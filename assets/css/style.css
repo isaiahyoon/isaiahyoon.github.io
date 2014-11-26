@@ -213,12 +213,10 @@ aside {
     color: white;
     margin-bottom: 20px;
     font-size: 25px;
-    font-family: 'Open Sans';
     font-weight: 100;
 }
 
 button {
-    font-family: 'Open Sans';
     cursor: pointer;
     border: 5px solid white;
     padding-left: 10px; padding-right: 10px;
