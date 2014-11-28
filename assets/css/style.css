@@ -8,6 +8,7 @@ body, html {
 
 a {
     cursor: pointer;
+    font-weight: 500;
 }
 
 a:link { 
@@ -178,6 +179,7 @@ aside {
 
 #contact {
     cursor: pointer;
+    font-weight: 500;
 }
 
 #modal-container {
