@@ -9,16 +9,19 @@ body, html {
 a {
     cursor: pointer;
     font-weight: 500;
+    margin: 0px auto;
 }
 
 a:link { 
     color: inherit;
     text-decoration: none;
 }
+
 a:active { 
     color: inherit; 
     text-decoration: none;
 }
+
 a:visited {
     color: inherit; 
     text-decoration: none;
@@ -165,38 +168,12 @@ aside {
     width: 320px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Modal */
 
 #contact {
     cursor: pointer;
     font-weight: 500;
+    margin: 0 auto;
 }
 
 #modal-container {
@@ -266,4 +243,49 @@ input {
 
 input::-webkit-input-placeholder {
     color: white;
+}
+
+.page-contents {
+    transition: 0.5s;
+    display: ;
+}
+
+/* Resume */
+
+.resume-card {
+    background-color: #e5e5e5;
+    border-radius: 3px;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 20px;
+}
+
+.resume-card * {
+    padding-left: 20px;
+    font-weight: 300;
+}
+
+.resume-category {
+    font-size: 24px;
+    padding-top: 20px;
+}
+
+#education-card {
+    height: 300px;
+}
+
+#projects-card {
+    height: 500px;
+}
+
+#experience-card {
+    height: 300px;
+}
+
+#skills-card {
+    height: 200px;
+}
+
+#awards-card {
+    height: 200px;
 }
