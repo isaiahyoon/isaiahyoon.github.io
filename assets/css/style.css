@@ -70,7 +70,7 @@ aside {
 /* Navbar */
 
 #navbar {
-    padding: 20px 0;
+    padding-bottom: 15px;
     margin-top: 20px;
 }
 
@@ -85,11 +85,13 @@ aside {
     border-radius: 2px;
     padding-left: 10px;
     padding-right: 10px;
-    transition: 0.3s;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    transition: 0.5s;
 }
 
 .navbar-items:hover {
-    background: rgba(63, 140, 207, 0.4);
+    background-color: #0084FF;
     color: white;
 }
 
@@ -152,16 +154,15 @@ aside {
     display: block;
     
     margin: 0px auto;
-    width: 187px;
-    height: 187px;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
     overflow: hidden;
-    margin-top: 36px;
-    border: 2px solid black;
+    margin-top: 20px;
 }
 
 #profile-img     {
-    width: 250px;
+    width: 320px;
 }
 
 
