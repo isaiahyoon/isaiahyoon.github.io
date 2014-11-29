@@ -82,7 +82,15 @@ aside {
 
 .navbar-items {
     display: inline-block;
-    margin-left: 20px;
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: 0.3s;
+}
+
+.navbar-items:hover {
+    background: rgba(63, 140, 207, 0.4);
+    color: white;
 }
 
 /* Panorama */          
