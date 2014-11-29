@@ -223,7 +223,7 @@ aside {
     margin: 0 auto;
     width: 500px;
     height: 260px;
-    background-color: #5485BB;
+    background-color: rgba(63, 140, 207, .8);
     padding: 20px;
 }
 
