@@ -15,5 +15,5 @@ $(document).ready(function(){
 	$("#modal-overlay").click(function() {
 		$("#modal-container").fadeOut(500);
 	});
-	
+
 });
