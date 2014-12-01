@@ -262,7 +262,7 @@ input::-webkit-input-placeholder {
 .resume-card {
     background-color: #e5e5e5;
     border-radius: 3px;
-    width: calc(100% - 20px);
+    width: calc(100% - 40px);
     height: 500px;
     margin-bottom: 20px;
     padding-right: 20px;
