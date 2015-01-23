@@ -41,6 +41,10 @@ p {
     clear: both;
 }
 
+ul {
+    margin: 0px;
+}
+
 /* Structure */
 #container {
     margin: auto;
@@ -284,25 +288,34 @@ input::-webkit-input-placeholder {
     margin-bottom: 10px;
 }
 
+.resume-links {
+
+}
+
 #education-card {
-    height: 120px;
+    height: 390px;
 }
 
 #projects-card {
-    height: 120px;
+    height: 270px;
 }
 
 #experience-card {
-    height: 140px;
+    height: 350px;
 }
 
 #skills-card {
-    height: 140px;
+    height: 150px;
 }
 
 #awards-card {
-    height: 120px;
+    height: 130px;
 }
+
+#links-card {
+    height: 150px;
+}
+
 
 /* Journal */
 
