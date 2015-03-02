@@ -171,10 +171,12 @@ ul {
     border-radius: 50%;
     overflow: hidden;
     margin-top: 20px;
+    position: relative;
 }
 
-#profile-img     {
+#profile-img {
     width: 320px;
+    transform: translate(0, -25%);
 }
 
 /* Modal */
