@@ -57,8 +57,13 @@ ul {
 }
 
 #profile-container {
-    width: 20%;
     float: left;
+    position: relative;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 50px;
 }       
         
 #about {
@@ -148,11 +153,6 @@ ul {
         text-align: center;
     }
 
-    #profile-container {
-        width: 100%;
-        display: inline-block;
-    }
-
     #about {
         width: 100%;
     }
@@ -162,21 +162,11 @@ ul {
     }
 }
 
-#profile {
-    position: relative;
-    display: block;
-    margin: 0px auto;
-    width: 230px;
-    height: 230px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: 50px;
-}
-
 #profile-img {
     position: absolute;
-    width: 500px;
-    transform: translate(0, 50%);
+    width: 400px;
+    top: -30px;
+    left: -130px;
 }
 
 /* Modal */
