@@ -317,35 +317,3 @@ input::-webkit-input-placeholder {
 #links-card {
     height: 150px;
 }
-
-
-/* Journal */
-
-.journal-card {
-    background-color: #e5e5e5;
-    border-radius: 3px;
-    width: calc(65% - 20px);
-    height: 500px;
-    margin-bottom: 20px;
-    padding-right: 20px;
-    float: left;
-}
-
-#nov27-14 {
-    height: 380px;
-}
-
-#nov30-14 {
-    height: 230px;
-}
-
-.journal-img {
-    float: right;
-    width: 300px;
-}
-
-.journal-img img {
-    padding: 0;
-    width: 100%;
-    border-radius: 3px;
-}
