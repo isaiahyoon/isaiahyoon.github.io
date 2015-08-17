@@ -230,6 +230,7 @@ button {
     border-radius: 3px;
     float: left;
     position: relative;
+    font-family: 'Roboto', sans-serif;
 }
 
 #cancel {
@@ -251,10 +252,12 @@ input, textarea {
 
 textarea::-webkit-input-placeholder {
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 input::-webkit-input-placeholder {
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 .page-contents {
