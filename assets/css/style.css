@@ -292,21 +292,17 @@ input::-webkit-input-placeholder {
 }
 
 #projects-card {
-    height: 270px;
+    height: 290px;
 }
 
 #experience-card {
-    height: 350px;
+    height: 485px;
 }
 
 #skills-card {
-    height: 150px;
+    height: 125px;
 }
 
-#awards-card {
-    height: 130px;
-}
-
-#links-card {
-    height: 150px;
+#orgsandex-card {
+    height: 195px;
 }
