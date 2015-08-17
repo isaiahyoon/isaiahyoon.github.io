@@ -270,12 +270,12 @@ input::-webkit-input-placeholder {
     padding-right: 20px;
 }
 
-.resume-card, .journal-card * {
+.resume-card * {
     padding-left: 20px;
     font-weight: 300;
 }
 
-.resume-category, .journal-date {
+.resume-category {
     font-size: 24px;
     padding-top: 20px;
     margin-bottom: 10px;
