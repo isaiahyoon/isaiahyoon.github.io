@@ -109,15 +109,21 @@ ul {
 }
 
 /* Panorama */          
-#panorama {
+#panorama-container {
+    position: relative;
+    margin: 0px auto;
+    border-radius: 5px;
+    overflow: hidden;
     float: left;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    height: 400px;
     width: 100%;
 }
 
-#panorama img {
-    width: 100%;
-    border-radius: 5px;
+#panorama-container img {
+    position: absolute;
+    width: 1000px;
+    top: -230px;
 }
 
 @media (max-width: 800px) {
@@ -156,10 +162,6 @@ ul {
 
     #about {
         width: 100%;
-    }
-
-    #panorama {
-        display: none;
     }
 }
 
