@@ -57,7 +57,13 @@ ul {
 }
 
 #profile-container {
-    width: 20%;
+    position: relative;
+    margin: 0px auto;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 50px;
     float: left;
 }       
         
@@ -148,12 +154,6 @@ ul {
         text-align: center;
     }
 
-    #profile-container {
-        width: 100%;
-        padding-bottom: 20px;
-        display: inline-block;
-    }
-
     #about {
         width: 100%;
     }
@@ -163,20 +163,11 @@ ul {
     }
 }
 
-#profile {
-    display: block;
-    margin: 0px auto;
-    width: 230px;
-    height: 230px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: 20px;
-    position: relative;
-}
-
 #profile-img {
-    width: 320px;
-    transform: translate(0, -25%);
+    position: absolute;
+    height: 400px;
+    top: -100px;
+    left: -20px;
 }
 
 /* Modal */
