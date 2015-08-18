@@ -236,6 +236,10 @@ button {
     height: 300px;
 }
 
+#center {
+    position: absolute;
+}
+
 .modal-link {
 
 }
