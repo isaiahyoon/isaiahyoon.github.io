@@ -226,15 +226,22 @@ button {
     padding-left: 10px; padding-right: 10px;
     background: white;
     color: #5485BB;
-    font-weight: 700;
     border-radius: 3px;
-    float: left;
-    position: relative;
+    position: absolute;
     font-family: 'Roboto', sans-serif;
 }
 
+.modal-card {
+    width: 300px;
+    height: 300px;
+}
+
+.modal-link {
+
+}
+
 #cancel {
-    margin-left: 20px;
+    float: left;
 }
 
 input, textarea {
@@ -248,16 +255,6 @@ input, textarea {
     font-size: 12px;
     font-weight: 700;
     color: white;
-}
-
-textarea::-webkit-input-placeholder {
-    color: white;
-    font-family: 'Roboto', sans-serif;
-}
-
-input::-webkit-input-placeholder {
-    color: white;
-    font-family: 'Roboto', sans-serif;
 }
 
 .page-contents {
