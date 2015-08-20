@@ -8,10 +8,6 @@ $(document).ready(function(){
 		$("#modal-container").fadeOut(500);
 	});
 
-	$("#submit").click(function() {
-		$("#modal-container").fadeOut(500);
-	});
-
 	$("#modal-overlay").click(function() {
 		$("#modal-container").fadeOut(500);
 	});
