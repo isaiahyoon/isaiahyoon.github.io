@@ -126,45 +126,6 @@ ul {
     top: -230px;
 }
 
-@media (max-width: 800px) {
-    #header {
-        float: none;
-        padding: 20px;
-    }
-
-    #navbar {
-        padding: 0;
-        margin: 0;
-    }
-
-    #navbar ul {
-        width: 100%;
-        float: none;
-    }
-
-    #navbar li {
-        display: block;
-        margin: 0;  
-    }
-
-    #contact {
-        display: block;
-        padding: 5px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #navbar a {
-        display: block;
-        padding: 5px;
-        text-align: center;
-    }
-
-    #about {
-        width: 100%;
-    }
-}
-
 #profile-img {
     position: absolute;
     height: 400px;
@@ -275,7 +236,7 @@ ul {
     width: 100%;
     height: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 1;
     display: none;
 }
 
@@ -285,20 +246,20 @@ ul {
     height: 100%;
 }
 
-#modal-box-wrapper {
-    position: absolute;
-    top: calc(50% - 250px);
-    left: calc(50% - 250px);
-}
-
 #modal-box {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     border-radius: 3px;
-    margin: 0 auto;
     width: 500px;
     height: 420px;
     background-color: #42A5F5;
     opacity: 0.9;
     padding: 20px;
+    z-index: 2;
 }
 
 #modal-header {
@@ -400,4 +361,30 @@ input, textarea {
 
 #orgsandex-card {
     height: 195px;
+}
+
+@media (max-width: 900px) {
+    #panorama-container {
+        display: none;
+    }
+
+    #profile-container {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        float: none;
+    }
+
+    #about {
+        width: 100%;
+    }
+
+    #modal-box {
+        width: 80%;
+        display: block;
+        margin-right: 20px;
+        margin-left: 20px;
+        float: none;
+    }
 }
