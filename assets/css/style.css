@@ -184,12 +184,104 @@ ul {
     height: 220px;
 }
 
+#modal-content {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.link-box {
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: white;
+    border-radius: 5px;
+}
+
+.link-img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#topleft {
+    margin-top:-200px;
+    margin-left:-160px;
+    transition: 0.5s;
+}
+
+#topleft:hover {
+    background-color: #FFD600;
+    color: white;
+}
+
+#topright {
+    margin-top:-200px;
+    margin-left:10px;
+    transition: 0.5s;
+}
+
+#topright:hover {
+    background-color: #4875B4;
+    color: white;
+}
+
+#bottomleft {
+    margin-top:-30px;
+    margin-left:-160px;
+    transition: 0.5s;
+}
+
+#bottomleft:hover {
+    background-color: #3B5998;
+    color: white;
+}
+
+#bottomright {
+    margin-top:-30px;
+    margin-left:10px;
+    transition: 0.5s;
+}
+
+#bottomright:hover {
+    background-color: #4E433C;
+    color: white;
+}
+
+#email-img {
+    height: 70px;
+}
+
+#linkedin-img {
+    height: 65px;
+}
+
+#facebook-img {
+    height: 70px;
+}
+
+#instagram-img {
+    height: 110px;
+}
+
 #modal-container {
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 100;
     display: none;
+}
+
+#modal-footer {
+    position: relative;
+    top: -70px;
 }
 
 #modal-overlay {
@@ -209,7 +301,8 @@ ul {
     margin: 0 auto;
     width: 500px;
     height: 420px;
-    background-color: rgba(63, 140, 207, .8);
+    background-color: #42A5F5;
+    opacity: 0.9;
     padding: 20px;
 }
 
@@ -240,12 +333,9 @@ button {
     position: absolute;
 }
 
-.modal-link {
-
-}
-
 #cancel {
     float: left;
+    font-weight: 700;
 }
 
 input, textarea {
