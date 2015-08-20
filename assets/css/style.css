@@ -180,7 +180,7 @@ ul {
 }
 
 #topleft:hover {
-    background-color: #FFD600;
+    background-color: #DD4B39;
     color: white;
 }
 
@@ -213,7 +213,7 @@ ul {
 }
 
 #bottomright:hover {
-    background-color: #4E433C;
+    background-color: #517FA4;
     color: white;
 }
 
@@ -285,9 +285,9 @@ ul {
 }
 
 #cancel:hover {
-    background-color: #0084FF;
+    background-color: #217C7E;
     color: white;
-    border: 5px solid #0084FF;
+    border: 5px solid #217C7E;
 }
 
 #modal-footer {
