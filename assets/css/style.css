@@ -279,11 +279,6 @@ ul {
     display: none;
 }
 
-#modal-footer {
-    position: relative;
-    top: -70px;
-}
-
 #modal-overlay {
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
@@ -313,15 +308,30 @@ ul {
     font-weight: 100;
 }
 
-button {
+#cancel {
     cursor: pointer;
     border: 5px solid white;
+    float: left;
+    font-weight: 700;
     padding-left: 10px; padding-right: 10px;
     background: white;
     color: #5485BB;
     border-radius: 3px;
     position: absolute;
     font-family: 'Roboto', sans-serif;
+    transition: 0.5s;
+}
+
+#cancel:hover {
+    background-color: #0084FF;
+    color: white;
+    border: 5px solid #0084FF;
+}
+
+#modal-footer {
+    position: relative;
+    top: -70px;
+    transition: 0.5s;
 }
 
 .modal-card {
@@ -331,11 +341,6 @@ button {
 
 #center {
     position: absolute;
-}
-
-#cancel {
-    float: left;
-    font-weight: 700;
 }
 
 input, textarea {
@@ -375,10 +380,6 @@ input, textarea {
     font-size: 24px;
     padding-top: 20px;
     margin-bottom: 10px;
-}
-
-.resume-links {
-
 }
 
 #education-card {
