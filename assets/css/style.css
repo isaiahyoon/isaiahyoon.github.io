@@ -102,6 +102,7 @@ ul {
     padding-top: 3px;
     padding-bottom: 3px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .navbar-items:hover {
@@ -177,6 +178,7 @@ ul {
     margin-top:-200px;
     margin-left:-160px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 #topleft:hover {
@@ -188,6 +190,7 @@ ul {
     margin-top:-200px;
     margin-left:10px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 #topright:hover {
@@ -199,6 +202,7 @@ ul {
     margin-top:-30px;
     margin-left:-160px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 #bottomleft:hover {
@@ -210,6 +214,7 @@ ul {
     margin-top:-30px;
     margin-left:10px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 #bottomright:hover {
@@ -282,6 +287,7 @@ ul {
     position: absolute;
     font-family: 'Roboto', sans-serif;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 #cancel:hover {
@@ -294,6 +300,7 @@ ul {
     position: relative;
     top: -70px;
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .modal-card {
@@ -320,6 +327,7 @@ input, textarea {
 
 .page-contents {
     transition: 0.5s;
+    transition-duration: 0.5s;
 }
 
 /* Resume */
