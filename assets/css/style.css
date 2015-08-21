@@ -123,14 +123,14 @@ ul {
     overflow: hidden;
     float: left;
     margin-bottom: 50px;
-    height: 400px;
+    height: 420px;
     width: 100%;
 }
 
 #panorama-container img {
     position: absolute;
     width: 1000px;
-    top: -30px;
+    top: -10px;
     left: -30px;
 }
 
