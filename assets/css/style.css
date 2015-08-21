@@ -131,6 +131,7 @@ ul {
     position: absolute;
     width: 1000px;
     top: -30px;
+    left: -30px;
 }
 
 #profile-img {
