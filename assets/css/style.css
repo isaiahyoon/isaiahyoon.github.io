@@ -132,15 +132,14 @@ ul {
     overflow: hidden;
     float: left;
     margin-bottom: 50px;
-    height: 420px;
+    height: 500px;
     width: 100%;
 }
 
 #panorama-container img {
     position: absolute;
     width: 1000px;
-    top: -10px;
-    left: -30px;
+    top: -120px;
 }
 
 #profile-img {
