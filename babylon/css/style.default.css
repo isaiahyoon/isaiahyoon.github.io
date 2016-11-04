@@ -61,6 +61,8 @@ UNIVERSAL SECTION STYLES
   position: relative;
   padding-top: 60px;
   padding-bottom: 60px;
+  margin-right: 20px;
+  margin-left: 20px;
   text-align: center;
 }
 .section:before,

@@ -44,9 +44,13 @@
         <script src="js/modernizr-2.6.2.min.js"></script>
 
         <style>
-            @font-face { font-family: proxima; src: url('chivo.ttf'); } 
+            @font-face { font-family: chivo; src: url('chivo.ttf'); } 
+            @font-face { font-family: proxima; src: url('proxima.otf'); }
             div {
-                font-family: proxima
+                font-family: chivo
+            }
+            .navtext {
+                font-family: proxima;
             }
         </style>
 
@@ -88,13 +92,13 @@
                 <div class="navbar-collapse collapse" id="navigation">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#section1">Our Mission</a>
+                        <li><a class="navtext" href="#section1">Our Mission</a>
                         </li>
-                        <li><a href="#section2">How it Works</a>
+                        <li><a class="navtext" href="#section2">How it Works</a>
                         </li>
-                        <li><a href="#section3">Benefits</a>
+                        <li><a class="navtext" href="#section3">Benefits</a>
                         </li>
-                        <li><a href="#section4">Sign Up</a>
+                        <li><a class="navtext" href="#section4">Sign Up</a>
                         </li>
                     </ul>
                 </div>
