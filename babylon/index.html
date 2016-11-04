@@ -1,127 +1,308 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+    <!--<![endif]-->
 
-<head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="all,follow">
+        <meta name="googlebot" content="index,follow,snippet,archive">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <title>Babylon</title>
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+        <meta name="keywords" content="">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
 
-    <!-- Custom CSS -->
-    <link href="css/scrolling-nav.css" rel="stylesheet">
+        <!-- Bootstrap and Font Awesome css -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <!-- owl carousel css -->
+
+        <link href="css/owl.carousel.css" rel="stylesheet">
+        <link href="css/owl.theme.css" rel="stylesheet">	        
+
+        <!-- Theme stylesheet -->
+        <link href="css/style.default.css" rel="stylesheet" id="theme-stylesheet">
+
+        <!-- Custom stylesheet - for your changes -->
+        <link href="css/custom.css" rel="stylesheet">
+
+        <!-- CSS Animations -->
+        <link href="css/animate.css" rel="stylesheet">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Mordernizr -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+
+        <style>
+            @font-face { font-family: proxima; src: url('chivo.ttf'); } 
+            div {
+                font-family: proxima
+            }
+        </style>
+
+        <!-- Responsivity for older IE -->
+        <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
     <![endif]-->
 
-</head>
+        <meta property="og:title" content="Landing Page | Landing Page Bootstrap Theme by Bootstrapious.com!">
+        <meta property="og:site_name" content="Landing Page | Landing Page Bootstrap Theme by Bootstrapious.com!">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
 
-<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+        <meta property="og:image" content="">  
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:creator" content="@bootstrapious">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+    </head>
+
+    <body data-spy="scroll" data-target="#navigation" data-offset="120">
+
+
+        <!-- *** NAVBAR ***
+        _________________________________________________________ -->
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand scrollTo" href="#intro"><p><img class="logo" src="img/logo.png"/>Babylon</p></a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navigation">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#section1">Our Mission</a>
+                        </li>
+                        <li><a href="#section2">How it Works</a>
+                        </li>
+                        <li><a href="#section3">Benefits</a>
+                        </li>
+                        <li><a href="#section4">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a class="page-scroll" href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">About</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- /#navbar -->
 
-    <!-- Intro Section -->
-    <section id="intro" class="intro-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Scrolling Nav</h1>
-                    <p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>, and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding ID on the page.</p>
-                    <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
+        <!-- *** NAVBAR END *** -->
+
+
+        <div id="all">
+
+
+            <!-- *** INTRO IMAGE ***
+        _________________________________________________________ -->
+            <div id="intro" class="clearfix">
+                <div class="item">
+                    <div class="container">
+<!--                         <div class="row">
+                            <h1 data-animate="fadeInDown"><b>B  a  b  y  l  o  n</b></h1>
+                            <p class="message" data-animate="fadeInDown">Be your own farmer. Know what you grow.</p>
+                        </div>
+                        <div class="row">
+                            <p><img id="intro-veg" data-animate="fadeInUp" src="img/intro-veg.png"/></p>
+                            <br>
+                            <br>
+                            <p><img data-animate="fadeInUp" src="img/intro-signup.png"/></p>
+                            <br>
+                            <br>
+                            <p><a href="#section4"><img src="img/intro-downarrow.png"/></a></p>
+                        </div> -->
+                        <div class="introimage" data-animate="fadeInUp"><img class="works" src="img/intro.png"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>About Section</h1>
+            <!-- *** INTRO IMAGE END *** -->
+
+
+
+            <!-- *** SERVICES ***
+        _________________________________________________________ -->
+            <div class="section text-gray" id="section1">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2 class="title" data-animate="fadeInDown">Our Mission</h2>
+
+                        <p data-animate="fadeInDown" class="lead">We believe that everyone should have an intimate relationship with the produce they consume. That's why we're introducing a system that intelligently grows your favorite fruits and vegetables with hydroponic technology right in your urban apartment complex, providing an easy and affordable way for you to access fresh produce at home while minimizing your waste and carbon footprint.</p>
+
+                        <p class="mission-tray"><img data-animate="fadeInUp" src="img/mission-tray.png"/></p>
+
+                    </div>
+                    <!-- /.12 -->
                 </div>
+                <!-- /.container -->
             </div>
-        </div>
-    </section>
+            <!-- /.section -->
 
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Services Section</h1>
+            <!-- *** SERVICES END *** -->
+
+
+            <!-- *** ABOUT US ***
+        _________________________________________________________ -->
+
+            <div class="section text-gray" id="section2">
+                <div class="container">
+                    <div class="col-md-12">
+                        <h2 class="title" data-animate="fadeInDown">How it Works</h2>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="how-it-works" data-animate="fadeInUp"><img class="works" src="img/how-it-works.png"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.12 -->
                 </div>
+                <!-- /.container -->
             </div>
-        </div>
-    </section>
+            <!-- /.section -->
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Contact Section</h1>
+            <!-- *** ABOUT US END *** -->
+
+      
+
+            <!-- *** TESTIMONIALS ***
+_________________________________________________________ -->
+
+            <div class="section text-gray" id="section3" data-animate="fadeInUp">
+
+                <div class="container">
+                    <div class="col-md-12">
+
+                        <div class="mb20">
+                            <h2 class="title" data-animate="fadeInUp">Benefits</h2>
+                        </div>
+
+                        <div class="row services">
+
+                            <div class="col-md-4" data-animate="fadeInUp">
+                                <div class="icon">
+                                    <img class="benefit" src="img/benefit1.png">
+                                </div>
+                                <h3 class="heading">Automated growing</h3>
+                                <p>Simply seed, fertilize, and track your growth. We'll let you know when it's time to enjoy the harvest.</p>
+                            </div>
+
+                            <div class="col-md-4" data-animate="fadeInUp">
+                                <div class="icon">
+                                    <img class="benefit" src="img/benefit2.png">
+                                </div>
+                                <h3 class="heading">Soil-free growing</h3>
+                                <p>Growing produce with no soil means faster growth, higher produce yield, and more nutrients. What's not to love?</p>
+                            </div>
+                        </div>
+                        <div class="row services">
+
+                            <div class="col-md-4" data-animate="fadeInUp">
+                                <div class="icon">
+                                    <img class="benefit" src="img/benefit3.png">
+                                </div>
+                                <h3 class="heading">Home-grown produce</h3>
+                                <p>Foster a close relationship with your produce by tracking its growth cycles and directly control what you eat.</p>
+                            </div>
+
+                            <div class="col-md-4" data-animate="fadeInUp">
+                                <div class="icon">
+                                    <img class="benefit" src="img/benefit4.png">
+                                </div>
+                                <h3 class="heading">Subscription model</h3>
+                                <p>Everything you need - from the seeds and nutrients to complementary recipes - are delivered every month.</p>
+                            </div>
+                        </div>
+                    </div> <!-- /.12 -->
+                </div> <!-- /.container -->
+
+            </div><!-- /.section -->	
+
+            <!-- *** TESTIMONIALS END *** -->
+
+            <!-- *** CONTACT ***
+        _________________________________________________________ -->
+
+            <div class="section text-green" id="section4">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="how-it-works" data-animate="fadeInUp"><img class="workss" src="img/signup.png"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.12 -->
                 </div>
+                <!-- /.container -->
             </div>
+            <!-- /.section -->
+
+
+
+            <!-- *** FOOTER ***
+        _________________________________________________________ -->
+
+
+
+            <div class="section text-gray" id="section5">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="row" data-animate="fadeInUp">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p>2530 Ridge Road<br>
+                                Berkeley, CA 94720<br>
+                                hello@babylon.com
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.12 -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /.section -->
+
+            <!-- *** FOOTER END *** -->
         </div>
-    </section>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+        <!-- js base -->
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
-    <!-- Scrolling Nav JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/scrolling-nav.js"></script>
+        <!-- waypoints for scroll spy -->
+        <script src="js/waypoints.min.js"></script>
 
-</body>
+        <!-- owl carousel -->
+        <script src="js/owl.carousel.min.js"></script>        
 
+        <!-- jQuery scroll to -->
+        <script src="js/jquery.scrollTo.min.js"></script>
+
+        <!-- main js file -->
+
+        <script src="js/front.js"></script>        
+
+
+    </body>
 </html>
