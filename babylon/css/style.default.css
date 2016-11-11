@@ -292,6 +292,9 @@ INTRO
 
 .introimage {
   margin-top: 120px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 /*
 
