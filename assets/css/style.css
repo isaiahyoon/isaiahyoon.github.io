@@ -63,7 +63,7 @@ ul {
 /* Structure */
 #container {
     margin: auto;
-    max-width: 960px;
+    max-width: 100%;
     padding: 10px;
 }
 
