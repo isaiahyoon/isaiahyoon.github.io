@@ -26,26 +26,22 @@ $(document).ready(function(){
     url: "assets/audio/startRest.wav"
   });
 
-
   $("#ding").click(function() {
     playSound("assets/audio/oneMinuteRemaining.wav");
   });
 
-  if (isEndOfBreak || !$("#pomo").is(":visible")) {
-    $(document).keyup(function(e) {
-      if (e.keyCode == 13) {
-        // enter pressed
-        startPomo();
-        isEndOfBreak = false;
-      }
-
-      if (e.keyCode == 27) {
-        // esc pressed
-        endPomo();
-        isEndOfBreak = false;
-      }
-    });
-  }
+  $(document).keyup(function(e) {
+    if (e.keyCode == 13 && (isEndOfBreak || $("#intro").is(":visible"))) {
+      // ENTER
+      startPomo();
+      isEndOfBreak = false;
+    }
+    if (e.keyCode == 27) {
+      // ESC
+      endPomo();
+      isEndOfBreak = false;
+    }
+  });
 });
 
 function startPomo() {
