@@ -1,6 +1,4 @@
 $(document).ready(function(){
-  $("#nav-placeholder").load("nav.html");
-	
 	$("#contact").click(function() {
 		$("#modal-container").fadeIn(500);
 	});
@@ -12,5 +10,4 @@ $(document).ready(function(){
 	$("#modal-overlay").click(function() {
 		$("#modal-container").fadeOut(500);
 	});
-
 });

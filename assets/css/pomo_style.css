@@ -1,0 +1,41 @@
+#pomo {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -150px 0 0 -150px;
+
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
+}
+
+#timer {
+  width: 400px;
+  height: 400px;
+  line-height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -200px 0 0 -200px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 60px;
+}
+
+#intro {
+  text-align: center;
+  width: 700px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0 0 -350px;
+  border-radius: 15px;
+}
+
+.external-link {
+  color: #0084FF !important;
+}
