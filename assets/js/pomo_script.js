@@ -1,8 +1,8 @@
 var pomoCount = 0;
 
-var workLength = 10; // 25 minutes
-var breakLength = 5; // 5 minutes
-var longBreakLength = 10; // 15 minutes
+var workLength = 25 * 60; // 25 minutes
+var breakLength = 5 * 60; // 5 minutes
+var longBreakLength = 15 * 60; // 15 minutes
 
 var maxTime = workLength;
 var currTime = 0;
