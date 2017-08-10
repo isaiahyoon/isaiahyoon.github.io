@@ -4,6 +4,11 @@ var workLength = 25 * 60; // 25 minutes
 var breakLength = 5 * 60; // 5 minutes
 var longBreakLength = 15 * 60; // 15 minutes
 
+// test
+// var workLength = 3; // 25 minutes
+// var breakLength = 3; // 5 minutes
+// var longBreakLength = 3; // 15 minutes
+
 var maxTime = workLength;
 var currTime = 0;
 var isEndOfBreak = false;
@@ -32,6 +37,10 @@ $(document).ready(function(){
     startPomo();
   });
 
+  $("#rest-text").click(function() {
+    startPomo();
+  });
+
   $(document).keyup(function(e) {
     if (e.keyCode == 13 && (isEndOfBreak || $("#intro").is(":visible"))) {
       // ENTER
@@ -48,6 +57,7 @@ $(document).ready(function(){
 
 function startPomo() {
   $("#alert-text").fadeOut(1000); 
+  $("#rest-text").fadeOut(1000); 
   $("#pomocount-text").text(pomoCount + 1);
   $("#pomocount-text").fadeIn(1000);
   isBreak = false;
@@ -134,7 +144,8 @@ function timer() {
       isEndOfBreak = true;
       playSound("assets/audio/startWork.wav");
       $("#alert-text").text("Press ENTER to continue");
-      $("#alert-text").fadeIn(1000);  
+      $("#alert-text").fadeIn(1000);
+      $("#rest-text").fadeIn(1000);
     } else {
       // end of pomo => autostart break
       $("#pomocount-text").fadeOut(1000);

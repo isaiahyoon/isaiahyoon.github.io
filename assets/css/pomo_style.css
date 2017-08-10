@@ -52,6 +52,20 @@
   font-size: 20px;
 }
 
+#rest-text {
+  display: none;
+  width: 300px;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 50px 0 0 -150px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+}
+
 #intro {
   text-align: center;
   width: 700px;
