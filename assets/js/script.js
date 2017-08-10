@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  $("#modal-container").load("modal.html");
   $("#nav").load("nav.html");
+  $("#modal-container").load("modal.html");
   
 	$("#contact").click(function() {
 		$("#modal-container").fadeIn(500);
