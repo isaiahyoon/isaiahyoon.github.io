@@ -17,18 +17,6 @@ var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' +
                           str_pad_left(secondsToSeconds(),'0',2);
 
 $(document).ready(function(){
-  $.ajax({
-    url: "assets/audio/oneMinuteRemaining.wav"
-  });
-
-  $.ajax({
-    url: "assets/audio/startWork.wav"
-  });
-
-  $.ajax({
-    url: "assets/audio/startRest.wav"
-  });
-
   $("#ding").click(function() {
     playSound("assets/audio/oneMinuteRemaining.wav");
   });
