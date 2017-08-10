@@ -1,6 +1,8 @@
 $(document).ready(function(){
+  $("#modal-container").load("modal.html");
+  $("#nav").load("nav.html");
+  
 	$("#contact").click(function() {
-    $("#modal-container").load("modal.html");
 		$("#modal-container").fadeIn(500);
 	});
 

@@ -98,8 +98,10 @@ ul {
 /* Navbar */
 
 #navbar {
-    padding-bottom: 15px;
-    margin-top: 20px;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    margin: auto;
+    max-width: 960px;
 }
 
 #navbar ul {
