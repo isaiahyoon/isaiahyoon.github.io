@@ -11,8 +11,6 @@ var isBreak = false;
 var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' + 
                           str_pad_left(secondsToSeconds(),'0',2);
 
-  $("#timer").text().trim();
-
 $(document).ready(function(){
   $.ajax({
     url: "assets/audio/oneMinuteRemaining.wav"
@@ -30,6 +28,10 @@ $(document).ready(function(){
     playSound("assets/audio/oneMinuteRemaining.wav");
   });
 
+  $("#start-button").click(function() {
+    startPomo();
+  });
+
   $(document).keyup(function(e) {
     if (e.keyCode == 13 && (isEndOfBreak || $("#intro").is(":visible"))) {
       // ENTER
@@ -45,6 +47,9 @@ $(document).ready(function(){
 });
 
 function startPomo() {
+  $("#alert-text").fadeOut(1000); 
+  $("#pomocount-text").text(pomoCount + 1);
+  $("#pomocount-text").fadeIn(1000);
   isBreak = false;
   if ($("#intro").is(":visible")) {
     $("#intro").hide();
@@ -91,7 +96,7 @@ function startBreak() {
 function startLongBreak() {
   isBreak = true;
   playSound("assets/audio/startRest.wav");
-  $("#pomo").css({"background-color": "#6942f5",
+  $("#pomo").css({"background-color": "#72f542",
                 "border-radius": "50%",
                 "width": "500px",
                 "height": "500px",
@@ -105,10 +110,21 @@ function timer() {
                           str_pad_left(secondsToSeconds(),'0',2);
   $("#timer").text(currFormattedTime);
   currTime = currTime + 1;
+
   if (currTime <= maxTime - 59 && currTime >= maxTime - 61) {
     // 1 minute left
     playSound("assets/audio/oneMinuteRemaining.wav");
   }
+
+  // display 1 minute alert
+  if (currTime == maxTime - 62) {
+    $("#alert-text").text("1 minute remaining");
+    $("#alert-text").fadeIn(1000);
+  }
+  if (currTime == maxTime - 58) {
+    $("#alert-text").fadeOut(1000);
+  }
+
   if (currTime > maxTime) {
     clearInterval(counter);
     currTime = 0;
@@ -116,9 +132,12 @@ function timer() {
     if (isBreak) {
       // end of break => prompt for enter/esc
       isEndOfBreak = true;
-      playSound("assets/audio/oneMinuteRemaining.wav");
+      playSound("assets/audio/startWork.wav");
+      $("#alert-text").text("Press ENTER to continue");
+      $("#alert-text").fadeIn(1000);  
     } else {
       // end of pomo => autostart break
+      $("#pomocount-text").fadeOut(1000);
       pomoCount = pomoCount + 1;
       if (pomoCount == 4) {
         pomoCount = 0;

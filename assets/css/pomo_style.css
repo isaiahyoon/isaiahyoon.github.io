@@ -25,6 +25,33 @@
   font-size: 60px;
 }
 
+#pomocount-text {
+  width: 300px;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -120px 0 0 -150px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+}
+
+#alert-text {
+  display: none;
+  width: 300px;
+  height: 100px;
+  line-height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 20px 0 0 -150px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+}
+
 #intro {
   text-align: center;
   width: 700px;
