@@ -8,6 +8,12 @@ $(document).ready(function(){
       closeModal();
     }
   });
+
+  $("#panorama-container").hover(function() {
+    $("#me-overlay").fadeIn(300);
+    }, function(){
+    $("#me-overlay").fadeOut(300);
+  });
 });
 
 function loadModal() {
