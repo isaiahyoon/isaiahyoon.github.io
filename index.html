@@ -29,8 +29,15 @@
                     <img id="panorama" src="assets/img/panorama.jpg" alt="panorama">
                     <img id="me-overlay" src="assets/img/me.png" alt="me">
                 </div>
-                <div class = "content" id = "profile-container">
-                    <img src="assets/img/profile.jpg" id = "profile-img" alt="profile">
+                <div class="content" id="profile-container" ontouchstart="this.classList.toggle('flipped')">
+                    <div class="flipper">
+                        <div class="front">
+                            <img src="assets/img/profile.jpg" id="profile-img" alt="profile">
+                        </div>
+                        <div class="back">
+                            <div id="profile-text">Just playing with CSS.<br>DON'T MIND ME!</div>
+                        </div>
+                    </div>
                 </div>
                 <div class = "content" id = "about">
                     <h1>Hello there!</h1>
@@ -39,7 +46,7 @@
                     <p>I currently reside in Los Angeles, California.</p>
                     <p>I received my undergraduate degree at UC Berkeley, with a double major in computer science and cognitive science.</p>
                     <br>
-                    <p>Please send me an email if you'd like to be in contact!</p>
+                    <p>Please send me an <a class="external-link" href="mailto:isaiahyoon22@gmail.com" target="_blank">email</a> if you'd like to be in contact!</p>
                 </div>
                 <div class = "clear">
                 </div>
