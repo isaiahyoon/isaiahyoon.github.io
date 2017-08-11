@@ -347,28 +347,8 @@ ul {
     color: white;
 }
 
-#email-img {
+#modal-content img {
     height: 70px;
-}
-
-#linkedin-img {
-    height: 65px;
-}
-
-#facebook-img {
-    height: 70px;
-}
-
-#instagram-img {
-    height: 110px;
-}
-
-#github-img {
-    height: 90px;
-}
-
-#spotify-img {
-    height: 120px;
 }
 
 #modal-container {
