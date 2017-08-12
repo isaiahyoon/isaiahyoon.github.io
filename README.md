@@ -2,10 +2,8 @@
 
 My personal website, featuring...
 
-A landing page. Try hovering over the images!
+A <a href="www.isaiahyoon.me" target="_blank">landing</a> page. Try hovering over the images!
 <br>
-A resume page.
+A <a href="www.isaiahyoon.me/resume" target="_blank">resume</a> page.
 <br>
-A Pomodoro app.
-<br>
-A contact modal. Email preferred...
+A <a href="www.isaiahyoon.me/pomodoro" target="_blank">Pomodoro app</a>.
