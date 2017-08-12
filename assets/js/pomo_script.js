@@ -5,9 +5,9 @@ var breakLength = 5 * 60; // 5 minutes
 var longBreakLength = 15 * 60; // 15 minutes
 
 // test
-// var workLength = 3; // 25 minutes
-// var breakLength = 3; // 5 minutes
-// var longBreakLength = 3; // 15 minutes
+// var workLength = 3;
+// var breakLength = 3;
+// var longBreakLength = 3;
 
 var maxTime = workLength;
 var currTime = 0;
@@ -22,7 +22,7 @@ var startWorkAudio = new Audio("assets/audio/startWork.wav");
 
 $(document).ready(function(){
   $("#ding").click(function() {
-    playSound(oneMinuteRemainingAudio);
+    oneMinuteRemainingAudio.play()
   });
 
   $("#start-button").click(function() {
@@ -57,7 +57,7 @@ function startPomo() {
     $("#intro").hide();
   }
 
-  playSound(startWorkAudio);
+  startWorkAudio.play();
   $("#pomo").fadeIn(1000);
   $("#pomo").css({"background-color": "#42A5F5",
               "width": "300px",
@@ -85,7 +85,7 @@ function endPomo() {
 
 function startBreak() {
   isBreak = true;
-  playSound(startRestAudio);
+  startRestAudio.play();
   $("#pomo").css({"background-color": "#42f593",
                 "border-radius": "50%",
                 "width": "400px",
@@ -97,7 +97,7 @@ function startBreak() {
 
 function startLongBreak() {
   isBreak = true;
-  playSound("assets/audio/startRest.wav");
+  startRestAudio.play();
   $("#pomo").css({"background-color": "#72f542",
                 "border-radius": "50%",
                 "width": "500px",
@@ -115,7 +115,7 @@ function timer() {
 
   if (currTime <= maxTime - 59 && currTime >= maxTime - 61) {
     // 1 minute left
-    playSound("assets/audio/oneMinuteRemaining.wav");
+    oneMinuteRemainingAudio.play();
   }
 
   // display 1 minute alert
@@ -134,7 +134,7 @@ function timer() {
     if (isBreak) {
       // end of break => prompt for enter/esc
       isEndOfBreak = true;
-      playSound("assets/audio/startWork.wav");
+      startWorkAudio.play();
       $("#alert-text").text("Press ENTER to continue");
       $("#alert-text").fadeIn(1000);
       $("#rest-text").fadeIn(1000);
@@ -162,8 +162,4 @@ function secondsToMinutes() {
 
 function secondsToSeconds() {
   return currTime - (secondsToMinutes() * 60);
-}
-
-function playSound(sound) {
-  sound.play();
 }
