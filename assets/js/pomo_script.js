@@ -1,6 +1,6 @@
 var pomoCount = 0;
 
-var workLength = 25 * 60; // 25 minutes
+var workLength = 3; // 25 minutes
 var breakLength = 5 * 60; // 5 minutes
 var longBreakLength = 15 * 60; // 15 minutes
 
@@ -16,9 +16,11 @@ var isBreak = false;
 var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' + 
                           str_pad_left(secondsToSeconds(),'0',2);
 // preload audio
-var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.wav");
-var startRestAudio = new Audio("assets/audio/startRest.wav");
+// var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.wav");
+// var startRestAudio = new Audio("assets/audio/startRest.wav");
 var startWorkAudio = new Audio("assets/audio/startWork.wav");
+var longBreakAudio = new Audio("assets/audio/yiruma.mp3");
+var shortBreakAudio = new Audio("assets/audio/5minute.mp3");
 
 $(document).ready(function(){
   $("#ding").click(function() {
@@ -42,6 +44,7 @@ $(document).ready(function(){
     if (e.keyCode == 27) {
       // ESC
       endPomo();
+      stopAudio();
       isEndOfBreak = false;
     }
   });
@@ -85,7 +88,7 @@ function endPomo() {
 
 function startBreak() {
   isBreak = true;
-  startRestAudio.play();
+  shortBreakAudio.play();
   $("#pomo").css({"background-color": "#42f593",
                 "border-radius": "50%",
                 "width": "400px",
@@ -97,7 +100,7 @@ function startBreak() {
 
 function startLongBreak() {
   isBreak = true;
-  startRestAudio.play();
+  longBreakAudio.play();
   $("#pomo").css({"background-color": "#72f542",
                 "border-radius": "50%",
                 "width": "500px",
@@ -150,6 +153,13 @@ function timer() {
       }
     }
   }
+}
+
+function stopAudio() {
+  $('audio').each(function(){
+    this.pause();
+    this.currentTime = 0;
+  });
 }
 
 function str_pad_left(string, pad, length) {
