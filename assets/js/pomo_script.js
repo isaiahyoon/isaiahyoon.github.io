@@ -1,6 +1,6 @@
 var pomoCount = 0;
 
-var workLength = 3; // 25 minutes
+var workLength = 25 * 60; // 25 minutes
 var breakLength = 5 * 60; // 5 minutes
 var longBreakLength = 15 * 60; // 15 minutes
 
