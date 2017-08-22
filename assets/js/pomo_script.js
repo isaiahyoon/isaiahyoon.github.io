@@ -16,7 +16,7 @@ var isBreak = false;
 var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' + 
                           str_pad_left(secondsToSeconds(),'0',2);
 // preload audio
-// var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.wav");
+var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.wav");
 // var startRestAudio = new Audio("assets/audio/startRest.wav");
 var startWorkAudio = new Audio("assets/audio/startWork.wav");
 var longBreakAudio = new Audio("assets/audio/yiruma.mp3");
