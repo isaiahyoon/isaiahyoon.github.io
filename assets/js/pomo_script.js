@@ -16,11 +16,9 @@ var isBreak = false;
 var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' + 
                           str_pad_left(secondsToSeconds(),'0',2);
 // preload audio
-var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.wav");
-// var startRestAudio = new Audio("assets/audio/startRest.wav");
-var startWorkAudio = new Audio("assets/audio/startWork.wav");
-var longBreakAudio = new Audio("assets/audio/yiruma.mp3");
-var shortBreakAudio = new Audio("assets/audio/5minute.mp3");
+var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.mp3");
+var startWorkAudio = new Audio("assets/audio/startWork.mp3");
+var startRestAudio = new Audio("assets/audio/startRest.mp3");
 
 $(document).ready(function(){
   $("#ding").click(function() {
@@ -88,7 +86,7 @@ function endPomo() {
 
 function startBreak() {
   isBreak = true;
-  shortBreakAudio.play();
+  startRestAudio.play();
   $("#pomo").css({"background-color": "#42f593",
                 "border-radius": "50%",
                 "width": "400px",
@@ -100,7 +98,7 @@ function startBreak() {
 
 function startLongBreak() {
   isBreak = true;
-  longBreakAudio.play();
+  startRestAudio.play();
   $("#pomo").css({"background-color": "#72f542",
                 "border-radius": "50%",
                 "width": "500px",
