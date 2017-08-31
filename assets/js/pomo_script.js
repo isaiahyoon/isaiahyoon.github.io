@@ -16,14 +16,14 @@ var isBreak = false;
 var currFormattedTime = str_pad_left(secondsToMinutes(),'0',2) + ':' + 
                           str_pad_left(secondsToSeconds(),'0',2);
 // preload audio
-var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.mp3");
+// var oneMinuteRemainingAudio = new Audio("assets/audio/oneMinuteRemaining.mp3");
 var startWorkAudio = new Audio("assets/audio/startWork.mp3");
 var startRestAudio = new Audio("assets/audio/startRest.mp3");
 
 $(document).ready(function(){
-  $("#ding").click(function() {
-    oneMinuteRemainingAudio.play()
-  });
+  // $("#ding").click(function() {
+  //   oneMinuteRemainingAudio.play()
+  // });
 
   $("#start-button").click(function() {
     startPomo();
@@ -114,10 +114,10 @@ function timer() {
   $("#timer").text(currFormattedTime);
   currTime = currTime + 1;
 
-  if (currTime <= maxTime - 59 && currTime >= maxTime - 61) {
-    // 1 minute left
-    oneMinuteRemainingAudio.play();
-  }
+  // if (currTime <= maxTime - 59 && currTime >= maxTime - 61) {
+  //   // 1 minute left
+  //   oneMinuteRemainingAudio.play();
+  // }
 
   // display 1 minute alert
   if (currTime == maxTime - 62) {
