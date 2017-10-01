@@ -160,9 +160,9 @@ ul {
 
 #profile-img {
     position: absolute;
-    height: 300px;
-    top: -20px;
-    left: -20px;
+    height: 275px;
+    top: 0px;
+    left: -25px;
 }
 
 #profile-container {
