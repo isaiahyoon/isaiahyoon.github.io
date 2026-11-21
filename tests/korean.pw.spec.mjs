@@ -60,7 +60,7 @@ for (const width of [1440, 320]) {
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
       await expect(page.locator('iframe')).toHaveAttribute('title', 'Isaiah Yoon의 영문 이력서 PDF');
-      await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#zoom=100');
+      await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.getByRole('link', { name: '기업 · 비영리 단체' }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
       await expect(page.getByRole('link', { name: /문자 보내기/ })).toHaveAttribute('href', 'sms:+13237748524');

@@ -16,7 +16,7 @@ Use the language switch in the header or add `?lang=ko` to any page URL for the 
 
 ## Update the résumé
 
-Replace `assets/resume.pdf` with the latest PDF, keeping the same filename and preserving its clickable links. The embedded PDF requests 100% initial zoom; viewer behavior varies by browser, and a direct link is available when embedding is unsupported. The PDF is public when the site is deployed, so check its contents before publishing.
+Replace `assets/resume.pdf` with the latest PDF, keeping the same filename and preserving its clickable links. The embedded PDF requests fit-to-width (`#view=FitH`); viewer behavior varies by browser, and a direct link is available when embedding is unsupported. The PDF is public when the site is deployed, so check its contents before publishing.
 
 ## Publishing
 

@@ -59,18 +59,18 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await page.goto(`${base}/resume/`);
       const viewer = page.locator('iframe[title="Isaiah Yoon\'s résumé PDF"]');
       await expect(viewer).toBeVisible();
-      await expect(viewer).toHaveAttribute('src', '/assets/resume.pdf#zoom=100');
+      await expect(viewer).toHaveAttribute('src', '/assets/resume.pdf#view=FitH');
       const viewerSize = await viewer.boundingBox();
       expect(viewerSize.width).toBeLessThanOrEqual(viewport.width);
       expect(viewerSize.height).toBeGreaterThanOrEqual(480);
       const pdfLink = page.getByRole('link', { name: 'open the résumé PDF' });
-      await expect(pdfLink).toHaveAttribute('href', '/assets/resume.pdf#zoom=100');
+      await expect(pdfLink).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await expect(pdfLink).toHaveAttribute('target', '_blank');
       await expect(pdfLink).toHaveAttribute('rel', 'noopener noreferrer');
       // Headless Chromium cannot display PDFs; use HTML to verify the new-tab navigation.
       await page.context().route('**/assets/resume.pdf', route => route.fulfill({ contentType: 'text/html', body: 'Résumé PDF' }));
       const [pdfTab] = await Promise.all([page.waitForEvent('popup'), pdfLink.click()]);
-      await expect(pdfTab).toHaveURL(`${base}/assets/resume.pdf#zoom=100`);
+      await expect(pdfTab).toHaveURL(`${base}/assets/resume.pdf#view=FitH`);
       await pdfTab.close();
       await page.context().unroute('**/assets/resume.pdf');
       await page.getByRole('link', { name: 'For businesses & nonprofits' }).click();

@@ -30,8 +30,8 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
     assert.match(home, /https:\/\/theamazingword\.org/);
     assert.match(home, /https:\/\/immanuelchurchofamerica\.org/);
     const resume = await (await fetch(`${base}/resume/`)).text();
-    assert.match(resume, /<iframe src="\/assets\/resume\.pdf#zoom=100" title="Isaiah Yoon's résumé PDF"><\/iframe>/);
-    assert.match(resume, /href="\/assets\/resume\.pdf#zoom=100" target="_blank" rel="noopener noreferrer">open the résumé PDF/);
+    assert.match(resume, /<iframe src="\/assets\/resume\.pdf#view=FitH" title="Isaiah Yoon's résumé PDF"><\/iframe>/);
+    assert.match(resume, /href="\/assets\/resume\.pdf#view=FitH" target="_blank" rel="noopener noreferrer">open the résumé PDF/);
     const pdf = await fetch(`${base}/assets/resume.pdf`);
     assert.equal(pdf.status, 200);
     assert.equal(pdf.headers.get('content-type'), 'application/pdf');
