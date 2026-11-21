@@ -114,7 +114,7 @@ if (isKorean) {
         '.resume-page > .eyebrow': '<span class="star" aria-hidden="true">✦</span> 경력 및 학력',
         '.resume-heading h1': '작업을 뒷받침하는<br /><em>경험.</em>',
         '.resume-heading p': '소프트웨어 엔지니어링, 독립 프로젝트, 공동체 활동을 소개합니다. 아래 이력서는 영문입니다.',
-        '.resume-fallback': '<a href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer">영문 이력서 PDF 열기</a>를 선택하면 새 탭에서 읽거나 확대하고 다운로드할 수 있습니다.'
+        '.resume-fallback': '이 기기에서 이력서가 표시되지 않으면 <a href="/assets/resume.pdf#zoom=100" target="_blank" rel="noopener noreferrer">영문 이력서 PDF 열기</a>를 선택해 새 탭에서 확인하세요.'
       }
     }
   };
@@ -138,8 +138,8 @@ if (isKorean) {
   document.querySelector('nav').setAttribute('aria-label', '주 메뉴');
   const phone = document.querySelector('.contact-phone');
   if (phone) phone.setAttribute('aria-label', '(323) 774-8524로 문자 보내기');
-  const preview = document.querySelector('.resume-document img');
-  if (preview) preview.alt = 'Isaiah Yoon의 영문 이력서 미리보기. 접근 가능한 문서는 아래 PDF를 열어 주세요.';
+  const resume = document.querySelector('.resume-document iframe');
+  if (resume) resume.title = 'Isaiah Yoon의 영문 이력서 PDF';
 
   for (const [selector, translation] of Object.entries({ ...common, ...page.content })) {
     const element = document.querySelector(selector);
