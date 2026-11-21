@@ -96,4 +96,9 @@ html:lang(ko) .eyebrow, html:lang(ko) .project-kicker, html:lang(ko) .brand smal
   .brand small { font-size: 8px; letter-spacing: .04em; }
   h1 { font-size: 45px; }.project-visual { height: 270px; }.footer div { gap: 14px; }
 }
+@media (max-width: 340px) {
+  .contact-list article { grid-template-columns: 1fr; gap: 4px; }
+  .contact-list .project-link { justify-self: start; }
+  .contact-list article > div { justify-content: flex-start; }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
