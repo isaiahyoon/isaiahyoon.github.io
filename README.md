@@ -14,9 +14,11 @@ node tools/dev-server.mjs
 
 Open [http://localhost:8002](http://localhost:8002). Run the server checks with `npm test`. For browser checks, run `npm install`, install the Playwright browser with `npx playwright install chromium` if needed, and run `npm run test:all`.
 
+CI runs on pull requests, pushes to `main`, and manual dispatches. Feature-branch pushes do not trigger a second run alongside the pull-request checks.
+
 Use the language switch in the header or add `?lang=ko` to any page URL for the Korean version. Internal navigation preserves the language; the résumé PDF remains in English. Korean localization requires JavaScript.
 
-On mobile, a compact brand and language row sits above a single row of Work, Résumé, Services, and Contact links. Browser tests check this layout in English and Korean at iPhone 17 (402px) and Galaxy S23 (360px) viewport widths.
+Navigation uses Work, Résumé, Services, and Contact on desktop and mobile. On mobile, a compact brand and language row sits above the single row of links. Browser tests check this layout in English and Korean at iPhone 17 (402px) and Galaxy S23 (360px) viewport widths.
 
 ## Update the résumé
 

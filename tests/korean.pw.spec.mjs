@@ -37,7 +37,7 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page).toHaveURL(`${base}/?source=test&lang=ko#work`);
       for (const [route, heading] of [
         ['/', /디지털 세상에/],
-        ['/services/', /당신의 공간에/],
+        ['/services/', /단체를 위한/],
         ['/resume/', /작업을 뒷받침하는/],
         ['/contact/', /함께 이야기를/]
       ]) {
@@ -45,11 +45,11 @@ for (const width of [1440, 320, 360, 402]) {
         await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
         await expect(page.getByRole('heading', { level: 1, name: heading })).toBeVisible();
         await expect(page.locator('nav')).toHaveAttribute('aria-label', '주 메뉴');
+        await expect(page.locator('nav a')).toHaveText(['작업', '이력서', '서비스', '문의']);
         await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /[가-힣]/);
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route}?lang=ko at ${width}px`).toBeLessThanOrEqual(dimensions.viewport);
         if (width <= 980) {
-          await expect(page.locator('nav a')).toHaveText(['작업', '이력서', '서비스', '문의'], { useInnerText: true });
           const navLinks = await page.locator('nav a').evaluateAll(links => links.map(link => ({
             top: link.getBoundingClientRect().top,
             scroll: link.scrollWidth,
@@ -64,7 +64,7 @@ for (const width of [1440, 320, 360, 402]) {
           expect(new URL(await link.getAttribute('href'), base).searchParams.get('lang')).toBe('ko');
         }
       }
-      await page.locator('nav').getByRole('link', { name: width <= 980 ? '작업' : '주요 작업', exact: true }).click();
+      await page.locator('nav').getByRole('link', { name: '작업', exact: true }).click();
       await expect(page).toHaveURL(`${base}/?lang=ko#work`);
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org');
@@ -72,8 +72,12 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
       await expect(page.locator('iframe')).toHaveAttribute('title', 'Isaiah Yoon의 영문 이력서 PDF');
+      if (width === 360 || width === 402) {
+        const viewerSize = await page.locator('iframe').boundingBox();
+        expect(viewerSize.y, 'Korean résumé preview starts within the initial viewport').toBeLessThanOrEqual(900 * 0.65);
+      }
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
-      await page.locator('nav').getByRole('link', { name: width <= 980 ? '서비스' : '기업 · 비영리 단체', exact: true }).click();
+      await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
       await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(2);
       await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();

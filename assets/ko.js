@@ -19,11 +19,9 @@ if (isKorean) {
   const common = {
     '.skip': '본문으로 건너뛰기',
     '.brand small': '소프트웨어 엔지니어 · 독립 창작자',
-    'nav a:nth-child(1) .nav-label': '주요 작업',
-    'nav a:nth-child(1) .nav-label-mobile': '작업',
+    'nav a:nth-child(1)': '작업',
     'nav a:nth-child(2)': '이력서',
-    'nav a:nth-child(3) .nav-label': '기업 · 비영리 단체',
-    'nav a:nth-child(3) .nav-label-mobile': '서비스',
+    'nav a:nth-child(3)': '서비스',
     'nav a:nth-child(4)': '문의'
   };
 
@@ -61,24 +59,24 @@ if (isKorean) {
       title: '웹사이트 제작 서비스 — Isaiah Yoon',
       description: '소규모 기업, 비영리 단체, 교회를 위한 세심한 랜딩 웹사이트를 제작합니다.',
       content: {
-        '.page-hero .eyebrow': '<span class="star" aria-hidden="true">✦</span> 좋은 일을 위한 웹사이트',
-        '.page-hero h1': '당신의 공간에<br /><em>따뜻한 환영을.</em>',
-        '.page-hero > p:not(.eyebrow)': '소규모 기업, 비영리 단체, 교회를 위해 사람을 생각하고 세부 사항까지 살핀 아름답고 명확한 랜딩 웹사이트를 만듭니다.',
+        '.page-hero .eyebrow': '<span class="star" aria-hidden="true">✦</span> 웹사이트 제작 서비스',
+        '.page-hero h1': '단체를 위한<br /><em>명확한 웹사이트.</em>',
+        '.page-hero > p:not(.eyebrow)': '소규모 기업, 비영리 단체, 교회를 위한 반응형 랜딩 웹사이트를 만듭니다. 활동을 소개하고 필요한 정보를 전하며 방문자가 쉽게 연락할 수 있도록 돕습니다.',
         '.page-hero .button': '문의 <span aria-hidden="true">↗</span>',
         '.page-hero .text-link': '주요 작업 보기 <span aria-hidden="true">↗</span>',
-        '.service-section .eyebrow': '당신의 사명을 위해',
-        '.service-section h2': '좋은 일에는<br /><em>좋은 공간이 필요합니다.</em>',
-        '.service-section .section-heading > p': '새로운 고객, 이웃, 성도를 맞이할 때 웹사이트가 다음 걸음을 쉽게 안내할 수 있습니다.',
+        '.service-section .eyebrow': '서비스 대상',
+        '.service-section h2': '방문자를<br /><em>중심으로.</em>',
+        '.service-section .section-heading > p': '방문자에게 필요한 정보와 연락 방법을 바탕으로 내용을 구성합니다.',
         '.service-grid article:nth-child(1) h3': '소규모 기업',
         '.service-grid article:nth-child(1) p': '사업을 소개하고 특별한 가치를 전하며 고객이 쉽게 연락할 수 있도록 돕습니다.',
         '.service-grid article:nth-child(2) h3': '비영리 단체',
         '.service-grid article:nth-child(2) p': '단체의 사명을 전하고 사람들이 참여하거나 연락하는 방법을 알기 쉽게 안내합니다.',
         '.service-grid article:nth-child(3) h3': '교회',
-        '.service-grid article:nth-child(3) p': '예배 정보를 나누고 공동체를 소개하며 방문자를 따뜻하게 맞이하는 공간을 만듭니다.',
+        '.service-grid article:nth-child(3) p': '예배 정보를 나누고 공동체를 소개하며 방문자가 찾아올 수 있도록 안내합니다.',
         '.approach .eyebrow': '진행 방식',
-        '.approach h2': '첫 인사부터<br /><em>세심하게.</em>',
-        '.approach-copy p:nth-child(1)': '모든 프로젝트는 함께하는 사람들, 목표, 웹사이트에 담고 싶은 이야기를 나누는 대화로 시작합니다.',
-        '.approach-copy p:nth-child(2)': '그다음 필요한 범위와 일정, 비용을 함께 논의합니다. 당신다운 명확하고 반응형인 웹사이트를 만드는 것이 목표입니다.',
+        '.approach h2': '범위와 일정,<br />그리고 <em>비용.</em>',
+        '.approach-copy p:nth-child(1)': '먼저 방문자, 목표, 웹사이트에 필요한 정보를 함께 논의합니다.',
+        '.approach-copy p:nth-child(2)': '그다음 프로젝트의 범위와 일정, 비용을 논의합니다. 웹사이트의 내용과 기능은 해당 범위에 따라 정해집니다.',
         '.invitation h2': '어떤 일을<br /><em>계획하고 계신가요?</em>',
         '.invitation > div > p': '단체와 구상 중인 웹사이트에 대해 들려주세요.',
         '.invitation .button': '프로젝트에 대해 알려주세요 <span aria-hidden="true">↗</span>'
@@ -90,9 +88,9 @@ if (isKorean) {
       content: {
         '.page-hero h1': '함께 이야기를<br /><em>나눠요.</em>',
         '.page-hero > p:not(.eyebrow)': '구상 중인 프로젝트가 있거나 인사를 나누고 싶으신가요? 연락을 기다립니다.',
-        '.service-grid article:nth-child(1) h3': '이메일',
-        '.service-grid article:nth-child(2) h3': '문자',
-        '.service-grid article:nth-child(3) h3': '다른 채널'
+        '.contact-list article:nth-child(1) h3': '이메일',
+        '.contact-list article:nth-child(2) h3': '문자',
+        '.contact-list article:nth-child(3) h3': '다른 채널'
       }
     },
     resume: {
