@@ -12,7 +12,7 @@ for (const width of [1440, 320]) {
     page.on('pageerror', error => errors.push(error.message));
     try {
       await page.setViewportSize({ width, height: 900 });
-      for (const route of ['/', '/services/', '/resume/', '/contact/']) {
+      for (const route of ['/', '/services', '/resume', '/contact']) {
         await page.goto(`${base}${route}?source=test#main`);
         const korean = page.getByRole('link', { name: '한국어로 보기' });
         await expect(korean).toBeVisible();
@@ -57,14 +57,14 @@ for (const width of [1440, 320]) {
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
-      await expect(page).toHaveURL(`${base}/resume/?lang=ko`);
+      await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf');
       await page.getByRole('link', { name: '기업 · 비영리 단체' }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
       await expect(page.getByRole('link', { name: /문자 보내기/ })).toHaveAttribute('href', 'sms:+13237748524');
       await page.getByRole('link', { name: '이야기 나누기' }).click();
-      await expect(page).toHaveURL(`${base}/contact/?lang=ko`);
+      await expect(page).toHaveURL(`${base}/contact?lang=ko`);
       await expect(page.getByRole('heading', { name: '이메일' })).toBeVisible();
       await page.goto(`${base}/?lang=en`);
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');

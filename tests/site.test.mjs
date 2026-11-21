@@ -18,7 +18,9 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
       assert.match(html, /href="\/resume"/);
       assert.match(html, /href="\/contact"/);
       assert.match(html, /mailto:isaiahyoon22@gmail\.com/);
+      assert.match(html, /property="og:image" content="https:\/\/isaiahyoon\.github\.io\/assets\/social-preview\.png\?v=1"/);
     }
+    assert.equal((await fetch(`${base}/assets/social-preview.png`)).status, 200);
     for (const page of ['/services/', '/resume/', '/contact/']) {
       const redirect = await fetch(`${base}${page}?lang=ko`, { redirect: 'manual' });
       assert.equal(redirect.status, 301);

@@ -84,15 +84,15 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.getByRole('heading', { name: 'Churches' })).toBeVisible();
       for (const name of ['Start a conversation', 'Tell me about your project']) {
         const link = page.getByRole('link', { name });
-        await expect(link).toHaveAttribute('href', '/contact/');
+        await expect(link).toHaveAttribute('href', '/contact');
         await link.click();
-        await expect(page).toHaveURL(`${base}/contact/`);
-        await page.goto(`${base}/services/`);
+        await expect(page).toHaveURL(`${base}/contact`);
+        await page.goto(`${base}/services`);
       }
       await expect(page.getByRole('link', { name: 'Email Isaiah' })).toHaveAttribute('href', /mailto:isaiahyoon22@gmail\.com/);
       await expect(page.getByRole('link', { name: 'Text (323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
       await page.getByRole('link', { name: 'Let’s talk' }).click();
-      await expect(page).toHaveURL(`${base}/contact/`);
+      await expect(page).toHaveURL(`${base}/contact`);
       await expect(page.getByRole('heading', { name: 'Let’s start a conversation.' })).toBeVisible();
       await expect(page.locator('main').getByRole('link', { name: 'isaiahyoon22@gmail.com' })).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
