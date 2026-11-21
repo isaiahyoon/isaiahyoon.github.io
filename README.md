@@ -12,9 +12,17 @@ node tools/dev-server.mjs
 
 Open [http://localhost:8002](http://localhost:8002). Run the server checks with `npm test`. For browser checks, run `npm install`, install the Playwright browser with `npx playwright install chromium` if needed, and run `npm run test:all`.
 
+Use the language switch in the header or add `?lang=ko` to any page URL for the Korean version. Internal navigation preserves the language; the résumé preview and PDF remain in English. Korean localization requires JavaScript.
+
 ## Update the résumé
 
-Replace `assets/resume.pdf` with the latest PDF, keeping the same filename. Both the preview and download link use this file. The PDF is public when the site is deployed, so check its contents before publishing.
+Replace `assets/resume.pdf` with the latest one-page PDF, keeping the same filename. Regenerate its responsive preview with Poppler's `pdftoppm`:
+
+```sh
+pdftoppm -f 1 -l 1 -r 144 -png -singlefile assets/resume.pdf assets/resume-preview
+```
+
+Commit both files together. The PDF and preview are public when the site is deployed, so check their contents before publishing.
 
 ## Publishing
 
