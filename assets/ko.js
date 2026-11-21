@@ -19,10 +19,12 @@ if (isKorean) {
   const common = {
     '.skip': '본문으로 건너뛰기',
     '.brand small': '소프트웨어 엔지니어 · 독립 창작자',
-    'nav a:nth-child(1)': '주요 작업',
+    'nav a:nth-child(1) .nav-label': '주요 작업',
+    'nav a:nth-child(1) .nav-label-mobile': '작업',
     'nav a:nth-child(2)': '이력서',
-    'nav a:nth-child(3)': '기업 · 비영리 단체',
-    'nav a:nth-child(4)': '문의하기 <span aria-hidden="true">↗</span>',
+    'nav a:nth-child(3) .nav-label': '기업 · 비영리 단체',
+    'nav a:nth-child(3) .nav-label-mobile': '서비스',
+    'nav a:nth-child(4)': '문의',
     '.footer p': '사람을 생각하며 정성껏 만듭니다.'
   };
 

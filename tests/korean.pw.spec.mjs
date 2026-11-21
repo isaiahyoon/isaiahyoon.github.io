@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { once } from 'node:events';
 import { createDevServer } from '../tools/dev-server.mjs';
 
-for (const width of [1440, 320]) {
+for (const width of [1440, 320, 360, 402]) {
   test(`Korean pages preserve language and layout at ${width}px`, async ({ page }) => {
     const server = createDevServer();
     server.listen(0, '127.0.0.1');
@@ -48,11 +48,23 @@ for (const width of [1440, 320]) {
         await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /[가-힣]/);
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route}?lang=ko at ${width}px`).toBeLessThanOrEqual(dimensions.viewport);
+        if (width <= 980) {
+          await expect(page.locator('nav a')).toHaveText(['작업', '이력서', '서비스', '문의'], { useInnerText: true });
+          const navLinks = await page.locator('nav a').evaluateAll(links => links.map(link => ({
+            top: link.getBoundingClientRect().top,
+            scroll: link.scrollWidth,
+            width: link.clientWidth
+          })));
+          for (const link of navLinks) {
+            expect(link.top).toBe(navLinks[0].top);
+            expect(link.scroll).toBeLessThanOrEqual(link.width);
+          }
+        }
         for (const link of await page.locator('nav a').all()) {
           expect(new URL(await link.getAttribute('href'), base).searchParams.get('lang')).toBe('ko');
         }
       }
-      await page.getByRole('link', { name: '주요 작업' }).click();
+      await page.locator('nav').getByRole('link', { name: width <= 980 ? '작업' : '주요 작업', exact: true }).click();
       await expect(page).toHaveURL(`${base}/?lang=ko#work`);
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org');
@@ -61,7 +73,7 @@ for (const width of [1440, 320]) {
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
       await expect(page.locator('iframe')).toHaveAttribute('title', 'Isaiah Yoon의 영문 이력서 PDF');
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
-      await page.getByRole('link', { name: '기업 · 비영리 단체' }).click();
+      await page.locator('nav').getByRole('link', { name: width <= 980 ? '서비스' : '기업 · 비영리 단체', exact: true }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
       await expect(page.getByRole('link', { name: /문자 보내기/ })).toHaveAttribute('href', 'sms:+13237748524');
       await page.getByRole('link', { name: '이야기 나누기' }).click();

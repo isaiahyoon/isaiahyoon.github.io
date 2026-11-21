@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { once } from 'node:events';
 import { createDevServer } from '../tools/dev-server.mjs';
 
-for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile-small', width: 320, height: 812 }, { name: 'mobile', width: 375, height: 812 }, { name: 'iphone-17', width: 402, height: 874 }, { name: 'mobile-wide', width: 400, height: 812 }]) {
+for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile-small', width: 320, height: 812 }, { name: 'galaxy-s23', width: 360, height: 780 }, { name: 'mobile', width: 375, height: 812 }, { name: 'iphone-17', width: 402, height: 874 }, { name: 'mobile-wide', width: 400, height: 812 }]) {
   test(`${viewport.name}: navigation, résumé, and freelance contact work without horizontal overflow`, async ({ page }) => {
     const server = createDevServer();
     server.listen(0, '127.0.0.1');
@@ -31,20 +31,25 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         await expect(page.locator('meta[name="viewport"]')).toHaveAttribute('content', 'width=device-width, initial-scale=1');
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport);
-        if (viewport.width <= 850) {
+        const navContact = page.locator('nav').getByRole('link', { name: 'Contact', exact: true });
+        await expect(navContact).toBeVisible();
+        await expect(navContact).toHaveCSS('border-top-width', '0px');
+        await expect(navContact).toHaveCSS('border-radius', '0px');
+        await expect(navContact).toHaveCSS('padding-left', '0px');
+        if (viewport.width <= 980) {
+          await expect(page.locator('nav a')).toHaveText(['Work', 'Résumé', 'Services', 'Contact'], { useInnerText: true });
+          await expect(page.locator('.brand small')).toBeHidden();
           const navLinks = await page.locator('nav a').evaluateAll(links => links.map(link => {
             const rect = link.getBoundingClientRect();
-            return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, height: rect.height };
+            return { left: rect.left, right: rect.right, top: rect.top, height: rect.height, scroll: link.scrollWidth, width: link.clientWidth };
           }));
-          expect(navLinks[0].top).toBe(navLinks[1].top);
-          expect(navLinks[2].top).toBe(navLinks[3].top);
-          expect(navLinks[2].top).toBeGreaterThanOrEqual(navLinks[0].bottom);
-          expect(navLinks[0].right).toBeLessThanOrEqual(navLinks[1].left);
-          expect(navLinks[2].right).toBeLessThanOrEqual(navLinks[3].left);
-          for (const link of navLinks) {
+          for (const [index, link] of navLinks.entries()) {
+            expect(link.top).toBe(navLinks[0].top);
             expect(link.height).toBeGreaterThanOrEqual(44);
             expect(link.left).toBeGreaterThanOrEqual(0);
             expect(link.right).toBeLessThanOrEqual(viewport.width);
+            expect(link.scroll).toBeLessThanOrEqual(link.width);
+            if (index > 0) expect(navLinks[index - 1].right).toBeLessThanOrEqual(link.left);
           }
         }
         const footerEmail = page.locator('footer').getByRole('link', { name: 'isaiahyoon22@gmail.com' });
@@ -73,7 +78,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(pdfTab).toHaveURL(`${base}/assets/resume.pdf#view=FitH`);
       await pdfTab.close();
       await page.context().unroute('**/assets/resume.pdf');
-      await page.getByRole('link', { name: 'For businesses & nonprofits' }).click();
+      await page.locator('nav').getByRole('link', { name: viewport.width <= 980 ? 'Services' : 'For businesses & nonprofits', exact: true }).click();
       await expect(page.getByRole('heading', { name: 'Small businesses' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Nonprofits' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Churches' })).toBeVisible();
@@ -86,7 +91,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       }
       await expect(page.getByRole('link', { name: 'Email Isaiah' })).toHaveAttribute('href', /mailto:isaiahyoon22@gmail\.com/);
       await expect(page.getByRole('link', { name: 'Text (323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
-      await page.getByRole('link', { name: 'Let’s talk' }).click();
+      await page.locator('nav').getByRole('link', { name: 'Contact', exact: true }).click();
       await expect(page).toHaveURL(`${base}/contact`);
       await expect(page.getByRole('heading', { name: 'Let’s start a conversation.' })).toBeVisible();
       await expect(page.locator('main').getByRole('link', { name: 'isaiahyoon22@gmail.com' })).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
