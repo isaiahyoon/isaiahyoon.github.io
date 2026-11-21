@@ -34,7 +34,7 @@ if (isKorean) {
         '.hero-intro': '안녕하세요, 소프트웨어 엔지니어이자 독립 창작자 Isaiah입니다. 사람과 공동체에 도움이 되는 편안하고 유용한 디지털 경험을 만듭니다.',
         '.hero-copy .button': '주요 작업 살펴보기 <span aria-hidden="true">↘</span>',
         '.hero-copy .text-link': '이력서 보기 <span aria-hidden="true">↗</span>',
-        '.hero-note': '<span aria-hidden="true">✳</span> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
+        '.hero-note': '<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v14M1 8h14M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.5" /></svg> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
         '.work-section .eyebrow': '01 / 주요 작업',
         '.work-section h2': '의미를 담은 <em>작업.</em>',
         '.work-section .section-heading > p': '말씀부터 공동체까지, 소중한 것에 조금 더 쉽게 다가갈 수 있도록 만든 프로젝트입니다.',

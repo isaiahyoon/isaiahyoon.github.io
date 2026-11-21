@@ -66,6 +66,7 @@ for (const width of [1440, 320, 360, 402]) {
       }
       await page.locator('nav').getByRole('link', { name: '작업', exact: true }).click();
       await expect(page).toHaveURL(`${base}/?lang=ko#work`);
+      await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
