@@ -28,6 +28,8 @@ Replace `assets/resume.pdf` with the latest PDF, keeping the same filename and p
 
 The site is static: deploy `index.html` and the `resume/`, `services/`, `contact/`, `assets/`, and `styles/` directories to a static host that serves directory index files. The local server is for development only.
 
+Umami Analytics tracks page views on all four pages using the website ID configured in each page’s `<head>`.
+
 ## License
 
 All rights reserved. See [LICENSE](LICENSE).
