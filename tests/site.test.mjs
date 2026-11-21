@@ -23,8 +23,9 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
     assert.match(home, /https:\/\/theamazingword\.org/);
     assert.match(home, /https:\/\/immanuelchurchofamerica\.org/);
     const resume = await (await fetch(`${base}/resume/`)).text();
-    assert.match(resume, /src="\/assets\/resume\.pdf"/);
-    assert.match(resume, /href="\/assets\/resume\.pdf" download/);
+    assert.match(resume, /src="\/assets\/resume-preview\.png"/);
+    assert.match(resume, /href="\/assets\/resume\.pdf" target="_blank" rel="noopener noreferrer">Open the résumé PDF/);
+    assert.equal((await fetch(`${base}/assets/resume-preview.png`)).status, 200);
     const pdf = await fetch(`${base}/assets/resume.pdf`);
     assert.equal(pdf.status, 200);
     assert.equal(pdf.headers.get('content-type'), 'application/pdf');
