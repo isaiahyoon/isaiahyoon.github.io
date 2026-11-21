@@ -2,6 +2,8 @@
 
 Personal portfolio and freelance website for small businesses, nonprofits, and churches. The site includes selected projects, a résumé, and a contact page.
 
+Home showcases selected work, Services explains the offer and process, Résumé documents experience, and Contact collects email, text, and social channels. Services directs inquiries to Contact; shared footer links remain available on every page.
+
 ## Run locally
 
 Requires Node.js 20 or later. No installation or build step is required to run the site.
@@ -13,6 +15,8 @@ node tools/dev-server.mjs
 Open [http://localhost:8002](http://localhost:8002). Run the server checks with `npm test`. For browser checks, run `npm install`, install the Playwright browser with `npx playwright install chromium` if needed, and run `npm run test:all`.
 
 Use the language switch in the header or add `?lang=ko` to any page URL for the Korean version. Internal navigation preserves the language; the résumé PDF remains in English. Korean localization requires JavaScript.
+
+On mobile, a compact brand and language row sits above a single row of Work, Résumé, Services, and Contact links. Browser tests check this layout in English and Korean at iPhone 17 (402px) and Galaxy S23 (360px) viewport widths.
 
 ## Update the résumé
 

@@ -19,11 +19,12 @@ if (isKorean) {
   const common = {
     '.skip': '본문으로 건너뛰기',
     '.brand small': '소프트웨어 엔지니어 · 독립 창작자',
-    'nav a:nth-child(1)': '주요 작업',
+    'nav a:nth-child(1) .nav-label': '주요 작업',
+    'nav a:nth-child(1) .nav-label-mobile': '작업',
     'nav a:nth-child(2)': '이력서',
-    'nav a:nth-child(3)': '기업 · 비영리 단체',
-    'nav a:nth-child(4)': '문의하기 <span aria-hidden="true">↗</span>',
-    '.footer p': '사람을 생각하며 정성껏 만듭니다.'
+    'nav a:nth-child(3) .nav-label': '기업 · 비영리 단체',
+    'nav a:nth-child(3) .nav-label-mobile': '서비스',
+    'nav a:nth-child(4)': '문의'
   };
 
   const pages = {
@@ -31,13 +32,11 @@ if (isKorean) {
       title: 'Isaiah Yoon — 소프트웨어 엔지니어 · 독립 창작자',
       description: 'Isaiah Yoon은 사람과 공동체를 위한 세심한 디지털 경험을 만드는 소프트웨어 엔지니어입니다.',
       content: {
-        '.hero-copy .eyebrow': '<span class="star" aria-hidden="true">✦</span> 사람을 생각하며 정성껏',
         '#hero-title': '디지털 세상에<br />조금 더 <em>따뜻한 마음을.</em>',
         '.hero-intro': '안녕하세요, 소프트웨어 엔지니어이자 독립 창작자 Isaiah입니다. 사람과 공동체에 도움이 되는 편안하고 유용한 디지털 경험을 만듭니다.',
         '.hero-copy .button': '주요 작업 살펴보기 <span aria-hidden="true">↘</span>',
         '.hero-copy .text-link': '이력서 보기 <span aria-hidden="true">↗</span>',
         '.hero-note': '<span aria-hidden="true">✳</span> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
-        '.art-caption': '<span>정성을 담아</span><span>✦</span><span>사람을 위해</span>',
         '.work-section .eyebrow': '01 / 주요 작업',
         '.work-section h2': '의미를 담은 <em>작업.</em>',
         '.work-section .section-heading > p': '말씀부터 공동체까지, 소중한 것에 조금 더 쉽게 다가갈 수 있도록 만든 프로젝트입니다.',
@@ -53,7 +52,6 @@ if (isKorean) {
         '.church-card .project-kicker': '02 / 교회 웹사이트',
         '.church-card .project-body > p:not(.project-kicker)': '예배 안내, 설교, 공동체 갤러리를 한곳에 담은 이중 언어 교회 웹사이트입니다.',
         '.church-card .project-link': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
-        '.invitation .eyebrow': '정성을 담은 첫인상',
         '.invitation h2': '좋은 시작은<br /><em>여기에서.</em>',
         '.invitation p:not(.eyebrow)': '소규모 기업, 비영리 단체, 교회의 이야기를 따뜻하게 전할 수 있는 온라인 공간을 함께 만들어 봅니다.',
         '.invitation .button': '웹사이트 제작 서비스 살펴보기 <span aria-hidden="true">↗</span>'
@@ -66,7 +64,7 @@ if (isKorean) {
         '.page-hero .eyebrow': '<span class="star" aria-hidden="true">✦</span> 좋은 일을 위한 웹사이트',
         '.page-hero h1': '당신의 공간에<br /><em>따뜻한 환영을.</em>',
         '.page-hero > p:not(.eyebrow)': '소규모 기업, 비영리 단체, 교회를 위해 사람을 생각하고 세부 사항까지 살핀 아름답고 명확한 랜딩 웹사이트를 만듭니다.',
-        '.page-hero .button': '이야기 나누기 <span aria-hidden="true">↗</span>',
+        '.page-hero .button': '문의 <span aria-hidden="true">↗</span>',
         '.page-hero .text-link': '주요 작업 보기 <span aria-hidden="true">↗</span>',
         '.service-section .eyebrow': '당신의 사명을 위해',
         '.service-section h2': '좋은 일에는<br /><em>좋은 공간이 필요합니다.</em>',
@@ -81,30 +79,20 @@ if (isKorean) {
         '.approach h2': '첫 인사부터<br /><em>세심하게.</em>',
         '.approach-copy p:nth-child(1)': '모든 프로젝트는 함께하는 사람들, 목표, 웹사이트에 담고 싶은 이야기를 나누는 대화로 시작합니다.',
         '.approach-copy p:nth-child(2)': '그다음 필요한 범위와 일정, 비용을 함께 논의합니다. 당신다운 명확하고 반응형인 웹사이트를 만드는 것이 목표입니다.',
-        '.approach-copy .project-link': '프로젝트에 대해 알려주세요 <span aria-hidden="true">↗</span>',
-        '.invitation .eyebrow': '의미 있는 무언가를 함께',
         '.invitation h2': '어떤 일을<br /><em>계획하고 계신가요?</em>',
-        '.invitation > div > p:nth-of-type(2)': '단체와 구상 중인 웹사이트에 대해 들려주세요.',
-        '.invitation .button': 'Isaiah에게 이메일 보내기 <span aria-hidden="true">↗</span>',
-        '.invitation > div > p:nth-of-type(3)': '또는 <a href="mailto:isaiahyoon22@gmail.com">isaiahyoon22@gmail.com</a>으로 직접 연락해 주세요.'
+        '.invitation > div > p': '단체와 구상 중인 웹사이트에 대해 들려주세요.',
+        '.invitation .button': '프로젝트에 대해 알려주세요 <span aria-hidden="true">↗</span>'
       }
     },
     contact: {
       title: '문의하기 — Isaiah Yoon',
       description: 'Isaiah Yoon에게 이메일, 문자 또는 소셜 미디어로 연락하세요.',
       content: {
-        '.page-hero .eyebrow': '<span class="star" aria-hidden="true">✦</span> 연락하기',
         '.page-hero h1': '함께 이야기를<br /><em>나눠요.</em>',
         '.page-hero > p:not(.eyebrow)': '구상 중인 프로젝트가 있거나 인사를 나누고 싶으신가요? 연락을 기다립니다.',
-        '.service-section .eyebrow': '연락 방법',
-        '.service-section h2': '편하게 <em>연락하세요.</em>',
-        '.service-section .section-heading > p': '편한 방법을 선택해 주세요. 이메일 주소를 복사해 사용하시는 이메일 서비스에서 보내셔도 됩니다.',
         '.service-grid article:nth-child(1) h3': '이메일',
-        '.service-grid article:nth-child(1) p': '프로젝트 문의나 가벼운 인사를 보내주세요.',
         '.service-grid article:nth-child(2) h3': '문자',
-        '.service-grid article:nth-child(2) p': '문자 메시지로 연락해 주세요.',
-        '.service-grid article:nth-child(3) h3': '다른 채널',
-        '.service-grid article:nth-child(3) p': '온라인에서 더 많은 작업을 보고 소식을 나눌 수 있습니다.'
+        '.service-grid article:nth-child(3) h3': '다른 채널'
       }
     },
     resume: {
@@ -136,8 +124,6 @@ if (isKorean) {
   }
   document.querySelector('.brand').setAttribute('aria-label', 'Isaiah Yoon 홈');
   document.querySelector('nav').setAttribute('aria-label', '주 메뉴');
-  const phone = document.querySelector('.contact-phone');
-  if (phone) phone.setAttribute('aria-label', '(323) 774-8524로 문자 보내기');
   const resume = document.querySelector('.resume-document iframe');
   if (resume) resume.title = 'Isaiah Yoon의 영문 이력서 PDF';
 
