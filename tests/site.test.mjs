@@ -17,6 +17,7 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
       assert.match(html, /href="\/services"/);
       assert.match(html, /href="\/resume"/);
       assert.match(html, /href="\/contact"/);
+      assert.match(html, /<script defer src="https:\/\/cloud\.umami\.is\/script\.js" data-website-id="bb736843-c36a-4bfa-b5e6-c80d36b1f134"><\/script>/);
       assert.match(html, /mailto:isaiahyoon22@gmail\.com/);
       assert.match(html, /property="og:image" content="https:\/\/isaiahyoon\.github\.io\/assets\/social-preview\.png\?v=1"/);
     }

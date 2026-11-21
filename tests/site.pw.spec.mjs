@@ -32,12 +32,12 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport);
         const navContact = page.locator('nav').getByRole('link', { name: 'Contact', exact: true });
+        await expect(page.locator('nav a')).toHaveText(['Work', 'Résumé', 'Services', 'Contact']);
         await expect(navContact).toBeVisible();
         await expect(navContact).toHaveCSS('border-top-width', '0px');
         await expect(navContact).toHaveCSS('border-radius', '0px');
         await expect(navContact).toHaveCSS('padding-left', '0px');
         if (viewport.width <= 980) {
-          await expect(page.locator('nav a')).toHaveText(['Work', 'Résumé', 'Services', 'Contact'], { useInnerText: true });
           await expect(page.locator('.brand small')).toBeHidden();
           const navLinks = await page.locator('nav a').evaluateAll(links => links.map(link => {
             const rect = link.getBoundingClientRect();
@@ -68,6 +68,9 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       const viewerSize = await viewer.boundingBox();
       expect(viewerSize.width).toBeLessThanOrEqual(viewport.width);
       expect(viewerSize.height).toBeGreaterThanOrEqual(480);
+      if (viewport.name === 'iphone-17' || viewport.name === 'galaxy-s23') {
+        expect(viewerSize.y, 'Résumé preview starts within the initial viewport').toBeLessThanOrEqual(viewport.height * 0.65);
+      }
       const pdfLink = page.getByRole('link', { name: 'open the résumé PDF' });
       await expect(pdfLink).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await expect(pdfLink).toHaveAttribute('target', '_blank');
@@ -78,7 +81,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(pdfTab).toHaveURL(`${base}/assets/resume.pdf#view=FitH`);
       await pdfTab.close();
       await page.context().unroute('**/assets/resume.pdf');
-      await page.locator('nav').getByRole('link', { name: viewport.width <= 980 ? 'Services' : 'For businesses & nonprofits', exact: true }).click();
+      await page.locator('nav').getByRole('link', { name: 'Services', exact: true }).click();
       await expect(page.getByRole('heading', { name: 'Small businesses' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Nonprofits' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Churches' })).toBeVisible();
@@ -97,6 +100,16 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.locator('main h1, main h2')).toHaveCount(1);
       await expect(page.locator('main').getByRole('link', { name: 'isaiahyoon22@gmail.com' })).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
+      const contactRows = await page.locator('.contact-list article').evaluateAll(rows => rows.map(row => {
+        const rect = row.getBoundingClientRect();
+        return { left: rect.left, height: rect.height, scroll: row.scrollWidth, width: row.clientWidth };
+      }));
+      expect(contactRows).toHaveLength(3);
+      for (const row of contactRows) {
+        expect(row.left).toBe(contactRows[0].left);
+        expect(row.height).toBeLessThanOrEqual(100);
+        expect(row.scroll).toBeLessThanOrEqual(row.width);
+      }
       if (viewport.width === 320) {
         await page.addStyleTag({ content: '.footer div { font-size: 16px; }' });
         const { scroll, width } = await page.locator('.footer').evaluate(footer => ({
