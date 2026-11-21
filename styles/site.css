@@ -91,6 +91,7 @@ html:lang(ko) .eyebrow, html:lang(ko) .project-kicker, html:lang(ko) .brand smal
   .hero { grid-template-columns: 1fr; gap: 10px; min-height: 0; padding-block: 65px; }.hero-art { height: 340px; }.orbit-one { width: 280px; height: 280px; }.orbit-two { width: min(70vw, 260px); height: min(47vw, 175px); }.art-disc { width: 215px; height: 215px; }.art-disc span { font-size: 150px; }.art-caption { bottom: 0; }.hero-note { margin-top: 32px; }
   .work-section, .service-section { padding-block: 70px; }.section-heading { align-items: start; flex-direction: column; }.project-grid { grid-template-columns: 1fr; }.project-body > p:not(.project-kicker) { min-height: 0; }
   .service-grid { grid-template-columns: 1fr; }.service-grid article { min-height: 0; }.service-grid h3 { margin-top: 24px; }.page-hero { padding-block: 75px; }.approach { grid-template-columns: 1fr; gap: 24px; padding-top: 75px; }.invitation { margin-block: 60px; }.invitation-mark { position: absolute; right: 0; bottom: -30px; opacity: .32; font-size: 160px; }.invitation > div { position: relative; z-index: 1; }.footer { flex-wrap: wrap; }.footer p { width: 100%; order: 3; }.resume-page { padding-block: 70px; }.resume-document { padding: 6px; }
+  .footer div { flex-wrap: wrap; }
 }
 @media (max-width: 390px) {
   .brand small { font-size: 8px; letter-spacing: .04em; }

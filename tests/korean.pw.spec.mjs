@@ -47,7 +47,7 @@ for (const width of [1440, 320]) {
         await expect(page.locator('nav')).toHaveAttribute('aria-label', '주 메뉴');
         await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /[가-힣]/);
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
-        expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.viewport);
+        expect(dimensions.scroll, `${route}?lang=ko at ${width}px`).toBeLessThanOrEqual(dimensions.viewport);
         for (const link of await page.locator('nav a').all()) {
           expect(new URL(await link.getAttribute('href'), base).searchParams.get('lang')).toBe('ko');
         }

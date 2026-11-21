@@ -29,7 +29,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       for (const route of ['/', '/services/', '/resume/', '/contact/']) {
         await page.goto(`${base}${route}`);
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
-        expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.viewport);
+        expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport);
         if (viewport.width <= 850) {
           const navLinks = await page.locator('nav a').evaluateAll(links => links.map(link => {
             const rect = link.getBoundingClientRect();
@@ -96,6 +96,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.getByRole('heading', { name: 'Let’s start a conversation.' })).toBeVisible();
       await expect(page.locator('main').getByRole('link', { name: 'isaiahyoon22@gmail.com' })).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
+      if (viewport.width === 320) {
+        await page.addStyleTag({ content: '.footer div { font-size: 16px; }' });
+        const { scroll, width } = await page.locator('.footer').evaluate(footer => ({
+          scroll: footer.scrollWidth, width: footer.clientWidth
+        }));
+        expect(scroll, 'Footer with larger text at 320px').toBeLessThanOrEqual(width);
+      }
     } finally {
       await page.close();
       const closed = once(server, 'close');
