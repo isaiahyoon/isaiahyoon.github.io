@@ -12,6 +12,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await page.setViewportSize(viewport);
       await page.goto(base);
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();
+      await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       const heroBounds = await page.locator('.hero-section').evaluate(element => {
         const bounds = element.getBoundingClientRect();
         return { left: bounds.left, right: bounds.right, viewport: document.documentElement.clientWidth };
@@ -82,6 +83,20 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await pdfTab.close();
       await page.context().unroute('**/assets/resume.pdf');
       await page.locator('nav').getByRole('link', { name: 'Services', exact: true }).click();
+      const servicesBackground = await page.locator('.page-hero-background').evaluate(container => {
+        const bounds = container.getBoundingClientRect();
+        return {
+          left: bounds.left,
+          right: bounds.right,
+          viewport: document.documentElement.clientWidth,
+          background: getComputedStyle(container).backgroundImage,
+          heroBackground: getComputedStyle(container.querySelector('.page-hero')).backgroundImage
+        };
+      });
+      expect(servicesBackground.left).toBe(0);
+      expect(servicesBackground.right).toBe(servicesBackground.viewport);
+      expect(servicesBackground.background).toContain('radial-gradient');
+      expect(servicesBackground.heroBackground).toBe('none');
       await expect(page.getByRole('heading', { name: 'Small businesses' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Nonprofits' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Churches' })).toBeVisible();
@@ -97,6 +112,20 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await page.locator('nav').getByRole('link', { name: 'Contact', exact: true }).click();
       await expect(page).toHaveURL(`${base}/contact`);
       await expect(page.getByRole('heading', { name: 'Let’s start a conversation.' })).toBeVisible();
+      const contactBackground = await page.locator('main').evaluate(main => {
+        const bounds = main.getBoundingClientRect();
+        return {
+          left: bounds.left,
+          right: bounds.right,
+          viewport: document.documentElement.clientWidth,
+          background: getComputedStyle(main).backgroundImage,
+          heroBackground: getComputedStyle(main.querySelector('.page-hero')).backgroundImage
+        };
+      });
+      expect(contactBackground.left).toBe(0);
+      expect(contactBackground.right).toBe(contactBackground.viewport);
+      expect(contactBackground.background).toContain('radial-gradient');
+      expect(contactBackground.heroBackground).toBe('none');
       await expect(page.locator('main h1, main h2')).toHaveCount(1);
       await expect(page.locator('main').getByRole('link', { name: 'isaiahyoon22@gmail.com' })).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
