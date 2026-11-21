@@ -37,7 +37,7 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page).toHaveURL(`${base}/?source=test&lang=ko#work`);
       for (const [route, heading] of [
         ['/', /디지털 세상에/],
-        ['/services/', /단체를 위한/],
+        ['/services/', /프로젝트를 위한/],
         ['/resume/', /작업을 뒷받침하는/],
         ['/contact/', /함께 이야기를/]
       ]) {
@@ -80,6 +80,7 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '그 밖의 프로젝트' })).toBeVisible();
       await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(2);
       await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();
       await expect(page).toHaveURL(`${base}/contact?lang=ko`);

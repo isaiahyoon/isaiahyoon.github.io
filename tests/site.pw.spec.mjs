@@ -100,6 +100,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.getByRole('heading', { name: 'Small businesses' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Nonprofits' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Churches' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Other projects' })).toBeVisible();
+      await expect(page.locator('.service-grid article').nth(3)).toContainText('Let’s discuss what you want to build');
       await expect(page.locator('main a[href="/contact"]')).toHaveCount(2);
       await expect(page.locator('main a[href^="mailto:"], main a[href^="sms:"]')).toHaveCount(0);
       for (const name of ['Contact', 'Tell me about your project']) {
