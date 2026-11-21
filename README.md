@@ -2,6 +2,8 @@
 
 Personal portfolio and freelance website for small businesses, nonprofits, and churches. The site includes selected projects, a résumé, and a contact page.
 
+Home showcases selected work, Services explains the offer and process, Résumé documents experience, and Contact collects email, text, and social channels. Services directs inquiries to Contact; shared footer links remain available on every page.
+
 ## Run locally
 
 Requires Node.js 20 or later. No installation or build step is required to run the site.

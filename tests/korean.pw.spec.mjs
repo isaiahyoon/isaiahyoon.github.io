@@ -75,10 +75,12 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: width <= 980 ? '서비스' : '기업 · 비영리 단체', exact: true }).click();
       await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
-      await expect(page.getByRole('link', { name: /문자 보내기/ })).toHaveAttribute('href', 'sms:+13237748524');
-      await page.getByRole('link', { name: '이야기 나누기' }).click();
+      await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(2);
+      await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();
       await expect(page).toHaveURL(`${base}/contact?lang=ko`);
       await expect(page.getByRole('heading', { name: '이메일' })).toBeVisible();
+      await expect(page.locator('main h1, main h2')).toHaveCount(1);
+      await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
       await page.goto(`${base}/?lang=en`);
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();
