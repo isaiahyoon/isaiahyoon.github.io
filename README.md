@@ -19,3 +19,7 @@ Replace `assets/resume.pdf` with the latest PDF, keeping the same filename. Both
 ## Publishing
 
 The site is static: deploy `index.html` and the `resume/`, `services/`, `contact/`, `assets/`, and `styles/` directories to a static host that serves directory index files. The local server is for development only.
+
+## License
+
+All rights reserved. See [LICENSE](LICENSE).
