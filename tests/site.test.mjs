@@ -14,10 +14,15 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
       assert.equal(response.status, 200);
       const html = await response.text();
       assert.match(html, /href="\/assets\/apple-touch-icon\.png\?v=4"/);
-      assert.match(html, /href="\/services\/"/);
-      assert.match(html, /href="\/resume\/"/);
-      assert.match(html, /href="\/contact\/"/);
+      assert.match(html, /href="\/services"/);
+      assert.match(html, /href="\/resume"/);
+      assert.match(html, /href="\/contact"/);
       assert.match(html, /mailto:isaiahyoon22@gmail\.com/);
+    }
+    for (const page of ['/services/', '/resume/', '/contact/']) {
+      const redirect = await fetch(`${base}${page}?lang=ko`, { redirect: 'manual' });
+      assert.equal(redirect.status, 301);
+      assert.equal(redirect.headers.get('location'), `${page.slice(0, -1)}?lang=ko`);
     }
     const home = await (await fetch(base)).text();
     assert.match(home, /https:\/\/theamazingword\.org/);

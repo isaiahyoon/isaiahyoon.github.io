@@ -15,6 +15,11 @@ export function createDevServer() {
       response.writeHead(400).end('Bad request');
       return;
     }
+    if (pathname !== '/' && pathname.endsWith('/')) {
+      const query = new URL(request.url, 'http://localhost').search;
+      response.writeHead(301, { Location: `${pathname.slice(0, -1)}${query}` }).end();
+      return;
+    }
     const relative = pathname.endsWith('/') || !path.extname(pathname)
       ? path.join(pathname.slice(1), 'index.html')
       : pathname.slice(1);
