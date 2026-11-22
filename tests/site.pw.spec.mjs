@@ -12,6 +12,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await page.setViewportSize(viewport);
       await page.goto(base);
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();
+      await expect(page.locator('.hero-intro')).toContainText('software engineer');
+      await expect(page.locator('.hero-intro')).toContainText('websites');
       await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       const heroServices = page.locator('.hero-copy').getByRole('link', { name: 'Explore website services' });
       await heroServices.click();
@@ -27,8 +29,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       });
       expect(heroBounds.left).toBe(0);
       expect(heroBounds.right).toBe(heroBounds.viewport);
-      await expect(page.getByRole('link', { name: 'Visit The Amazing Word' })).toHaveAttribute('href', 'https://theamazingword.org');
+      await expect(page.getByRole('link', { name: 'Visit The Amazing Word' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await expect(page.getByRole('link', { name: 'Visit the church website' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
+      await expect(page.locator('.word-card .project-kicker')).toContainText('Creator & engineer');
+      await expect(page.locator('.church-card .project-kicker')).toContainText('Web developer');
       for (const name of ['Visit The Amazing Word', 'Visit the church website']) {
         const link = page.getByRole('link', { name });
         await expect(link).toHaveAttribute('target', '_blank');
@@ -106,21 +110,37 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       expect(servicesBackground.right).toBe(servicesBackground.viewport);
       expect(servicesBackground.background).toContain('radial-gradient');
       expect(servicesBackground.heroBackground).toBe('none');
-      const preview = page.locator('.project-preview');
-      await expect(preview.getByRole('heading', { name: 'Immanuel Church of America' })).toBeVisible();
-      const previewLink = preview.getByRole('link', { name: 'Visit the church website' });
-      await expect(previewLink).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
-      await expect(previewLink).toHaveAttribute('target', '_blank');
-      await expect(previewLink).toHaveAttribute('rel', 'noopener noreferrer');
-      await page.context().route('https://immanuelchurchofamerica.org/', route => route.fulfill({ contentType: 'text/html', body: 'Church website' }));
-      const [projectTab] = await Promise.all([page.waitForEvent('popup'), previewLink.click()]);
-      await expect(projectTab).toHaveURL('https://immanuelchurchofamerica.org/');
-      await projectTab.close();
-      await page.context().unroute('https://immanuelchurchofamerica.org/');
+      const preview = page.locator('.featured-work');
+      for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org']]) {
+        const previewLink = preview.getByRole('link', { name });
+        await expect(previewLink).toBeVisible();
+        await expect(previewLink).toHaveAttribute('href', url);
+        await expect(previewLink).toHaveAttribute('target', '_blank');
+        await expect(previewLink).toHaveAttribute('rel', 'noopener noreferrer');
+        const destination = new URL(url).href;
+        await page.context().route(destination, route => route.fulfill({ contentType: 'text/html', body: name }));
+        const [projectTab] = await Promise.all([page.waitForEvent('popup'), previewLink.click()]);
+        await expect(projectTab).toHaveURL(destination);
+        await projectTab.close();
+        await page.context().unroute(destination);
+      }
       await expect(page).toHaveURL(`${base}/services`);
+      if (viewport.width <= 402) {
+        const layout = await page.evaluate(() => ({
+          offerTop: document.querySelector('.service-section').getBoundingClientRect().top + window.scrollY,
+          cards: [...document.querySelectorAll('.featured-project')].map(card => ({
+            top: card.getBoundingClientRect().top,
+            width: card.clientWidth,
+            scroll: card.scrollWidth
+          }))
+        }));
+        expect(layout.offerTop, 'The offer follows compact project previews on mobile').toBeLessThan(1100);
+        expect(layout.cards[1].top).toBeGreaterThan(layout.cards[0].top);
+        for (const card of layout.cards) expect(card.scroll).toBeLessThanOrEqual(card.width);
+      }
       await expect(page.locator('.service-hero a[href="/contact"], .service-hero a[href="/#work"]')).toHaveCount(0);
       await expect(page.locator('.service-audiences li')).toHaveText(['Small businesses', 'Nonprofits', 'Churches', 'Other projects']);
-      await expect(page.getByRole('heading', { name: 'What your website can do' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'What your website can include' })).toBeVisible();
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
       await expect(page.locator('main a[href="/contact"]')).toHaveCount(1);
       await expect(page.locator('main a[href^="mailto:"], main a[href^="sms:"]')).toHaveCount(0);
