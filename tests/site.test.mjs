@@ -28,7 +28,7 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
       assert.equal(redirect.headers.get('location'), `${page.slice(0, -1)}?lang=ko`);
     }
     const home = await (await fetch(base)).text();
-    assert.match(home, /https:\/\/theamazingword\.org/);
+    assert.match(home, /https:\/\/theamazingword\.org\/about/);
     assert.match(home, /https:\/\/immanuelchurchofamerica\.org/);
     const resume = await (await fetch(`${base}/resume/`)).text();
     assert.match(resume, /<iframe src="\/assets\/resume\.pdf#view=FitH" title="Isaiah Yoon's résumé PDF"><\/iframe>/);

@@ -68,7 +68,7 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page).toHaveURL(`${base}/?lang=ko#work`);
       await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
-      await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org');
+      await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
@@ -79,14 +79,21 @@ for (const width of [1440, 320, 360, 402]) {
       }
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
-      await expect(page.getByRole('heading', { name: '소규모 기업' })).toBeVisible();
-      await expect(page.getByRole('heading', { name: '그 밖의 프로젝트' })).toBeVisible();
-      await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(2);
+      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트']);
+      await expect(page.locator('.featured-work').getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
+      await expect(page.locator('.featured-work').getByRole('link', { name: '교회 웹사이트 방문하기' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
+      await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
+      await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
+      await expect(page.locator('.approach-steps li')).toHaveCount(3);
+      await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(1);
       await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();
       await expect(page).toHaveURL(`${base}/contact?lang=ko`);
       await expect(page.getByRole('heading', { name: '이메일' })).toBeVisible();
       await expect(page.locator('main h1, main h2')).toHaveCount(1);
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
+      await page.goto(`${base}/?lang=ko`);
+      await page.locator('.hero-copy').getByRole('link', { name: '웹사이트 제작 서비스 살펴보기' }).click();
+      await expect(page).toHaveURL(`${base}/services?lang=ko`);
       await page.goto(`${base}/?lang=en`);
       await expect(page.locator('html')).toHaveAttribute('lang', 'en');
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();

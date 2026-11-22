@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "node tools/dev-server.mjs",
+    "update:resume": "node tools/update-resume.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
     "test:all": "npm test && npm run test:browser"
