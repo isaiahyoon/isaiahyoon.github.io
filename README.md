@@ -22,7 +22,9 @@ Navigation uses Work, Résumé, Services, and Contact on desktop and mobile. On 
 
 ## Update the résumé
 
-Replace `assets/resume.pdf` with the latest PDF, keeping the same filename and preserving its clickable links. The embedded PDF requests fit-to-width (`#view=FitH`); viewer behavior varies by browser, and a direct link is available when embedding is unsupported. The PDF is public when the site is deployed, so check its contents before publishing.
+Run `npm run update:resume` from the repository root. The command selects the highest numeric version of `isaiah_yoon_resume_<number>.pdf` from an iCloud Drive folder. It copies that PDF to `assets/resume.pdf`, preserving its clickable links, and renders its first page to `assets/resume-preview.png`. If the highest version is duplicated or the PDF cannot be read, it reports an error instead. It requires Poppler's `pdftoppm` command (`brew install poppler` on macOS). Commit the updated assets through your normal workflow to publish them.
+
+The embedded PDF requests fit-to-width (`#view=FitH`); viewer behavior varies by browser, and a direct link is available when embedding is unsupported. The preview image is generated for reuse but is not currently displayed on the résumé page. Both assets are public when the site is deployed, so check their contents before publishing.
 
 ## Publishing
 
