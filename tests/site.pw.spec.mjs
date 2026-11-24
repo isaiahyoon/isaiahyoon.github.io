@@ -180,9 +180,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         expect(layout.cards[1].top).toBeGreaterThan(layout.cards[0].top);
         for (const card of layout.cards) expect(card.scroll).toBeLessThanOrEqual(card.width);
         if (viewport.name === 'mobile-small') {
-          const fallbackFonts = await page.addStyleTag({ content: ':root { --sans: Arial, sans-serif; --serif: Georgia, serif; }' });
+          const fallbackFonts = await page.addStyleTag({ content: ':root { --sans: Arial, sans-serif; --serif: Georgia, serif; } .featured-project .project-links .project-link { letter-spacing: .08em; }' });
+          const linkRows = await preview.locator('.word-visual .project-link').evaluateAll(links => links.map(link => link.getBoundingClientRect().top));
+          expect(linkRows[1], 'The layout remains compact when project links wrap').toBeGreaterThan(linkRows[0]);
           const fallbackOfferTop = await page.locator('.service-section').evaluate(element => element.getBoundingClientRect().top + window.scrollY);
-          expect(fallbackOfferTop, 'The offer remains compact with fallback fonts').toBeLessThan(1100);
+          expect(fallbackOfferTop, 'The offer remains compact with wider fallback text').toBeLessThan(1100);
+          const fallbackDimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
+          expect(fallbackDimensions.scroll).toBeLessThanOrEqual(fallbackDimensions.viewport);
           await fallbackFonts.evaluate(element => element.remove());
         }
       }

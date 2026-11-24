@@ -117,6 +117,7 @@ html:lang(ko) .eyebrow, html:lang(ko) .project-kicker, html:lang(ko) .brand smal
 @media (max-width: 390px) {
   .brand small { font-size: 8px; letter-spacing: .04em; }
   h1 { font-size: 45px; }.project-visual { height: 270px; }.footer div { gap: 14px; }
+  .service-hero { padding-block: 40px; gap: 24px; }
 }
 @media (max-width: 340px) {
   .contact-list article { grid-template-columns: 1fr; gap: 4px; }
