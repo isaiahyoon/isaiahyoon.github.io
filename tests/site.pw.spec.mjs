@@ -45,10 +45,11 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.locator('.stones-card .project-body > p:not(.project-kicker)')).toContainText('Korean-first website');
       const concepts = page.locator('#concepts');
       await expect(concepts).toContainText('not client projects');
-      await expect(concepts.locator('.project-card')).toHaveCount(2);
+      await expect(concepts.locator('.project-card')).toHaveCount(3);
       for (const [name, url] of [
         ['View Doan Math Academy concept', 'https://doan-math-academy-preview.pages.dev/'],
-        ['View The Café concept', 'https://the-cafe-portfolio-preview.pages.dev/']
+        ['View The Café concept', 'https://the-cafe-portfolio-preview.pages.dev/'],
+        ['View Jasa’s Records concept', 'https://jasas-records-preview.pages.dev/']
       ]) {
         const link = concepts.getByRole('link', { name });
         await expect(link).toHaveAttribute('href', url);

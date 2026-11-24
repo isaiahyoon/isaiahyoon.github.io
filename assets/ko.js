@@ -66,6 +66,9 @@ if (isKorean) {
         '.cafe-concept .project-kicker': '개인 콘셉트 · 카페',
         '.cafe-concept .project-body > p:not(.project-kicker)': '가상의 동네 카페를 위한 웹사이트 콘셉트로, 주문 데모를 포함합니다.',
         '.cafe-concept .project-link': 'The Café 콘셉트 보기 <span aria-hidden="true">↗</span>',
+        '.records-concept .project-kicker': '개인 콘셉트 · 음악',
+        '.records-concept .project-body > p:not(.project-kicker)': '가상의 음반과 시각적인 감상 공간을 담은 레코드 상점 콘셉트입니다.',
+        '.records-concept .project-link': 'Jasa’s Records 콘셉트 보기 <span aria-hidden="true">↗</span>',
         '.invitation h2': '프로젝트를<br /><em>웹으로.</em>',
         '.invitation p:not(.eyebrow)': '활동을 위한 따뜻한 온라인 공간을 함께 만들어 봅니다.',
         '.invitation .button': '웹사이트 제작 서비스 살펴보기 <span aria-hidden="true">↗</span>'

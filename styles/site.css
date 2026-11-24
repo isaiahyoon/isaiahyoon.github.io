@@ -71,9 +71,11 @@ h1 em, h2 em { color: #416a83; font-weight: 400; }
 .stones-frame p { margin: 0 0 18px; color: #e3d3a9; font-size: 8px; letter-spacing: .15em; }.stones-frame strong { font: 35px/1 var(--serif); }.stones-frame strong em { color: #d3e2d8; }.stones-frame > span { margin-top: 20px; font-size: 8px; letter-spacing: .13em; }
 .academy-visual { background: linear-gradient(135deg, #e1e9e1, #f5eee2); }
 .cafe-visual { background: linear-gradient(135deg, #f2e2cf, #e6d6c6); }
+.records-visual { background: linear-gradient(135deg, #e6d5bd, #ddd5e9); }
 .concept-frame { display: flex; flex-direction: column; justify-content: center; width: min(75%, 360px); height: 235px; padding: 28px; border: 1px solid rgba(255,255,255,.8); box-shadow: 0 16px 35px rgba(34,59,85,.15); }
 .academy-visual .concept-frame { color: #f7f5ea; background: #354c3c; }
 .cafe-visual .concept-frame { color: #f9f4e9; background: #73513d; }
+.records-visual .concept-frame { color: #f9f1de; background: #523e4f; }
 .concept-frame span, .concept-frame small { font-size: 9px; font-weight: 700; letter-spacing: .12em; }
 .concept-frame strong { margin: 22px 0; font: 36px/1 var(--serif); }
 .visual-label { position: absolute; right: 18px; bottom: 14px; color: #617589; font-size: 9px; font-weight: 700; letter-spacing: .13em; }
