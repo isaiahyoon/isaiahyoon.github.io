@@ -48,7 +48,7 @@ if (isKorean) {
         '.church-frame strong': '함께하는<br /><em>곳.</em>',
         '.church-visual .visual-label': '신앙 · 공동체',
         '.church-card .project-kicker': '02 / 교회 웹사이트 · 웹 개발자',
-        '.church-card .project-body > p:not(.project-kicker)': '예배 안내, 설교, 공동체 갤러리를 한곳에 담은 이중 언어 웹사이트를 개발했습니다.',
+        '.church-card .project-body > p:not(.project-kicker)': '설교 오디오, 독자와 소통하는 목회 칼럼, 사진 갤러리, 2단계 인증 관리자 포털까지 Node.js로 처음부터 직접 구축한 이중 언어 교회 플랫폼입니다.',
         '.church-card .project-link': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
         '.stones-frame strong': '스윙의 기본부터,<br /><em>다시 단단하게.</em>',
         '.stones-visual .visual-label': '레슨 · 클럽 피팅',
