@@ -47,6 +47,8 @@ for (const width of [1440, 320, 360, 402]) {
         await expect(page.locator('nav')).toHaveAttribute('aria-label', '주 메뉴');
         await expect(page.locator('nav a')).toHaveText(['작업', '이력서', '서비스', '문의']);
         await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /[가-힣]/);
+        await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램');
+        await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램');
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route}?lang=ko at ${width}px`).toBeLessThanOrEqual(dimensions.viewport);
         if (width <= 980) {
@@ -59,6 +61,7 @@ for (const width of [1440, 320, 360, 402]) {
             expect(link.top).toBe(navLinks[0].top);
             expect(link.scroll).toBeLessThanOrEqual(link.width);
           }
+
         }
         for (const link of await page.locator('nav a').all()) {
           expect(new URL(await link.getAttribute('href'), base).searchParams.get('lang')).toBe('ko');
@@ -125,3 +128,34 @@ for (const width of [1440, 320, 360, 402]) {
     }
   });
 }
+
+test('Korean project translations follow reordered cards and links', async ({ page }) => {
+  const server = createDevServer();
+  server.listen(0, '127.0.0.1');
+  await once(server, 'listening');
+  const base = `http://127.0.0.1:${server.address().port}`;
+  try {
+    await page.route('**/assets/ko.js', async route => {
+      const response = await route.fetch();
+      const script = await response.text();
+      const reorder = [
+        "document.querySelector('.featured-grid').prepend(document.querySelector('.featured-project.church-visual'));",
+        "document.querySelector('.featured-project.word-visual .project-links').prepend(document.querySelector('.featured-project.word-visual .instagram-link'));"
+      ].join('\n');
+      await route.fulfill({ response, body: `${reorder}\n${script}` });
+    });
+    await page.goto(`${base}/services?lang=ko`);
+    await expect(page.locator('.featured-project').first()).toHaveClass(/church-visual/);
+    await expect(page.locator('.featured-project.word-visual .project-kicker')).toHaveText('성경 읽기 서비스');
+    await expect(page.locator('.featured-project.word-visual .project-link:not(.instagram-link)')).toContainText('The Amazing Word 방문하기');
+    await expect(page.locator('.featured-project.word-visual .instagram-link')).toHaveText('Instagram ↗');
+    await expect(page.locator('.featured-project.church-visual .project-kicker')).toHaveText('교회 웹사이트');
+    await expect(page.locator('.featured-project.church-visual .project-link:not(.instagram-link)')).toContainText('교회 웹사이트 방문하기');
+  } finally {
+    await page.close();
+    const closed = once(server, 'close');
+    server.close();
+    server.closeAllConnections();
+    await closed;
+  }
+});

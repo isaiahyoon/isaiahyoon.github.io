@@ -20,6 +20,8 @@ Use the language switch in the header or add `?lang=ko` to any page URL for the 
 
 Navigation uses Work, Résumé, Services, and Contact on desktop and mobile. On mobile, a compact brand and language row sits above the single row of links. Browser tests check this layout in English and Korean at iPhone 17 (402px) and Galaxy S23 (360px) viewport widths.
 
+The site stays static without a build step, so headers and footers are repeated in the page HTML; keep them consistent when editing. Korean translations live in `assets/ko.js`; project translations identify cards by their project-specific classes rather than their position.
+
 ## Update the résumé
 
 Run `npm run update:resume` from the repository root. The command selects the highest numeric version of `isaiah_yoon_resume_<number>.pdf` from an iCloud Drive folder. It copies that PDF to `assets/resume.pdf`, preserving its clickable links, and renders its first page to `assets/resume-preview.png`. If the highest version is duplicated or the PDF cannot be read, it reports an error instead. It requires Poppler's `pdftoppm` command (`brew install poppler` on macOS). Commit the updated assets through your normal workflow to publish them.
