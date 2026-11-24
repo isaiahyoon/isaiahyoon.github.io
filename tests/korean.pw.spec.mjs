@@ -69,6 +69,8 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
+      await expect(page.locator('.stones-card .project-body > p:not(.project-kicker)')).toContainText('한국어 중심 웹사이트');
+      await expect(page.getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
@@ -79,9 +81,10 @@ for (const width of [1440, 320, 360, 402]) {
       }
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
-      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트']);
+      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트']);
       await expect(page.locator('.featured-work').getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await expect(page.locator('.featured-work').getByRole('link', { name: '교회 웹사이트 방문하기' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
+      await expect(page.locator('.featured-work').getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
       await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
       await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
       await expect(page.locator('.approach-steps li')).toHaveCount(3);

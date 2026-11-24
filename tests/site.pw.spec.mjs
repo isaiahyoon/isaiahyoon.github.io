@@ -31,9 +31,11 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       expect(heroBounds.right).toBe(heroBounds.viewport);
       await expect(page.getByRole('link', { name: 'Visit The Amazing Word' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await expect(page.getByRole('link', { name: 'Visit the church website' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
+      await expect(page.getByRole('link', { name: 'Visit David’s Stones Golf Club' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
       await expect(page.locator('.word-card .project-kicker')).toContainText('Creator & engineer');
       await expect(page.locator('.church-card .project-kicker')).toContainText('Web developer');
-      for (const name of ['Visit The Amazing Word', 'Visit the church website']) {
+      await expect(page.locator('.stones-card .project-body > p:not(.project-kicker)')).toContainText('Korean-first website');
+      for (const name of ['Visit The Amazing Word', 'Visit the church website', 'Visit David’s Stones Golf Club']) {
         const link = page.getByRole('link', { name });
         await expect(link).toHaveAttribute('target', '_blank');
         await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -111,7 +113,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       expect(servicesBackground.background).toContain('radial-gradient');
       expect(servicesBackground.heroBackground).toBe('none');
       const preview = page.locator('.featured-work');
-      for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org']]) {
+      for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org'], ['Visit David’s Stones Golf Club', 'https://davidsstonesgolfclub.com/']]) {
         const previewLink = preview.getByRole('link', { name });
         await expect(previewLink).toBeVisible();
         await expect(previewLink).toHaveAttribute('href', url);
