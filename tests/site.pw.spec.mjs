@@ -30,11 +30,31 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       expect(heroBounds.left).toBe(0);
       expect(heroBounds.right).toBe(heroBounds.viewport);
       await expect(page.getByRole('link', { name: 'Visit The Amazing Word' })).toHaveAttribute('href', 'https://theamazingword.org/about');
+      const instagram = page.locator('.word-card').getByRole('link', { name: 'Instagram', exact: true });
+      await expect(instagram).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
+      await expect(instagram).toHaveAttribute('target', '_blank');
+      await expect(instagram).toHaveAttribute('rel', 'noopener noreferrer');
+      const churchInstagram = page.locator('.church-card').getByRole('link', { name: 'Instagram', exact: true });
+      await expect(churchInstagram).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
+      await expect(churchInstagram).toHaveAttribute('target', '_blank');
+      await expect(churchInstagram).toHaveAttribute('rel', 'noopener noreferrer');
       await expect(page.getByRole('link', { name: 'Visit the church website' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
       await expect(page.getByRole('link', { name: 'Visit David’s Stones Golf Club' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
       await expect(page.locator('.word-card .project-kicker')).toContainText('Creator & engineer');
       await expect(page.locator('.church-card .project-kicker')).toContainText('Web developer');
       await expect(page.locator('.stones-card .project-body > p:not(.project-kicker)')).toContainText('Korean-first website');
+      const concepts = page.locator('#concepts');
+      await expect(concepts).toContainText('not client projects');
+      await expect(concepts.locator('.project-card')).toHaveCount(2);
+      for (const [name, url] of [
+        ['View Doan Math Academy concept', 'https://doan-math-academy-preview.pages.dev/'],
+        ['View The Café concept', 'https://the-cafe-portfolio-preview.pages.dev/']
+      ]) {
+        const link = concepts.getByRole('link', { name });
+        await expect(link).toHaveAttribute('href', url);
+        await expect(link).toHaveAttribute('target', '_blank');
+        await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      }
       for (const name of ['Visit The Amazing Word', 'Visit the church website', 'Visit David’s Stones Golf Club']) {
         const link = page.getByRole('link', { name });
         await expect(link).toHaveAttribute('target', '_blank');
@@ -113,6 +133,14 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       expect(servicesBackground.background).toContain('radial-gradient');
       expect(servicesBackground.heroBackground).toBe('none');
       const preview = page.locator('.featured-work');
+      const previewInstagram = preview.locator('.word-visual').getByRole('link', { name: 'Instagram', exact: true });
+      await expect(previewInstagram).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
+      await expect(previewInstagram).toHaveAttribute('target', '_blank');
+      await expect(previewInstagram).toHaveAttribute('rel', 'noopener noreferrer');
+      const previewChurchInstagram = preview.locator('.church-visual').getByRole('link', { name: 'Instagram', exact: true });
+      await expect(previewChurchInstagram).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
+      await expect(previewChurchInstagram).toHaveAttribute('target', '_blank');
+      await expect(previewChurchInstagram).toHaveAttribute('rel', 'noopener noreferrer');
       for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org'], ['Visit David’s Stones Golf Club', 'https://davidsstonesgolfclub.com/']]) {
         const previewLink = preview.getByRole('link', { name });
         await expect(previewLink).toBeVisible();
@@ -142,6 +170,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       }
       await expect(page.locator('.service-hero a[href="/contact"], .service-hero a[href="/#work"]')).toHaveCount(0);
       await expect(page.locator('.service-audiences li')).toHaveText(['Small businesses', 'Nonprofits', 'Churches', 'Other projects']);
+      await page.getByRole('link', { name: 'Explore independent concept designs' }).click();
+      await expect(page).toHaveURL(`${base}/#concepts`);
+      await expect(page.locator('#concepts h2')).toBeVisible();
+      await page.goto(`${base}/services`);
       await expect(page.getByRole('heading', { name: 'What your website can include' })).toBeVisible();
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
       await expect(page.locator('main a[href="/contact"]')).toHaveCount(1);
