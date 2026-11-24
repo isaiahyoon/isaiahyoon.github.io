@@ -69,8 +69,16 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
+      await expect(page.locator('.word-card').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
+      await expect(page.locator('.church-card').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
       await expect(page.locator('.stones-card .project-body > p:not(.project-kicker)')).toContainText('한국어 중심 웹사이트');
       await expect(page.getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
+      await expect(page.locator('#concepts .section-heading > p')).toContainText('실제 의뢰 작업이 아닌');
+      await expect(page.getByRole('link', { name: 'Doan Math Academy 콘셉트 보기' })).toHaveAttribute('href', 'https://doan-math-academy-preview.pages.dev/');
+      await expect(page.getByRole('link', { name: 'The Café 콘셉트 보기' })).toHaveAttribute('href', 'https://the-cafe-portfolio-preview.pages.dev/');
+      await expect(page.getByRole('link', { name: 'Jasa’s Records 콘셉트 보기' })).toHaveAttribute('href', 'https://jasas-records-preview.pages.dev/');
+      await expect(page.locator('.records-concept .project-kicker')).toHaveText('개인 콘셉트 · 음악');
+      await expect(page.locator('.records-concept .project-body > p:not(.project-kicker)')).toContainText('가상의 음반');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
@@ -81,8 +89,15 @@ for (const width of [1440, 320, 360, 402]) {
       }
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
+      const conceptLink = page.getByRole('link', { name: '독립적인 콘셉트 디자인 살펴보기' });
+      await expect(conceptLink).toHaveAttribute('href', '/?lang=ko#concepts');
+      await conceptLink.click();
+      await expect(page).toHaveURL(`${base}/?lang=ko#concepts`);
+      await page.goto(`${base}/services?lang=ko`);
       await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트']);
       await expect(page.locator('.featured-work').getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
+      await expect(page.locator('.featured-work .word-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
+      await expect(page.locator('.featured-work .church-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
       await expect(page.locator('.featured-work').getByRole('link', { name: '교회 웹사이트 방문하기' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
       await expect(page.locator('.featured-work').getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
       await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
