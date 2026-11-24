@@ -17,9 +17,9 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
       assert.match(html, /href="\/services"/);
       assert.match(html, /href="\/resume"/);
       assert.match(html, /href="\/contact"/);
-      assert.match(html, /<script defer src="https:\/\/cloud\.umami\.is\/script\.js" data-website-id="bb736843-c36a-4bfa-b5e6-c80d36b1f134"><\/script>/);
+      assert.match(html, /<script\s+defer\s+src="https:\/\/cloud\.umami\.is\/script\.js"\s+data-website-id="bb736843-c36a-4bfa-b5e6-c80d36b1f134"\s*><\/script>/);
       assert.match(html, /mailto:isaiahyoon22@gmail\.com/);
-      assert.match(html, /property="og:image" content="https:\/\/isaiahyoon\.github\.io\/assets\/social-preview\.png\?v=1"/);
+      assert.match(html, /property="og:image"\s+content="https:\/\/isaiahyoon\.github\.io\/assets\/social-preview\.png\?v=1"/);
     }
     assert.equal((await fetch(`${base}/assets/social-preview.png`)).status, 200);
     for (const page of ['/services/', '/resume/', '/contact/']) {
@@ -33,8 +33,8 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
     assert.match(home, /https:\/\/davidsstonesgolfclub\.com\//);
     assert.match(home, /David’s Stones Golf Club/);
     const resume = await (await fetch(`${base}/resume/`)).text();
-    assert.match(resume, /<iframe src="\/assets\/resume\.pdf#view=FitH" title="Isaiah Yoon's résumé PDF"><\/iframe>/);
-    assert.match(resume, /href="\/assets\/resume\.pdf#view=FitH" target="_blank" rel="noopener noreferrer">open the résumé PDF/);
+    assert.match(resume, /<iframe\s+src="\/assets\/resume\.pdf#view=FitH"\s+title="Isaiah Yoon's résumé PDF"\s*><\/iframe>/);
+    assert.match(resume, /href="\/assets\/resume\.pdf#view=FitH"\s+target="_blank"\s+rel="noopener noreferrer"\s*>open the résumé PDF/);
     const pdf = await fetch(`${base}/assets/resume.pdf`);
     assert.equal(pdf.status, 200);
     assert.equal(pdf.headers.get('content-type'), 'application/pdf');

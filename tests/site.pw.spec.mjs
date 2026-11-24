@@ -1,15 +1,28 @@
-import { test, expect } from '@playwright/test';
+import { test as baseTest, expect } from '@playwright/test';
 import { once } from 'node:events';
 import { createDevServer } from '../tools/dev-server.mjs';
 
-for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile-small', width: 320, height: 812 }, { name: 'galaxy-s23', width: 360, height: 780 }, { name: 'mobile', width: 375, height: 812 }, { name: 'iphone-17', width: 402, height: 874 }, { name: 'mobile-wide', width: 400, height: 812 }]) {
-  test(`${viewport.name}: navigation, résumé, and freelance contact work without horizontal overflow`, async ({ page }) => {
+const test = baseTest.extend({
+  base: async ({}, use) => {
     const server = createDevServer();
     server.listen(0, '127.0.0.1');
     await once(server, 'listening');
-    const base = `http://127.0.0.1:${server.address().port}`;
     try {
-      await page.setViewportSize(viewport);
+      await use(`http://127.0.0.1:${server.address().port}`);
+    } finally {
+      const closed = once(server, 'close');
+      server.close();
+      server.closeAllConnections();
+      await closed;
+    }
+  }
+});
+
+for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile-small', width: 320, height: 812 }, { name: 'galaxy-s23', width: 360, height: 780 }, { name: 'mobile', width: 375, height: 812 }, { name: 'iphone-17', width: 402, height: 874 }, { name: 'mobile-wide', width: 400, height: 812 }]) {
+  test.describe(viewport.name, () => {
+    test.use({ viewport: { width: viewport.width, height: viewport.height } });
+
+    test('homepage, navigation, and shared layout', async ({ page, base }) => {
       await page.goto(base);
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();
       await expect(page.locator('.hero-intro')).toContainText('software engineer');
@@ -81,6 +94,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport);
         const navContact = page.locator('nav').getByRole('link', { name: 'Contact', exact: true });
         await expect(page.locator('nav a')).toHaveText(['Work', 'Résumé', 'Services', 'Contact']);
+        expect(await page.locator('nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))))
+          .toEqual(['/#work', '/resume', '/services', '/contact']);
         await expect(navContact).toBeVisible();
         await expect(navContact).toHaveCSS('border-top-width', '0px');
         await expect(navContact).toHaveCSS('border-radius', '0px');
@@ -101,6 +116,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
           }
         }
         const footerEmail = page.locator('footer').getByRole('link', { name: 'isaiahyoon22@gmail.com' });
+        expect(await page.locator('footer a').evaluateAll(links => links.map(link => link.getAttribute('href'))))
+          .toEqual(['/', 'mailto:isaiahyoon22@gmail.com', 'https://github.com/isaiahyoon', 'https://instagram.com/isaiahyoon']);
         await expect(footerEmail).toBeVisible();
         await expect(footerEmail).toHaveAttribute('href', 'mailto:isaiahyoon22@gmail.com');
         for (const name of ['GitHub', 'Instagram']) {
@@ -109,6 +126,9 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
           await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
         }
       }
+    });
+
+    test('résumé viewer and download', async ({ page, base }) => {
       await page.goto(`${base}/resume/`);
       const viewer = page.locator('iframe[title="Isaiah Yoon\'s résumé PDF"]');
       await expect(viewer).toBeVisible();
@@ -129,7 +149,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(pdfTab).toHaveURL(`${base}/assets/resume.pdf#view=FitH`);
       await pdfTab.close();
       await page.context().unroute('**/assets/resume.pdf');
-      await page.locator('nav').getByRole('link', { name: 'Services', exact: true }).click();
+    });
+
+    test('services, previews, and project contact', async ({ page, base }) => {
+      await page.goto(`${base}/services`);
       const servicesBackground = await page.locator('.page-hero-background').evaluate(container => {
         const bounds = container.getBoundingClientRect();
         return {
@@ -204,6 +227,9 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(projectContact).toHaveAttribute('href', '/contact');
       await projectContact.click();
       await expect(page).toHaveURL(`${base}/contact`);
+    });
+
+    test('contact page and navigation', async ({ page, base }) => {
       await page.goto(`${base}/services`);
       await page.locator('nav').getByRole('link', { name: 'Contact', exact: true }).click();
       await expect(page).toHaveURL(`${base}/contact`);
@@ -242,12 +268,6 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         }));
         expect(scroll, 'Footer with larger text at 320px').toBeLessThanOrEqual(width);
       }
-    } finally {
-      await page.close();
-      const closed = once(server, 'close');
-      server.close();
-      server.closeAllConnections();
-      await closed;
-    }
+    });
   });
 }

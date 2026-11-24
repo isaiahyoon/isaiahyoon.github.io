@@ -44,13 +44,13 @@ if (isKorean) {
         '.word-visual .visual-label': '말씀을 읽는 조용한 공간',
         '.word-card .project-kicker': '01 / 성경 읽기 서비스 · 창작자 및 엔지니어',
         '.word-card .project-body > p:not(.project-kicker)': '온라인과 오프라인에서 말씀을 찾고 읽고 간직할 수 있도록 8개 언어 성경 읽기 서비스를 만들었습니다.',
-        '.word-card .project-link': 'The Amazing Word 방문하기 <span aria-hidden="true">↗</span>',
+        '.word-card .project-link:not(.instagram-link)': 'The Amazing Word 방문하기 <span aria-hidden="true">↗</span>',
         '.word-card .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
         '.church-frame strong': '함께하는<br /><em>곳.</em>',
         '.church-visual .visual-label': '신앙 · 공동체',
         '.church-card .project-kicker': '02 / 교회 웹사이트 · 웹 개발자',
         '.church-card .project-body > p:not(.project-kicker)': '설교 오디오, 독자와 소통하는 목회 칼럼, 사진 갤러리, 2단계 인증 관리자 포털까지 Node.js로 처음부터 직접 구축한 이중 언어 교회 플랫폼입니다.',
-        '.church-card .project-link': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
+        '.church-card .project-link:not(.instagram-link)': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
         '.church-card .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
         '.stones-frame strong': '스윙의 기본부터,<br /><em>다시 단단하게.</em>',
         '.stones-visual .visual-label': '레슨 · 클럽 피팅',
@@ -82,17 +82,17 @@ if (isKorean) {
         '.service-hero-copy h1': '프로젝트를 위한<br /><em>명확한 웹사이트.</em>',
         '.service-hero-copy > p:not(.eyebrow)': '프로젝트와 방문자를 중심으로 세심하게 구성한 반응형 랜딩 웹사이트를 만듭니다.',
         '.featured-work .eyebrow': '주요 작업',
-        '.featured-project:nth-child(1) .project-kicker': '성경 읽기 서비스',
-        '.featured-project:nth-child(1) > p:not(.project-kicker)': '온라인과 오프라인에서 읽을 수 있는 8개 언어 성경 서비스입니다.',
-        '.featured-project:nth-child(1) .project-link': 'The Amazing Word 방문하기 <span aria-hidden="true">↗</span>',
-        '.featured-project:nth-child(1) .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
-        '.featured-project:nth-child(2) .project-kicker': '교회 웹사이트',
-        '.featured-project:nth-child(2) > p:not(.project-kicker)': '예배와 공동체를 위한 이중 언어 웹사이트입니다.',
-        '.featured-project:nth-child(2) .project-link': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
-        '.featured-project:nth-child(2) .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
-        '.featured-project:nth-child(3) .project-kicker': '골프 클럽 웹사이트',
-        '.featured-project:nth-child(3) > p:not(.project-kicker)': '골프 레슨과 클럽 피팅을 소개하는 한국어 중심 웹사이트입니다.',
-        '.featured-project:nth-child(3) .project-link': 'David’s Stones Golf Club 방문하기 <span aria-hidden="true">↗</span>',
+        '.featured-project.word-visual .project-kicker': '성경 읽기 서비스',
+        '.featured-project.word-visual > p:not(.project-kicker)': '온라인과 오프라인에서 읽을 수 있는 8개 언어 성경 서비스입니다.',
+        '.featured-project.word-visual .project-link:not(.instagram-link)': 'The Amazing Word 방문하기 <span aria-hidden="true">↗</span>',
+        '.featured-project.word-visual .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
+        '.featured-project.church-visual .project-kicker': '교회 웹사이트',
+        '.featured-project.church-visual > p:not(.project-kicker)': '예배와 공동체를 위한 이중 언어 웹사이트입니다.',
+        '.featured-project.church-visual .project-link:not(.instagram-link)': '교회 웹사이트 방문하기 <span aria-hidden="true">↗</span>',
+        '.featured-project.church-visual .instagram-link': 'Instagram <span aria-hidden="true">↗</span>',
+        '.featured-project.stones-visual .project-kicker': '골프 클럽 웹사이트',
+        '.featured-project.stones-visual > p:not(.project-kicker)': '골프 레슨과 클럽 피팅을 소개하는 한국어 중심 웹사이트입니다.',
+        '.featured-project.stones-visual .project-link': 'David’s Stones Golf Club 방문하기 <span aria-hidden="true">↗</span>',
         '.service-section .eyebrow': '서비스 소개',
         '.service-section h2': '활동을 위한<br /><em>따뜻한 공간.</em>',
         '.service-section .section-heading > p': '방문자가 활동과 연락 방법을 쉽게 이해할 수 있도록 구성합니다.',
@@ -155,7 +155,7 @@ if (isKorean) {
     document.querySelector(selector).content = page.description;
   }
   for (const selector of ['meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]']) {
-    document.querySelector(selector).content = 'The Amazing Word 성경 읽기 서비스 이름과 프리즘 검 문양';
+    document.querySelector(selector).content = '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램';
   }
   document.querySelector('.brand').setAttribute('aria-label', 'Isaiah Yoon 홈');
   document.querySelector('nav').setAttribute('aria-label', '주 메뉴');
