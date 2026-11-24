@@ -46,6 +46,10 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       const concepts = page.locator('#concepts');
       await expect(concepts).toContainText('not client projects');
       await expect(concepts.locator('.project-card')).toHaveCount(3);
+      await expect(concepts.locator('.project-kicker')).toHaveText([
+        'Personal concept · Education', 'Personal concept · Café', 'Personal concept · Music'
+      ]);
+      await expect(concepts.locator('.records-concept')).toContainText('fictional releases');
       for (const [name, url] of [
         ['View Doan Math Academy concept', 'https://doan-math-academy-preview.pages.dev/'],
         ['View The Café concept', 'https://the-cafe-portfolio-preview.pages.dev/'],
@@ -55,6 +59,13 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         await expect(link).toHaveAttribute('href', url);
         await expect(link).toHaveAttribute('target', '_blank');
         await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+        if (viewport.name === 'desktop') {
+          await page.context().route(url, route => route.fulfill({ contentType: 'text/html', body: name }));
+          const [tab] = await Promise.all([page.waitForEvent('popup'), link.click()]);
+          await expect(tab).toHaveURL(url);
+          await tab.close();
+          await page.context().unroute(url);
+        }
       }
       for (const name of ['Visit The Amazing Word', 'Visit the church website', 'Visit David’s Stones Golf Club']) {
         const link = page.getByRole('link', { name });
@@ -168,6 +179,12 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         expect(layout.offerTop, 'The offer follows compact project previews on mobile').toBeLessThan(1100);
         expect(layout.cards[1].top).toBeGreaterThan(layout.cards[0].top);
         for (const card of layout.cards) expect(card.scroll).toBeLessThanOrEqual(card.width);
+        if (viewport.name === 'mobile-small') {
+          const fallbackFonts = await page.addStyleTag({ content: ':root { --sans: Arial, sans-serif; --serif: Georgia, serif; }' });
+          const fallbackOfferTop = await page.locator('.service-section').evaluate(element => element.getBoundingClientRect().top + window.scrollY);
+          expect(fallbackOfferTop, 'The offer remains compact with fallback fonts').toBeLessThan(1100);
+          await fallbackFonts.evaluate(element => element.remove());
+        }
       }
       await expect(page.locator('.service-hero a[href="/contact"], .service-hero a[href="/#work"]')).toHaveCount(0);
       await expect(page.locator('.service-audiences li')).toHaveText(['Small businesses', 'Nonprofits', 'Churches', 'Other projects']);

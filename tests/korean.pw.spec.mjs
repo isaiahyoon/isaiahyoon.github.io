@@ -77,6 +77,8 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.getByRole('link', { name: 'Doan Math Academy 콘셉트 보기' })).toHaveAttribute('href', 'https://doan-math-academy-preview.pages.dev/');
       await expect(page.getByRole('link', { name: 'The Café 콘셉트 보기' })).toHaveAttribute('href', 'https://the-cafe-portfolio-preview.pages.dev/');
       await expect(page.getByRole('link', { name: 'Jasa’s Records 콘셉트 보기' })).toHaveAttribute('href', 'https://jasas-records-preview.pages.dev/');
+      await expect(page.locator('.records-concept .project-kicker')).toHaveText('개인 콘셉트 · 음악');
+      await expect(page.locator('.records-concept .project-body > p:not(.project-kicker)')).toContainText('가상의 음반');
       await page.getByRole('link', { name: '이력서', exact: true }).click();
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();

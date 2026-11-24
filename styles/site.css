@@ -112,6 +112,7 @@ html:lang(ko) .eyebrow, html:lang(ko) .project-kicker, html:lang(ko) .brand smal
 }
 @media (max-width: 600px) {
   .hero-art { height: 160px; }.orbit-one { width: 145px; height: 145px; }.orbit-two { width: 160px; height: 110px; }.art-disc { width: 112px; height: 112px; }.art-disc span { font-size: 80px; }.star-one { top: 2px; right: 25%; }.star-two { bottom: 10px; left: 25%; }.featured-grid { grid-template-columns: 1fr; }.featured-project { padding: 12px; }.featured-project .project-kicker { margin-bottom: 4px; }.featured-project h2 { margin-bottom: 4px; font-size: 20px; }.featured-project > p:not(.project-kicker) { font-size: 13px; line-height: 1.35; }.featured-project .project-link { min-height: 36px; padding-top: 6px; }.service-hero { padding-block: 60px; }.service-section { padding-block: 60px; }
+  .featured-project .project-links { flex-direction: row; gap: 0 12px; }
 }
 @media (max-width: 390px) {
   .brand small { font-size: 8px; letter-spacing: .04em; }
