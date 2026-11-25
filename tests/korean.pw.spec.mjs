@@ -148,7 +148,7 @@ test('Korean project translations follow reordered cards and links', async ({ pa
     await expect(page.locator('.featured-project').first()).toHaveClass(/church-visual/);
     await expect(page.locator('.featured-project.word-visual .project-kicker')).toHaveText('성경 읽기 서비스');
     await expect(page.locator('.featured-project.word-visual .project-link:not(.instagram-link)')).toContainText('The Amazing Word 방문하기');
-    await expect(page.locator('.featured-project.word-visual .instagram-link')).toHaveText('Instagram ↗');
+    await expect(page.locator('.featured-project.word-visual .instagram-link')).toHaveText('Instagram');
     await expect(page.locator('.featured-project.church-visual .project-kicker')).toHaveText('교회 웹사이트');
     await expect(page.locator('.featured-project.church-visual .project-link:not(.instagram-link)')).toContainText('교회 웹사이트 방문하기');
   } finally {
