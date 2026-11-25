@@ -128,6 +128,37 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       }
     });
 
+    test('link arrows are decorative SVGs in English and Korean', async ({ page, base }) => {
+      for (const route of ['/', '/services/', '/contact/']) {
+        for (const language of ['', '?lang=ko']) {
+          await page.goto(`${base}${route}${language}`);
+          await expect(page.locator('body')).not.toContainText(/[↗↘]/);
+
+          const arrowLinks = page.locator('a:has(svg.link-arrow)');
+          const arrowCount = await arrowLinks.count();
+          expect(arrowCount, `${route}${language} has arrow links`).toBeGreaterThan(0);
+          await expect(page.locator('svg.link-arrow')).toHaveCount(arrowCount);
+
+          for (const link of await arrowLinks.all()) {
+            const label = (await link.innerText()).replace(/\s+/g, ' ').trim();
+            await expect(link).toHaveAccessibleName(label);
+            const arrow = link.locator('svg.link-arrow');
+            await expect(arrow).toHaveAttribute('aria-hidden', 'true');
+            await expect(arrow).toHaveAttribute('focusable', 'false');
+            await expect(arrow).toHaveAttribute('viewBox', '0 0 16 16');
+            const icon = await arrow.evaluate(element => ({
+              width: element.getBoundingClientRect().width,
+              height: element.getBoundingClientRect().height,
+              stroke: getComputedStyle(element.querySelector('path')).stroke
+            }));
+            expect(icon.width).toBeGreaterThan(0);
+            expect(icon.height).toBeGreaterThan(0);
+            expect(icon.stroke).not.toBe('none');
+          }
+        }
+      }
+    });
+
     test('résumé viewer and download', async ({ page, base }) => {
       await page.goto(`${base}/resume/`);
       const viewer = page.locator('iframe[title="Isaiah Yoon\'s résumé PDF"]');
