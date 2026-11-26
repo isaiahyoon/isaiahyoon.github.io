@@ -267,6 +267,12 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.locator('#concepts h2')).toBeVisible();
       await page.goto(`${base}/services`);
       await expect(page.getByRole('heading', { name: 'What your website can include' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Website launches start at $1,000.' })).toBeVisible();
+      await expect(page.locator('.service-pricing')).toContainText('online booking, e-commerce, or custom integrations');
+      await expect(page.locator('.service-pricing')).toContainText('Work after launch is $100 per hour');
+      await expect(page.locator('.service-pricing')).toContainText('separate costs');
+      await expect(page.locator('.service-payment')).toHaveText('Payment accepted through Venmo, Cash App, Zelle, or cash. Payment details are provided after we agree on the project.');
+      await expect(page.locator('.approach-steps li').nth(1)).toContainText('We’ll confirm the scope, timing, price, and payment schedule in a written agreement before work begins.');
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
       await expect(page.locator('main a[href="/contact"]')).toHaveCount(1);
       await expect(page.locator('main a[href^="mailto:"], main a[href^="sms:"]')).toHaveCount(0);

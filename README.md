@@ -4,6 +4,8 @@ Personal portfolio and freelance website for small businesses, nonprofits, and c
 
 Home showcases selected work and independent concept designs, Services features a project preview, links to the concepts, and explains the offer and process, Résumé documents experience, and Contact collects email, text, and social channels. Services directs inquiries to Contact; shared footer links remain available on every page.
 
+Services lists the starting launch price, explains how project complexity can affect the quote, and discloses the hourly rate for post-launch work and potential third-party costs. It lists accepted payment methods without public payment handles and explains that scope, timing, price, and payment schedule are confirmed in a written agreement before work begins.
+
 ## Run locally
 
 Requires Node.js 20 or later. No installation or build step is required to run the site.

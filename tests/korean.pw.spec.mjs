@@ -105,6 +105,12 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('.featured-work').getByRole('link', { name: 'Human Rhythm Records 방문하기' })).toHaveAttribute('href', 'https://humanrhythmrecords.com/');
       await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
       await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '웹사이트 제작 및 공개 비용은 $1,000부터 시작합니다.' })).toBeVisible();
+      await expect(page.locator('.service-pricing')).toContainText('프로젝트 비용이 높아질 수 있습니다');
+      await expect(page.locator('.service-pricing')).toContainText('시간당 $100');
+      await expect(page.locator('.service-pricing')).toContainText('별도 비용');
+      await expect(page.locator('.service-payment')).toHaveText('Venmo, Cash App, Zelle 또는 현금으로 결제하실 수 있습니다. 결제 정보는 프로젝트에 합의한 후 안내해 드립니다.');
+      await expect(page.locator('.approach-steps li').nth(1)).toContainText('작업을 시작하기 전에 범위, 일정, 비용 및 결제 일정을 서면 계약으로 확정합니다.');
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
       await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(1);
       await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();
