@@ -113,7 +113,7 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('.featured-work .church-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
       await expect(page.locator('.featured-work').getByRole('link', { name: '교회 웹사이트 방문하기' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
       await expect(page.locator('.featured-work').getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
-      await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
+      await expect(page.locator('.service-audiences li')).toHaveText(['기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
       await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
       await expect(page.getByRole('heading', { name: '웹사이트 제작 및 공개 비용은 $1,000부터 시작합니다.' })).toBeVisible();
       await expect(page.locator('.service-pricing')).toContainText('프로젝트 비용이 높아질 수 있습니다');

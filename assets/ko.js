@@ -94,7 +94,7 @@ if (isKorean) {
         '.hero-note': '<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v14M1 8h14M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.5" /></svg> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
         '.intro-section .eyebrow': '하는 일',
         '.intro-section h2': '사람을 위한<br /><em>세심한 웹사이트.</em>',
-        '.intro-section .section-heading > p': '소규모 기업부터 교회와 비영리 단체까지, 디자인과 기술을 함께 담아 명확하고 반응형인 디지털 공간을 만듭니다.',
+        '.intro-section .section-heading > p': '기업부터 교회와 비영리 단체까지, 디자인과 기술을 함께 담아 명확하고 반응형인 디지털 공간을 만듭니다.',
         '.invitation h2': '프로젝트를<br /><em>웹으로.</em>',
         '.invitation p:not(.eyebrow)': '활동을 위한 따뜻한 온라인 공간을 함께 만들어 봅니다.',
         '.invitation .button': '대화 시작하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
@@ -102,7 +102,7 @@ if (isKorean) {
     },
     services: {
       title: '웹사이트 제작 서비스 — 윤이사야',
-      description: '소규모 기업, 비영리 단체, 교회와 그 밖의 프로젝트를 위한 세심한 랜딩 웹사이트를 제작합니다.',
+      description: '기업, 비영리 단체, 교회와 그 밖의 프로젝트를 위한 세심한 랜딩 웹사이트를 제작합니다.',
       content: {
         '.service-hero-copy .eyebrow': '<span class="star" aria-hidden="true">✦</span> 웹사이트 제작 서비스',
         '.service-hero-copy h1': '프로젝트를 위한<br /><em>명확한 웹사이트.</em>',
@@ -137,7 +137,7 @@ if (isKorean) {
         '.service-section .eyebrow': '서비스 소개',
         '.service-section h2': '활동을 위한<br /><em>따뜻한 공간.</em>',
         '.service-section .section-heading > p': '방문자가 활동과 연락 방법을 쉽게 이해할 수 있도록 구성합니다.',
-        '.service-audiences li:nth-child(1)': '소규모 기업',
+        '.service-audiences li:nth-child(1)': '기업',
         '.service-audiences li:nth-child(2)': '비영리 단체',
         '.service-audiences li:nth-child(3)': '교회',
         '.service-audiences li:nth-child(4)': '그 밖의 프로젝트',

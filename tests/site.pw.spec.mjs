@@ -285,7 +285,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         }
       }
       await expect(page.locator('.service-hero a[href="/contact"], .service-hero a[href="/#work"]')).toHaveCount(0);
-      await expect(page.locator('.service-audiences li')).toHaveText(['Small businesses', 'Nonprofits', 'Churches', 'Other projects']);
+      await expect(page.locator('.service-audiences li')).toHaveText(['Businesses', 'Nonprofits', 'Churches', 'Other projects']);
       await page.getByRole('link', { name: 'Explore independent concept designs' }).click();
       await expect(page).toHaveURL(`${base}/work#concepts`);
       await expect(page.locator('#concepts h2')).toBeVisible();
