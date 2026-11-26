@@ -257,32 +257,17 @@ h2 em {
   height: 290px;
   transform: rotate(-35deg);
 }
-.art-disc {
-  display: grid;
-  place-items: center;
-  width: 275px;
-  height: 275px;
+.portrait {
+  display: block;
+  aspect-ratio: 1;
+  object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 20%,
-    #fafbff 0%,
-    #dcd7f7 24%,
-    #a9cadd 60%,
-    #789cbd 100%
-  );
-  box-shadow:
-    inset 0 0 35px rgba(255, 255, 255, 0.8),
-    0 24px 70px rgba(65, 92, 120, 0.2);
+  box-shadow: 0 24px 70px rgba(65, 92, 120, 0.2);
 }
-.art-disc span {
-  color: #fff9e6;
-  font:
-    190px/1 Georgia,
-    serif;
-  text-shadow:
-    0 2px 3px #8f6a28,
-    0 6px 18px rgba(34, 59, 85, 0.22);
+.hero-portrait {
+  width: 275px;
+  height: 275px;
 }
 .art-star {
   position: absolute;
@@ -456,14 +441,56 @@ h2 em {
   font-size: 8px;
   letter-spacing: 0.13em;
 }
+.hrr-visual {
+  background:
+    radial-gradient(circle at 15% 18%, #f6cedf, transparent 45%),
+    radial-gradient(circle at 86% 20%, #f7ddc4, transparent 45%),
+    radial-gradient(circle at 55% 85%, #cbdcf5, transparent 48%),
+    #f6f1ed;
+}
+.hrr-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(75%, 360px);
+  height: 240px;
+  color: #fffaf1;
+  border: 1px solid rgba(255, 250, 241, 0.72);
+  background: #273a62;
+  box-shadow: 0 18px 35px rgba(39, 58, 98, 0.28);
+  transform: rotate(2deg) translateY(10px);
+  text-align: center;
+}
+.hrr-frame p {
+  margin: 0 0 18px;
+  color: #ffd4e5;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+}
+.hrr-frame strong {
+  font: 35px/1 var(--serif);
+}
+.hrr-frame strong em {
+  color: #ffb45e;
+}
+.hrr-frame > span {
+  margin-top: 20px;
+  font-size: 8px;
+  letter-spacing: 0.13em;
+}
+.hrr-visual .visual-label {
+  padding: 5px 8px;
+  color: #171310;
+  background: #fffaf1;
+  border: 1px solid #e4b4a2;
+  font-size: 10px;
+}
 .academy-visual {
   background: linear-gradient(135deg, #e1e9e1, #f5eee2);
 }
 .cafe-visual {
   background: linear-gradient(135deg, #f2e2cf, #e6d6c6);
-}
-.records-visual {
-  background: linear-gradient(135deg, #e6d5bd, #ddd5e9);
 }
 .concept-frame {
   display: flex;
@@ -482,10 +509,6 @@ h2 em {
 .cafe-visual .concept-frame {
   color: #f9f4e9;
   background: #73513d;
-}
-.records-visual .concept-frame {
-  color: #f9f1de;
-  background: #523e4f;
 }
 .concept-frame span,
 .concept-frame small {
@@ -645,6 +668,22 @@ h2 em {
 }
 .page-hero > p:not(.eyebrow) {
   max-width: 600px;
+}
+.contact-page .page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 680px) minmax(0, 1fr);
+  column-gap: 48px;
+}
+.contact-page .page-hero > :not(.contact-portrait) {
+  grid-column: 1;
+}
+.contact-portrait {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 220px);
+  height: auto;
 }
 .service-hero {
   display: grid;
@@ -895,12 +934,9 @@ html:lang(ko) .brand small {
     width: min(70vw, 260px);
     height: min(47vw, 175px);
   }
-  .art-disc {
+  .hero-portrait {
     width: 215px;
     height: 215px;
-  }
-  .art-disc span {
-    font-size: 150px;
   }
   .hero-note {
     margin-top: 32px;
@@ -922,6 +958,13 @@ html:lang(ko) .brand small {
   }
   .page-hero {
     padding-block: 75px;
+  }
+  .contact-page .page-hero {
+    display: block;
+  }
+  .contact-portrait {
+    width: 150px;
+    margin-top: 28px;
   }
   .service-hero {
     grid-template-columns: 1fr;
@@ -974,12 +1017,9 @@ html:lang(ko) .brand small {
     width: 160px;
     height: 110px;
   }
-  .art-disc {
-    width: 112px;
-    height: 112px;
-  }
-  .art-disc span {
-    font-size: 80px;
+  .hero-portrait {
+    width: 132px;
+    height: 132px;
   }
   .star-one {
     top: 2px;
@@ -991,9 +1031,10 @@ html:lang(ko) .brand small {
   }
   .featured-grid {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
   .featured-project {
-    padding: 12px;
+    padding: 8px 12px;
   }
   .featured-project .project-kicker {
     margin-bottom: 4px;
