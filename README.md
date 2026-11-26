@@ -22,7 +22,7 @@ Use the language switch in the header or add `?lang=ko` to any page URL for the 
 
 Navigation uses Work, Services, Résumé, and Contact on desktop and mobile. On mobile, a compact brand and language row sits above the single row of links. Browser tests check this layout in English and Korean at iPhone 17 (402px) and Galaxy S23 (360px) viewport widths.
 
-The Services work carousel includes all projects and independent concepts. It pauses for interaction and respects reduced-motion preferences; without JavaScript, the cards remain in a grid.
+The Services work carousel includes all projects and independent concepts. Visitors navigate it manually, and transitions respect reduced-motion preferences; without JavaScript, the cards remain in a grid.
 
 The site stays static without a build step, so headers and footers are repeated in the page HTML; keep them consistent when editing. Korean translations live in `assets/ko.js`; project translations identify cards by their project-specific classes rather than their position.
 

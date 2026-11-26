@@ -52,6 +52,7 @@
       data-website-id="bb736843-c36a-4bfa-b5e6-c80d36b1f134"
     ></script>
     <script defer src="/assets/ko.js"></script>
+    <script defer src="/assets/work-carousel.js"></script>
     <title>Website services — Isaiah Yoon</title>
   </head>
   <body data-page="services">
@@ -60,13 +61,13 @@
       <a class="brand" href="/" aria-label="Isaiah Yoon home"
         ><span class="monogram" aria-hidden="true">ᛉ</span
         ><span
-          >Isaiah Yoon<small>Engineer &amp; independent creator</small></span
+          ><span class="brand-name">Isaiah Yoon</span><small>Engineer &amp; independent creator</small></span
         ></a
       >
       <nav aria-label="Main navigation">
-        <a href="/#work">Work</a><a href="/resume">Résumé</a
+        <a href="/work">Work</a
         ><a href="/services" aria-current="page">Services</a
-        ><a href="/contact">Contact</a>
+        ><a href="/resume">Résumé</a><a href="/contact">Contact</a>
       </nav>
       <a
         class="language-switch"
@@ -153,18 +154,28 @@
               <article class="featured-project hrr-visual">
                 <p class="project-kicker">Independent record label</p>
                 <h2>Human Rhythm Records</h2>
-                <p>A digital home for soul, jazz, funk, and gospel releases.</p>
+                <p>A digital home for an independent record label and listening room.</p>
                 <div class="project-links">
-                  <a
-                    class="project-link"
-                    href="https://humanrhythmrecords.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <a class="project-link" href="https://humanrhythmrecords.com/" target="_blank" rel="noopener noreferrer"
                     >Visit Human Rhythm Records
+                    <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a
+                  ><a class="project-link instagram-link" href="https://instagram.com/humanrhythmrecords" target="_blank" rel="noopener noreferrer"
+                    >Instagram
+                    <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a
+                  >
+                </div>
+              </article>
+              <article class="featured-project smile-visual">
+                <p class="project-kicker">Christian outreach website</p>
+                <h2>Make a Smile</h2>
+                <p>A home for an Atlanta ministry serving its neighbors.</p>
+                <div class="project-links">
+                  <a class="project-link" href="https://makeasmileatl.org/" target="_blank" rel="noopener noreferrer"
+                    >Visit Make a Smile
                     <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a
                   ><a
                     class="project-link instagram-link"
-                    href="https://instagram.com/humanrhythmrecords"
+                    href="https://instagram.com/makeasmile_homeless_ministry"
                     target="_blank"
                     rel="noopener noreferrer"
                     >Instagram
@@ -172,7 +183,35 @@
                   >
                 </div>
               </article>
+              <article class="featured-project academy-visual">
+                <p class="project-kicker">Independent concept · Education</p>
+                <h2>Doan Math Academy</h2>
+                <p>An independent website concept, not a client project.</p>
+                <a class="project-link" href="https://doan-math-academy-preview.pages.dev/" target="_blank" rel="noopener noreferrer"
+                  >View Doan Math Academy concept
+                  <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+              </article>
+              <article class="featured-project cafe-visual">
+                <p class="project-kicker">Independent concept · Café</p>
+                <h2>The Café</h2>
+                <p>A neighborhood café concept with a demo ordering experience.</p>
+                <a class="project-link" href="https://the-cafe-portfolio-preview.pages.dev/" target="_blank" rel="noopener noreferrer"
+                  >View The Café concept
+                  <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+              </article>
             </div>
+            <div class="carousel-controls" hidden>
+              <button class="carousel-previous" type="button" aria-label="Previous project">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m0 0 6-6m-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <span class="carousel-position" role="status" aria-live="polite"></span>
+              <button class="carousel-next" type="button" aria-label="Next project">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+            </div>
+            <a class="project-link all-work-link" href="/work"
+              >Explore all work
+              <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
           </div>
         </section>
       </div>
@@ -207,7 +246,7 @@
               <li>A way to connect, such as an email or contact link.</li>
             </ul>
             <p>Content and functionality depend on the scope we agree on.</p>
-            <a class="project-link concept-link" href="/#concepts"
+            <a class="project-link concept-link" href="/work#concepts"
               >Explore independent concept designs
               <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a
             >
@@ -294,7 +333,7 @@
     </main>
     <footer class="footer wrap">
       <a class="footer-brand" href="/"
-        ><span aria-hidden="true">ᛉ</span> Isaiah Yoon</a
+        ><span aria-hidden="true">ᛉ</span> <span class="footer-name">Isaiah Yoon</span></a
       >
       <div>
         <a href="mailto:isaiahyoon22@gmail.com">isaiahyoon22@gmail.com</a

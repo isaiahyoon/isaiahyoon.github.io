@@ -18,23 +18,23 @@ window.addEventListener('hashchange', updateLanguageSwitch);
 if (isKorean) {
   const common = {
     '.skip': '본문으로 건너뛰기',
+    '.brand-name': '윤이사야',
+    '.footer-name': '윤이사야',
     '.brand small': '소프트웨어 엔지니어 · 독립 창작자',
     'nav a:nth-child(1)': '작업',
-    'nav a:nth-child(2)': '이력서',
-    'nav a:nth-child(3)': '서비스',
+    'nav a:nth-child(2)': '서비스',
+    'nav a:nth-child(3)': '이력서',
     'nav a:nth-child(4)': '문의'
   };
 
   const pages = {
-    home: {
-      title: 'Isaiah Yoon — 소프트웨어 엔지니어 · 독립 창작자',
-      description: 'Isaiah Yoon은 사람과 공동체를 위한 세심한 디지털 경험을 만드는 소프트웨어 엔지니어입니다.',
+    work: {
+      title: '작업 — 윤이사야',
+      description: '윤이사야의 웹사이트, 디지털 프로젝트와 독립적인 콘셉트 디자인을 살펴보세요.',
       content: {
-        '#hero-title': '디지털 세상에<br />조금 더 <em>따뜻한 마음을.</em>',
-        '.hero-intro': '안녕하세요, 소프트웨어 엔지니어이자 독립 창작자 Isaiah입니다. 사람과 공동체를 위한 웹사이트와 디지털 경험을 만듭니다.',
-        '.hero-copy .button': '주요 작업 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 5 11 11M5 11h6V5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
-        '.hero-copy .text-link': '웹사이트 제작 서비스 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
-        '.hero-note': '<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v14M1 8h14M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.5" /></svg> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
+        '.work-page-hero .eyebrow': '주요 작업',
+        '.work-page-hero h1': '사람을 위한<br /><em>디지털 공간.</em>',
+        '.work-page-hero > p:not(.eyebrow)': '공동체와 아이디어를 위한 웹사이트와 디지털 경험을 살펴보세요.',
         '.work-section .eyebrow': '01 / 주요 작업',
         '.work-section h2': '의미를 담은 <em>작업.</em>',
         '.work-section .section-heading > p': '말씀부터 공동체까지, 소중한 것에 조금 더 쉽게 다가갈 수 있도록 만든 프로젝트입니다.',
@@ -63,6 +63,12 @@ if (isKorean) {
         '.hrr-card .project-body > p:not(.project-kicker)': '소울, 재즈, 펑크, 가스펠 음반을 감상실과 디지털 레코드 경험으로 이어주는 독립 레이블의 디지털 홈을 디자인하고 개발했습니다.',
         '.hrr-card .project-link:not(.instagram-link)': 'Human Rhythm Records 방문하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
         '.hrr-card .instagram-link': 'Instagram <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.smile-frame strong': '함께할 때<br /><em>희망이 자랍니다.</em>',
+        '.smile-visual .visual-label': '이웃과 함께하는 사역',
+        '.smile-card .project-kicker': '05 / 기독교 사역 웹사이트 · 웹 개발자',
+        '.smile-card .project-body > p:not(.project-kicker)': '애틀랜타에서 노숙을 겪는 이웃과 실질적인 도움, 기도, 공동체를 나누는 사역을 위한 웹사이트입니다.',
+        '.smile-card .project-link:not(.instagram-link)': 'Make a Smile 방문하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.smile-card .instagram-link': 'Instagram <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
         '.concept-section .eyebrow': '02 / 콘셉트 디자인',
         '.concept-section h2': '아이디어를 <em>디자인으로.</em>',
         '.concept-section .section-heading > p': '웹사이트의 가능성을 탐구한 독립적인 디자인입니다. 실제 의뢰 작업이 아닌 콘셉트입니다.',
@@ -77,8 +83,25 @@ if (isKorean) {
         '.invitation .button': '웹사이트 제작 서비스 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
       }
     },
+    home: {
+      title: '윤이사야 — 소프트웨어 엔지니어 · 독립 창작자',
+      description: '윤이사야는 사람과 공동체를 위한 세심한 디지털 경험을 만드는 소프트웨어 엔지니어입니다.',
+      content: {
+        '#hero-title': '디지털 세상에<br />조금 더 <em>따뜻한 마음을.</em>',
+        '.hero-intro': '안녕하세요, 소프트웨어 엔지니어이자 독립 창작자 윤이사야입니다. 사람과 공동체를 위한 웹사이트와 디지털 경험을 만듭니다.',
+        '.hero-copy .button': '작업 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.hero-copy .text-link': '웹사이트 제작 서비스 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.hero-note': '<svg aria-hidden="true" viewBox="0 0 16 16"><path d="M8 1v14M1 8h14M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor" stroke-width="1.5" /></svg> 로스앤젤레스 기반 · 의미 있는 프로젝트를 기다립니다',
+        '.intro-section .eyebrow': '하는 일',
+        '.intro-section h2': '사람을 위한<br /><em>세심한 웹사이트.</em>',
+        '.intro-section .section-heading > p': '소규모 기업부터 교회와 비영리 단체까지, 디자인과 기술을 함께 담아 명확하고 반응형인 디지털 공간을 만듭니다.',
+        '.invitation h2': '프로젝트를<br /><em>웹으로.</em>',
+        '.invitation p:not(.eyebrow)': '활동을 위한 따뜻한 온라인 공간을 함께 만들어 봅니다.',
+        '.invitation .button': '대화 시작하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>'
+      }
+    },
     services: {
-      title: '웹사이트 제작 서비스 — Isaiah Yoon',
+      title: '웹사이트 제작 서비스 — 윤이사야',
       description: '소규모 기업, 비영리 단체, 교회와 그 밖의 프로젝트를 위한 세심한 랜딩 웹사이트를 제작합니다.',
       content: {
         '.service-hero-copy .eyebrow': '<span class="star" aria-hidden="true">✦</span> 웹사이트 제작 서비스',
@@ -97,9 +120,20 @@ if (isKorean) {
         '.featured-project.stones-visual > p:not(.project-kicker)': '골프 레슨과 클럽 피팅을 소개하는 한국어 중심 웹사이트입니다.',
         '.featured-project.stones-visual .project-link': 'David’s Stones Golf Club 방문하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
         '.featured-project.hrr-visual .project-kicker': '독립 레이블',
-        '.featured-project.hrr-visual > p:not(.project-kicker)': '소울, 재즈, 펑크, 가스펠 음반을 위한 디지털 공간입니다.',
+        '.featured-project.hrr-visual > p:not(.project-kicker)': '독립 레이블과 감상실을 위한 디지털 공간입니다.',
         '.featured-project.hrr-visual .project-link:not(.instagram-link)': 'Human Rhythm Records 방문하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
         '.featured-project.hrr-visual .instagram-link': 'Instagram <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.featured-project.smile-visual .project-kicker': '기독교 사역 웹사이트',
+        '.featured-project.smile-visual > p:not(.project-kicker)': '애틀랜타에서 이웃을 섬기는 사역을 위한 웹사이트입니다.',
+        '.featured-project.smile-visual .project-link:not(.instagram-link)': 'Make a Smile 방문하기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.featured-project.smile-visual .instagram-link': 'Instagram <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.featured-project.academy-visual .project-kicker': '독립 콘셉트 · 교육',
+        '.featured-project.academy-visual > p:not(.project-kicker)': '실제 의뢰 작업이 아닌 독립적인 웹사이트 콘셉트입니다.',
+        '.featured-project.academy-visual .project-link': 'Doan Math Academy 콘셉트 보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.featured-project.cafe-visual .project-kicker': '독립 콘셉트 · 카페',
+        '.featured-project.cafe-visual > p:not(.project-kicker)': '주문 데모를 포함한 가상의 동네 카페 웹사이트 콘셉트입니다.',
+        '.featured-project.cafe-visual .project-link': 'The Café 콘셉트 보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
+        '.all-work-link': '모든 작업 살펴보기 <svg class="link-arrow" aria-hidden="true" viewBox="0 0 16 16" focusable="false"><path d="M5 11 11 5M5 5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>',
         '.service-section .eyebrow': '서비스 소개',
         '.service-section h2': '활동을 위한<br /><em>따뜻한 공간.</em>',
         '.service-section .section-heading > p': '방문자가 활동과 연락 방법을 쉽게 이해할 수 있도록 구성합니다.',
@@ -136,8 +170,8 @@ if (isKorean) {
       }
     },
     contact: {
-      title: '문의하기 — Isaiah Yoon',
-      description: 'Isaiah Yoon에게 이메일, 문자 또는 소셜 미디어로 연락하세요.',
+      title: '문의하기 — 윤이사야',
+      description: '윤이사야에게 이메일, 문자 또는 소셜 미디어로 연락하세요.',
       content: {
         '.page-hero h1': '함께 이야기를<br /><em>나눠요.</em>',
         '.page-hero > p:not(.eyebrow)': '구상 중인 프로젝트가 있거나 인사를 나누고 싶으신가요? 연락을 기다립니다.',
@@ -147,8 +181,8 @@ if (isKorean) {
       }
     },
     resume: {
-      title: '이력서 — Isaiah Yoon',
-      description: 'Isaiah Yoon의 소프트웨어 엔지니어링 이력서를 확인하고 다운로드하세요.',
+      title: '이력서 — 윤이사야',
+      description: '윤이사야의 소프트웨어 엔지니어링 이력서를 확인하고 다운로드하세요.',
       content: {
         '.resume-page > .eyebrow': '<span class="star" aria-hidden="true">✦</span> 경력 및 학력',
         '.resume-heading h1': '작업을 뒷받침하는<br /><em>경험.</em>',
@@ -171,14 +205,16 @@ if (isKorean) {
     document.querySelector(selector).content = page.description;
   }
   for (const selector of ['meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]']) {
-    document.querySelector(selector).content = '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램';
+    document.querySelector(selector).content = '짙은 남색 배경의 빛나는 금색 큐브에 담긴 윤이사야 모노그램';
   }
-  document.querySelector('.brand').setAttribute('aria-label', 'Isaiah Yoon 홈');
+  document.querySelector('.brand').setAttribute('aria-label', '윤이사야 홈');
+  const portrait = document.querySelector('.portrait');
+  if (portrait) portrait.setAttribute('alt', '윤이사야');
   document.querySelector('nav').setAttribute('aria-label', '주 메뉴');
   const audiences = document.querySelector('.service-audiences');
   if (audiences) audiences.setAttribute('aria-label', '함께하는 프로젝트');
   const resume = document.querySelector('.resume-document iframe');
-  if (resume) resume.title = 'Isaiah Yoon의 영문 이력서 PDF';
+  if (resume) resume.title = '윤이사야의 영문 이력서 PDF';
 
   for (const [selector, translation] of Object.entries({ ...common, ...page.content })) {
     const element = document.querySelector(selector);
