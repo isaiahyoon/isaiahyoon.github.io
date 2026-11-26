@@ -269,8 +269,12 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(page.getByRole('heading', { name: 'What your website can include' })).toBeVisible();
       await expect(page.getByRole('heading', { name: 'Website launches start at $1,000.' })).toBeVisible();
       await expect(page.locator('.service-pricing')).toContainText('online booking, e-commerce, or custom integrations');
-      await expect(page.locator('.service-pricing')).toContainText('Work after launch is $100 per hour');
+      await expect(page.locator('.service-project-scope')).toContainText('Your quote will specify the pages, features, and revision rounds included.');
+      await expect(page.locator('.service-pricing h4')).toHaveText(['Payment schedule', 'After launch & ongoing costs']);
+      await expect(page.locator('.service-post-launch')).toHaveText('Updates and additional work after launch are $100 per hour. We’ll discuss the work and estimated cost before proceeding. Corrections to meet the agreed requirements are included at no extra charge.');
       await expect(page.locator('.service-pricing')).toContainText('separate costs');
+      await expect(page.locator('.service-hosting')).toContainText('For simple websites, hosting can be $0/month, depending on the provider and plan limits.');
+      await expect(page.locator('.service-payment-schedule')).toHaveText('50% to begin. 50% before launch. After we sign the agreement, half is paid before work begins. The rest is paid after you approve a working website preview, before launch. For a $1,000 project, that’s $500 upfront and $500 before launch.');
       await expect(page.locator('.service-payment')).toHaveText('Payment accepted through Venmo, Cash App, Zelle, or cash. Payment details are provided after we agree on the project.');
       await expect(page.locator('.approach-steps li').nth(1)).toContainText('We’ll confirm the scope, timing, price, and payment schedule in a written agreement before work begins.');
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
