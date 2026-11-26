@@ -22,6 +22,21 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
   test.describe(viewport.name, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } });
 
+    test('portraits load and remain visible in both languages', async ({ page, base }) => {
+      for (const route of ['/', '/contact']) {
+        for (const language of ['', '?lang=ko']) {
+          await page.goto(`${base}${route}${language}`);
+          const portrait = page.getByRole('img', { name: 'Isaiah Yoon' });
+          await expect(portrait).toBeVisible();
+          expect(await portrait.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+          const bounds = await portrait.boundingBox();
+          expect(bounds.width).toBeGreaterThanOrEqual(130);
+          expect(bounds.x).toBeGreaterThanOrEqual(0);
+          expect(bounds.x + bounds.width).toBeLessThanOrEqual(viewport.width);
+        }
+      }
+    });
+
     test('homepage, navigation, and shared layout', async ({ page, base }) => {
       await page.goto(base);
       await expect(page.getByRole('heading', { name: /a little more care/i })).toBeVisible();
