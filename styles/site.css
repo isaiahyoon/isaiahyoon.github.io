@@ -781,6 +781,36 @@ h2 em {
 .service-details p {
   margin-bottom: 0;
 }
+.service-pricing {
+  max-width: 680px;
+  margin-top: 48px;
+  padding: 28px;
+  border: 1px solid #d5c6a5;
+  background: rgba(255, 255, 255, 0.5);
+}
+.service-pricing .eyebrow {
+  margin-bottom: 12px;
+}
+.service-pricing h3 {
+  margin: 0 0 14px;
+  font-size: 26px;
+}
+.service-pricing p:not(.eyebrow) {
+  margin: 0;
+  color: #566a7a;
+}
+.service-pricing p:not(.eyebrow) + p {
+  margin-top: 14px;
+}
+.service-pricing-group {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #d5c6a5;
+}
+.service-pricing-group h4 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
 .approach {
   display: grid;
   grid-template-columns: 1fr 1fr;

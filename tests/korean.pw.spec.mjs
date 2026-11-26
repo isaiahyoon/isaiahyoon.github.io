@@ -105,6 +105,17 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('.featured-work').getByRole('link', { name: 'Human Rhythm Records 방문하기' })).toHaveAttribute('href', 'https://humanrhythmrecords.com/');
       await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
       await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
+      await expect(page.getByRole('heading', { name: '웹사이트 제작 및 공개 비용은 $1,000부터 시작합니다.' })).toBeVisible();
+      await expect(page.locator('.service-pricing')).toContainText('프로젝트 비용이 높아질 수 있습니다');
+      await expect(page.locator('.service-pricing')).toContainText('시간당 $100');
+      await expect(page.locator('.service-project-scope')).toContainText('견적서에는 포함되는 페이지, 기능 및 수정 횟수를 명시합니다.');
+      await expect(page.locator('.service-pricing h4')).toHaveText(['결제 일정', '공개 후 작업 및 유지 비용']);
+      await expect(page.locator('.service-post-launch')).toContainText('합의된 요구 사항에 맞추기 위한 오류 수정에는 추가 비용이 없습니다.');
+      await expect(page.locator('.service-pricing')).toContainText('별도 비용');
+      await expect(page.locator('.service-hosting')).toContainText('간단한 웹사이트는 서비스 제공업체와 요금제의 이용 한도에 따라 월 $0에 호스팅할 수도 있습니다.');
+      await expect(page.locator('.service-payment-schedule')).toHaveText('작업 시작 전 50%, 공개 전 50%. 계약서에 서명한 후 작업을 시작하기 전에 절반을 결제합니다. 나머지는 실제로 작동하는 웹사이트 미리보기를 확인하고 승인한 후, 공개 전에 결제합니다. $1,000 프로젝트의 경우 착수금 $500, 공개 전 잔금 $500입니다.');
+      await expect(page.locator('.service-payment')).toHaveText('Venmo, Cash App, Zelle 또는 현금으로 결제하실 수 있습니다. 결제 정보는 프로젝트에 합의한 후 안내해 드립니다.');
+      await expect(page.locator('.approach-steps li').nth(1)).toContainText('작업을 시작하기 전에 범위, 일정, 비용 및 결제 일정을 서면 계약으로 확정합니다.');
       await expect(page.locator('.approach-steps li')).toHaveCount(3);
       await expect(page.locator('main a[href="/contact?lang=ko"]')).toHaveCount(1);
       await page.locator('main').getByRole('link', { name: '프로젝트에 대해 알려주세요' }).click();

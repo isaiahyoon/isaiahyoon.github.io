@@ -4,6 +4,8 @@ Personal portfolio and freelance website for small businesses, nonprofits, and c
 
 Home showcases selected work and independent concept designs, Services features a project preview, links to the concepts, and explains the offer and process, Résumé documents experience, and Contact collects email, text, and social channels. Services directs inquiries to Contact; shared footer links remain available on every page.
 
+Services groups project pricing, payment schedule, and ongoing costs separately. Quotes specify included pages, features, and revision rounds; the hourly rate covers updates and additional work, not corrections to meet agreed requirements. Services lists the starting launch price, explains how project complexity can affect the quote, and discloses the hourly rate for post-launch work and potential third-party costs. It notes that simple sites can use $0/month hosting depending on provider and plan limits. Payment is 50% after signing and before work begins, then 50% after approval of a working website preview and before launch, with a $500/$500 example for a $1,000 project. It lists accepted payment methods without public payment handles and explains that scope, timing, price, and payment schedule are confirmed in a written agreement before work begins.
+
 ## Run locally
 
 Requires Node.js 20 or later. No installation or build step is required to run the site.
