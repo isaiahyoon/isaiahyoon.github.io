@@ -9,12 +9,13 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
   await once(server, 'listening');
   try {
     const base = `http://127.0.0.1:${server.address().port}`;
-    for (const page of ['/', '/services/', '/resume/', '/contact/', '/services', '/resume', '/contact']) {
+    for (const page of ['/', '/work/', '/services/', '/resume/', '/contact/', '/work', '/services', '/resume', '/contact']) {
       const response = await fetch(`${base}${page}`);
       assert.equal(response.status, 200);
       const html = await response.text();
       assert.match(html, /href="\/assets\/apple-touch-icon\.png\?v=4"/);
       assert.match(html, /href="\/services"/);
+      assert.match(html, /href="\/work"/);
       assert.match(html, /href="\/resume"/);
       assert.match(html, /href="\/contact"/);
       assert.match(html, /<script\s+defer\s+src="https:\/\/cloud\.umami\.is\/script\.js"\s+data-website-id="bb736843-c36a-4bfa-b5e6-c80d36b1f134"\s*><\/script>/);
@@ -34,18 +35,18 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
     const png = Buffer.from(await socialPreview.arrayBuffer());
     assert.equal(png.readUInt32BE(16), 1200);
     assert.equal(png.readUInt32BE(20), 630);
-    for (const page of ['/services/', '/resume/', '/contact/']) {
+    for (const page of ['/work/', '/services/', '/resume/', '/contact/']) {
       const redirect = await fetch(`${base}${page}?lang=ko`, { redirect: 'manual' });
       assert.equal(redirect.status, 301);
       assert.equal(redirect.headers.get('location'), `${page.slice(0, -1)}?lang=ko`);
     }
-    const home = await (await fetch(base)).text();
-    assert.match(home, /https:\/\/theamazingword\.org\/about/);
-    assert.match(home, /https:\/\/immanuelchurchofamerica\.org/);
-    assert.match(home, /https:\/\/davidsstonesgolfclub\.com\//);
-    assert.match(home, /David’s Stones Golf Club/);
-    assert.match(home, /https:\/\/humanrhythmrecords\.com\//);
-    assert.match(home, /Human Rhythm Records/);
+    const work = await (await fetch(`${base}/work`)).text();
+    assert.match(work, /https:\/\/theamazingword\.org\/about/);
+    assert.match(work, /https:\/\/immanuelchurchofamerica\.org/);
+    assert.match(work, /https:\/\/davidsstonesgolfclub\.com\//);
+    assert.match(work, /David’s Stones Golf Club/);
+    assert.match(work, /https:\/\/humanrhythmrecords\.com\//);
+    assert.match(work, /Human Rhythm Records/);
     const resume = await (await fetch(`${base}/resume/`)).text();
     assert.match(resume, /<iframe\s+src="\/assets\/resume\.pdf#view=FitH"\s+title="Isaiah Yoon's résumé PDF"\s*><\/iframe>/);
     assert.match(resume, /href="\/assets\/resume\.pdf#view=FitH"\s+target="_blank"\s+rel="noopener noreferrer"\s*>open the résumé PDF/);

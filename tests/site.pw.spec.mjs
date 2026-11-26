@@ -26,7 +26,8 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       for (const route of ['/', '/contact']) {
         for (const language of ['', '?lang=ko']) {
           await page.goto(`${base}${route}${language}`);
-          const portrait = page.getByRole('img', { name: 'Isaiah Yoon' });
+          const portraitName = language ? '윤이사야' : 'Isaiah Yoon';
+          const portrait = page.getByRole('img', { name: portraitName });
           await expect(portrait).toBeVisible();
           expect(await portrait.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
           const bounds = await portrait.boundingBox();
@@ -47,16 +48,17 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await heroServices.click();
       await expect(page).toHaveURL(`${base}/services`);
       await page.goto(base);
-      if (viewport.name === 'galaxy-s23' || viewport.name === 'iphone-17') {
-        const workTop = await page.locator('#work').evaluate(element => element.getBoundingClientRect().top + window.scrollY);
-        expect(workTop, 'Selected work is closer to the top on mobile').toBeLessThan(950);
-      }
+      await expect(page.locator('.intro-section')).toContainText('design and engineering');
+      await expect(page.locator('.project-card')).toHaveCount(0);
+      await expect(page.locator('.invitation').getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', '/contact');
       const heroBounds = await page.locator('.hero-section').evaluate(element => {
         const bounds = element.getBoundingClientRect();
         return { left: bounds.left, right: bounds.right, viewport: document.documentElement.clientWidth };
       });
       expect(heroBounds.left).toBe(0);
       expect(heroBounds.right).toBe(heroBounds.viewport);
+      await page.getByRole('link', { name: 'View my work' }).click();
+      await expect(page).toHaveURL(`${base}/work`);
       await expect(page.getByRole('link', { name: 'Visit The Amazing Word' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       const instagram = page.locator('.word-card').getByRole('link', { name: 'Instagram', exact: true });
       await expect(instagram).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
@@ -102,16 +104,16 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
       }
 
-      for (const route of ['/', '/services/', '/resume/', '/contact/']) {
+      for (const route of ['/', '/work/', '/services/', '/resume/', '/contact/']) {
         await page.goto(`${base}${route}`);
         await expect(page.locator('meta[name="viewport"]')).toHaveAttribute('content', 'width=device-width, initial-scale=1');
         await expect(page.locator('body')).not.toContainText(/\bneed(?:s|ed|ing)?\b/i);
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBeLessThanOrEqual(dimensions.viewport);
         const navContact = page.locator('nav').getByRole('link', { name: 'Contact', exact: true });
-        await expect(page.locator('nav a')).toHaveText(['Work', 'Résumé', 'Services', 'Contact']);
+        await expect(page.locator('nav a')).toHaveText(['Work', 'Services', 'Résumé', 'Contact']);
         expect(await page.locator('nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))))
-          .toEqual(['/#work', '/resume', '/services', '/contact']);
+          .toEqual(['/work', '/services', '/resume', '/contact']);
         await expect(navContact).toBeVisible();
         await expect(navContact).toHaveCSS('border-top-width', '0px');
         await expect(navContact).toHaveCSS('border-radius', '0px');
@@ -145,7 +147,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
     });
 
     test('link arrows are decorative SVGs in English and Korean', async ({ page, base }) => {
-      for (const route of ['/', '/services/', '/contact/']) {
+      for (const route of ['/', '/work/', '/services/', '/contact/']) {
         for (const language of ['', '?lang=ko']) {
           await page.goto(`${base}${route}${language}`);
           await expect(page.locator('body')).not.toContainText(/[↗↘]/);
@@ -173,6 +175,28 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
           }
         }
       }
+    });
+
+    test('work page and Make a Smile are accessible from previews', async ({ page, base }) => {
+      for (const route of ['/services', '/work']) {
+        await page.goto(`${base}${route}`);
+        const project = page.getByRole('link', { name: 'Visit Make a Smile' });
+        await expect(project).toHaveAttribute('href', 'https://makeasmileatl.org/');
+        await expect(project).toHaveAttribute('target', '_blank');
+        await expect(project).toHaveAttribute('rel', 'noopener noreferrer');
+        const card = route === '/work' ? page.locator('.smile-card') : page.locator('.smile-visual');
+        const instagram = card.getByRole('link', { name: 'Instagram', exact: true });
+        await expect(instagram).toHaveAttribute('href', 'https://instagram.com/makeasmile_homeless_ministry');
+        await expect(instagram).toHaveAttribute('target', '_blank');
+        await expect(instagram).toHaveAttribute('rel', 'noopener noreferrer');
+        if (route !== '/work') {
+          await page.getByRole('link', { name: 'Explore all work' }).click();
+          await expect(page).toHaveURL(`${base}/work`);
+        }
+      }
+      await expect(page.locator('#work .project-card')).toHaveCount(5);
+      await expect(page.locator('#concepts .project-card')).toHaveCount(2);
+      await expect(page.locator('nav a[aria-current="page"]')).toHaveText('Work');
     });
 
     test('résumé viewer and download', async ({ page, base }) => {
@@ -223,7 +247,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
       await expect(previewChurchInstagram).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
       await expect(previewChurchInstagram).toHaveAttribute('target', '_blank');
       await expect(previewChurchInstagram).toHaveAttribute('rel', 'noopener noreferrer');
-      for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org'], ['Visit David’s Stones Golf Club', 'https://davidsstonesgolfclub.com/'], ['Visit Human Rhythm Records', 'https://humanrhythmrecords.com/']]) {
+      for (const [name, url] of [['Visit The Amazing Word', 'https://theamazingword.org/about'], ['Visit the church website', 'https://immanuelchurchofamerica.org'], ['Visit David’s Stones Golf Club', 'https://davidsstonesgolfclub.com/'], ['Visit Make a Smile', 'https://makeasmileatl.org/']]) {
         const previewLink = preview.getByRole('link', { name });
         await expect(previewLink).toBeVisible();
         await expect(previewLink).toHaveAttribute('href', url);
@@ -247,7 +271,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
           }))
         }));
         expect(layout.offerTop, 'The offer follows compact project previews on mobile').toBeLessThan(1250);
-        expect(layout.cards[1].top).toBeGreaterThan(layout.cards[0].top);
+        expect(layout.cards[1].top).toBe(layout.cards[0].top);
         for (const card of layout.cards) expect(card.scroll).toBeLessThanOrEqual(card.width);
         if (viewport.name === 'mobile-small') {
           const fallbackFonts = await page.addStyleTag({ content: ':root { --sans: Arial, sans-serif; --serif: Georgia, serif; } .featured-project .project-links .project-link { letter-spacing: .08em; }' });
@@ -261,9 +285,9 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
         }
       }
       await expect(page.locator('.service-hero a[href="/contact"], .service-hero a[href="/#work"]')).toHaveCount(0);
-      await expect(page.locator('.service-audiences li')).toHaveText(['Small businesses', 'Nonprofits', 'Churches', 'Other projects']);
+      await expect(page.locator('.service-audiences li')).toHaveText(['Businesses', 'Nonprofits', 'Churches', 'Other projects']);
       await page.getByRole('link', { name: 'Explore independent concept designs' }).click();
-      await expect(page).toHaveURL(`${base}/#concepts`);
+      await expect(page).toHaveURL(`${base}/work#concepts`);
       await expect(page.locator('#concepts h2')).toBeVisible();
       await page.goto(`${base}/services`);
       await expect(page.getByRole('heading', { name: 'What your website can include' })).toBeVisible();
@@ -328,3 +352,56 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
     });
   });
 }
+
+test('work carousel stays still until manually navigated', async ({ page, base }) => {
+  await page.clock.install();
+  await page.goto(`${base}/services`);
+  const carousel = page.locator('.featured-work');
+  const position = carousel.locator('.carousel-position');
+  await carousel.scrollIntoViewIfNeeded();
+  await page.mouse.move(0, 0);
+  await expect(position).toHaveText('01 / 07');
+  await expect(carousel.locator('.carousel-controls button')).toHaveCount(2);
+  await page.clock.fastForward(21000);
+  await expect(position).toHaveText('01 / 07');
+  await carousel.getByRole('button', { name: 'Next project' }).click();
+  await expect(position).toHaveText('02 / 07');
+  await page.mouse.move(0, 0);
+  await page.locator('h1').click();
+  await page.clock.fastForward(21000);
+  await expect(position).toHaveText('02 / 07');
+});
+
+test('work carousel supports reduced motion and wraparound', async ({ page, base }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.clock.install();
+  await page.goto(`${base}/services?lang=ko`);
+  const carousel = page.getByRole('region', { name: '작업 모음' });
+  const position = carousel.locator('.carousel-position');
+  await carousel.scrollIntoViewIfNeeded();
+  await page.clock.fastForward(15000);
+  await expect(position).toHaveText('01 / 07');
+  await carousel.getByRole('button', { name: '이전 작업' }).click();
+  await expect(position).toHaveText('07 / 07');
+  await expect(position).toHaveAttribute('aria-label', '7개 중 7번째 작업: The Café');
+  await expect.poll(async () => carousel.locator('.featured-grid').evaluate(track => {
+    const trackBounds = track.getBoundingClientRect();
+    const cardBounds = track.lastElementChild.getBoundingClientRect();
+    return Math.abs((trackBounds.left + trackBounds.width / 2) - (cardBounds.left + cardBounds.width / 2));
+  })).toBeLessThan(2);
+  await carousel.getByRole('button', { name: '다음 작업' }).click();
+  await expect(position).toHaveText('01 / 07');
+});
+
+test('work cards remain available without JavaScript', async ({ browser, base }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    await page.goto(`${base}/services`);
+    await expect(page.locator('.featured-project')).toHaveCount(7);
+    await expect(page.locator('.carousel-controls')).toBeHidden();
+    await expect(page.getByRole('link', { name: 'View The Café concept' })).toBeVisible();
+  } finally {
+    await context.close();
+  }
+});

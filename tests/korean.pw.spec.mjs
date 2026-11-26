@@ -12,7 +12,7 @@ for (const width of [1440, 320, 360, 402]) {
     page.on('pageerror', error => errors.push(error.message));
     try {
       await page.setViewportSize({ width, height: 900 });
-      for (const route of ['/', '/services', '/resume', '/contact']) {
+      for (const route of ['/', '/work', '/services', '/resume', '/contact']) {
         await page.goto(`${base}${route}?source=test#main`);
         const korean = page.getByRole('link', { name: '한국어로 보기' });
         await expect(korean).toBeVisible();
@@ -32,11 +32,12 @@ for (const width of [1440, 320, 360, 402]) {
         await expect(page.locator('html')).toHaveAttribute('lang', 'en');
       }
       await page.goto(`${base}/?source=test`);
-      await page.getByRole('link', { name: 'Explore selected work' }).click();
+      await page.getByRole('link', { name: 'View my work' }).click();
       await page.getByRole('link', { name: '한국어로 보기' }).click();
-      await expect(page).toHaveURL(`${base}/?source=test&lang=ko#work`);
+      await expect(page).toHaveURL(`${base}/work?lang=ko`);
       for (const [route, heading] of [
         ['/', /디지털 세상에/],
+        ['/work/', /사람을 위한/],
         ['/services/', /프로젝트를 위한/],
         ['/resume/', /작업을 뒷받침하는/],
         ['/contact/', /함께 이야기를/]
@@ -45,10 +46,12 @@ for (const width of [1440, 320, 360, 402]) {
         await expect(page.locator('html')).toHaveAttribute('lang', 'ko');
         await expect(page.getByRole('heading', { level: 1, name: heading })).toBeVisible();
         await expect(page.locator('nav')).toHaveAttribute('aria-label', '주 메뉴');
-        await expect(page.locator('nav a')).toHaveText(['작업', '이력서', '서비스', '문의']);
+        await expect(page.locator('nav a')).toHaveText(['작업', '서비스', '이력서', '문의']);
         await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /[가-힣]/);
-        await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램');
-        await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 Isaiah Yoon 모노그램');
+        await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 윤이사야 모노그램');
+        await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute('content', '짙은 남색 배경의 빛나는 금색 큐브에 담긴 윤이사야 모노그램');
+        await expect(page.locator('.brand-name')).toHaveText('윤이사야');
+        await expect(page.locator('.footer-name')).toHaveText('윤이사야');
         const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
         expect(dimensions.scroll, `${route}?lang=ko at ${width}px`).toBeLessThanOrEqual(dimensions.viewport);
         if (width <= 980) {
@@ -68,8 +71,9 @@ for (const width of [1440, 320, 360, 402]) {
         }
       }
       await page.locator('nav').getByRole('link', { name: '작업', exact: true }).click();
-      await expect(page).toHaveURL(`${base}/?lang=ko#work`);
-      await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
+      await expect(page).toHaveURL(`${base}/work?lang=ko`);
+      await expect(page.getByRole('link', { name: 'Make a Smile 방문하기' })).toHaveAttribute('href', 'https://makeasmileatl.org/');
+      await expect(page.locator('.smile-card').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/makeasmile_homeless_ministry');
       await expect(page.getByRole('heading', { name: /의미를 담은/ })).toBeVisible();
       await expect(page.getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await expect(page.locator('.word-card').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
@@ -84,7 +88,7 @@ for (const width of [1440, 320, 360, 402]) {
       await page.getByRole('link', { name: '이력서', exact: true }).click();
       await expect(page).toHaveURL(`${base}/resume?lang=ko`);
       await expect(page.getByText('아래 이력서는 영문입니다.', { exact: false })).toBeVisible();
-      await expect(page.locator('iframe')).toHaveAttribute('title', 'Isaiah Yoon의 영문 이력서 PDF');
+      await expect(page.locator('iframe')).toHaveAttribute('title', '윤이사야의 영문 이력서 PDF');
       if (width === 360 || width === 402) {
         const viewerSize = await page.locator('iframe').boundingBox();
         expect(viewerSize.y, 'Korean résumé preview starts within the initial viewport').toBeLessThanOrEqual(900 * 0.65);
@@ -92,18 +96,24 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.getByRole('link', { name: '영문 이력서 PDF 열기' })).toHaveAttribute('href', '/assets/resume.pdf#view=FitH');
       await page.locator('nav').getByRole('link', { name: '서비스', exact: true }).click();
       const conceptLink = page.getByRole('link', { name: '독립적인 콘셉트 디자인 살펴보기' });
-      await expect(conceptLink).toHaveAttribute('href', '/?lang=ko#concepts');
+      await expect(conceptLink).toHaveAttribute('href', '/work?lang=ko#concepts');
       await conceptLink.click();
-      await expect(page).toHaveURL(`${base}/?lang=ko#concepts`);
+      await expect(page).toHaveURL(`${base}/work?lang=ko#concepts`);
       await page.goto(`${base}/services?lang=ko`);
-      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트', '독립 레이블']);
+      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트', '독립 레이블', '기독교 사역 웹사이트', '독립 콘셉트 · 교육', '독립 콘셉트 · 카페']);
+      await expect(page.locator('.featured-project.hrr-visual').getByRole('link', { name: 'Human Rhythm Records 방문하기' })).toHaveAttribute('href', 'https://humanrhythmrecords.com/');
+      await expect(page.locator('.featured-project.hrr-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/humanrhythmrecords');
+      await expect(page.locator('.featured-project.academy-visual').getByRole('link', { name: 'Doan Math Academy 콘셉트 보기' })).toHaveAttribute('href', 'https://doan-math-academy-preview.pages.dev/');
+      await expect(page.locator('.featured-project.cafe-visual').getByRole('link', { name: 'The Café 콘셉트 보기' })).toHaveAttribute('href', 'https://the-cafe-portfolio-preview.pages.dev/');
+      await expect(page.getByRole('link', { name: 'Make a Smile 방문하기' })).toHaveAttribute('href', 'https://makeasmileatl.org/');
+      await expect(page.locator('.smile-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/makeasmile_homeless_ministry');
+      await expect(page.getByRole('link', { name: '모든 작업 살펴보기' })).toHaveAttribute('href', '/work?lang=ko');
       await expect(page.locator('.featured-work').getByRole('link', { name: 'The Amazing Word 방문하기' })).toHaveAttribute('href', 'https://theamazingword.org/about');
       await expect(page.locator('.featured-work .word-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/theamazingwordapp');
       await expect(page.locator('.featured-work .church-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/immanuelchurchofamerica');
       await expect(page.locator('.featured-work').getByRole('link', { name: '교회 웹사이트 방문하기' })).toHaveAttribute('href', 'https://immanuelchurchofamerica.org');
       await expect(page.locator('.featured-work').getByRole('link', { name: 'David’s Stones Golf Club 방문하기' })).toHaveAttribute('href', 'https://davidsstonesgolfclub.com/');
-      await expect(page.locator('.featured-work').getByRole('link', { name: 'Human Rhythm Records 방문하기' })).toHaveAttribute('href', 'https://humanrhythmrecords.com/');
-      await expect(page.locator('.service-audiences li')).toHaveText(['소규모 기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
+      await expect(page.locator('.service-audiences li')).toHaveText(['기업', '비영리 단체', '교회', '그 밖의 프로젝트']);
       await expect(page.getByRole('heading', { name: '웹사이트에 담을 수 있는 내용' })).toBeVisible();
       await expect(page.getByRole('heading', { name: '웹사이트 제작 및 공개 비용은 $1,000부터 시작합니다.' })).toBeVisible();
       await expect(page.locator('.service-pricing')).toContainText('프로젝트 비용이 높아질 수 있습니다');
@@ -124,6 +134,11 @@ for (const width of [1440, 320, 360, 402]) {
       await expect(page.locator('main h1, main h2')).toHaveCount(1);
       await expect(page.locator('main').getByRole('link', { name: '(323) 774-8524' })).toHaveAttribute('href', 'sms:+13237748524');
       await page.goto(`${base}/?lang=ko`);
+      await expect(page.locator('.hero-note svg')).toHaveAttribute('aria-hidden', 'true');
+      await expect(page.locator('.intro-section h2')).toContainText('사람을 위한');
+      await expect(page.locator('.project-card')).toHaveCount(0);
+      await expect(page.getByRole('link', { name: '작업 살펴보기' })).toHaveAttribute('href', '/work?lang=ko');
+      await expect(page.getByRole('link', { name: '대화 시작하기' })).toHaveAttribute('href', '/contact?lang=ko');
       await page.locator('.hero-copy').getByRole('link', { name: '웹사이트 제작 서비스 살펴보기' }).click();
       await expect(page).toHaveURL(`${base}/services?lang=ko`);
       await page.goto(`${base}/?lang=en`);
