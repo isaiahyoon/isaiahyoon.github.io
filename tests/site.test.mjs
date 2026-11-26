@@ -32,6 +32,8 @@ test('pages, navigation, contact links, and replaceable résumé are served', as
     assert.match(home, /https:\/\/immanuelchurchofamerica\.org/);
     assert.match(home, /https:\/\/davidsstonesgolfclub\.com\//);
     assert.match(home, /David’s Stones Golf Club/);
+    assert.match(home, /https:\/\/humanrhythmrecords\.com\//);
+    assert.match(home, /Human Rhythm Records/);
     const resume = await (await fetch(`${base}/resume/`)).text();
     assert.match(resume, /<iframe\s+src="\/assets\/resume\.pdf#view=FitH"\s+title="Isaiah Yoon's résumé PDF"\s*><\/iframe>/);
     assert.match(resume, /href="\/assets\/resume\.pdf#view=FitH"\s+target="_blank"\s+rel="noopener noreferrer"\s*>open the résumé PDF/);
