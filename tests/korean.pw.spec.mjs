@@ -100,7 +100,7 @@ for (const width of [1440, 320, 360, 402]) {
       await conceptLink.click();
       await expect(page).toHaveURL(`${base}/work?lang=ko#concepts`);
       await page.goto(`${base}/services?lang=ko`);
-      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트', '독립 레이블', '기독교 사역 웹사이트', '독립 콘셉트 · 교육', '독립 콘셉트 · 카페']);
+      await expect(page.locator('.featured-project .project-kicker')).toHaveText(['성경 읽기 서비스', '교회 웹사이트', '골프 클럽 웹사이트', '독립 레이블', '기독교 사역 웹사이트', '농구 훈련', '코딩 교육', '독립 콘셉트 · 교육', '독립 콘셉트 · 카페']);
       await expect(page.locator('.featured-project.hrr-visual').getByRole('link', { name: 'Human Rhythm Records 방문하기' })).toHaveAttribute('href', 'https://humanrhythmrecords.com/');
       await expect(page.locator('.featured-project.hrr-visual').getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://instagram.com/humanrhythmrecords');
       await expect(page.locator('.featured-project.academy-visual').getByRole('link', { name: 'Doan Math Academy 콘셉트 보기' })).toHaveAttribute('href', 'https://doan-math-academy-preview.pages.dev/');

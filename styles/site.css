@@ -312,7 +312,7 @@ h2 em {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 26px;
 }
-.smile-card {
+.atlanta-card {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -345,7 +345,7 @@ h2 em {
   background: #fbfaf6;
   border: 1px solid #fff;
   box-shadow: 0 16px 35px rgba(34, 59, 85, 0.15);
-  transform: rotate(-3deg) translateY(10px);
+  transform: rotate(-3deg) translateY(-6px);
 }
 .mini-top {
   display: flex;
@@ -397,7 +397,7 @@ h2 em {
   border: 2px solid #d5bc7b;
   background: linear-gradient(145deg, #182b40, #365d7e);
   box-shadow: 0 18px 35px rgba(34, 59, 85, 0.2);
-  transform: rotate(3deg) translateY(10px);
+  transform: rotate(3deg) translateY(-6px);
   text-align: center;
 }
 .church-frame .church-cross {
@@ -434,7 +434,7 @@ h2 em {
   border: 2px solid #d5bc7b;
   background: linear-gradient(145deg, #203b35, #46655b);
   box-shadow: 0 18px 35px rgba(34, 59, 85, 0.2);
-  transform: rotate(-2deg) translateY(10px);
+  transform: rotate(-2deg) translateY(-6px);
   text-align: center;
 }
 .stones-frame p {
@@ -472,7 +472,7 @@ h2 em {
   border: 1px solid rgba(255, 250, 241, 0.72);
   background: #273a62;
   box-shadow: 0 18px 35px rgba(39, 58, 98, 0.28);
-  transform: rotate(2deg) translateY(10px);
+  transform: rotate(2deg) translateY(-6px);
   text-align: center;
 }
 .hrr-frame p {
@@ -492,13 +492,6 @@ h2 em {
   font-size: 8px;
   letter-spacing: 0.13em;
 }
-.hrr-visual .visual-label {
-  padding: 5px 8px;
-  color: #171310;
-  background: #fffaf1;
-  border: 1px solid #e4b4a2;
-  font-size: 10px;
-}
 .smile-visual {
   background: linear-gradient(135deg, #dcd7f7, #fff 50%, #d6f2b9);
 }
@@ -513,6 +506,7 @@ h2 em {
   border: 1px solid rgba(255, 255, 255, 0.8);
   background: linear-gradient(135deg, #55477f, #315c4d);
   box-shadow: 0 16px 35px rgba(34, 59, 85, 0.15);
+  transform: rotate(-3deg) translateY(-6px);
 }
 .smile-frame p,
 .smile-frame span {
@@ -524,8 +518,48 @@ h2 em {
   margin: 20px 0;
   font: 32px/1.05 var(--serif);
 }
-.smile-visual .visual-label {
-  color: #4b4a60;
+.basketball-visual {
+  background: linear-gradient(135deg, #defefc, #fff3c5);
+}
+.atlanta-visual {
+  background: linear-gradient(135deg, #dcd7f7, #cee3ee 55%, #f5e1d3);
+}
+.basketball-frame,
+.atlanta-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(75%, 360px);
+  height: 240px;
+  padding: 28px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 16px 35px rgba(34, 59, 85, 0.15);
+}
+.basketball-frame {
+  background: linear-gradient(135deg, #223b55, #315a7a);
+  transform: rotate(3deg) translateY(-6px);
+}
+.atlanta-frame {
+  background: linear-gradient(135deg, #102440, #55466a);
+  transform: rotate(-2deg) translateY(-6px);
+}
+.basketball-frame p,
+.basketball-frame span,
+.atlanta-frame p,
+.atlanta-frame span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.basketball-frame strong,
+.atlanta-frame strong {
+  margin: 20px 0;
+  font: 32px/1.05 var(--serif);
+}
+.basketball-frame em,
+.atlanta-frame em {
+  color: #ead49e;
 }
 .academy-visual {
   background: linear-gradient(135deg, #e1e9e1, #f5eee2);
@@ -565,22 +599,28 @@ h2 em {
   position: absolute;
   right: 18px;
   bottom: 14px;
-  color: #617589;
-  font-size: 9px;
+  color: #263f5a;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.13em;
 }
 .church-visual .visual-label {
-  padding: 4px 8px;
-  color: #fff;
-  background: var(--navy);
-  font-size: 11px;
+  color: #263f60;
 }
 .stones-visual .visual-label {
-  padding: 4px 8px;
-  color: #fff;
-  background: #203b35;
-  font-size: 11px;
+  color: #284b3d;
+}
+.hrr-visual .visual-label {
+  color: #60335a;
+}
+.smile-visual .visual-label {
+  color: #49365e;
+}
+.basketball-visual .visual-label {
+  color: #254c5c;
+}
+.atlanta-visual .visual-label {
+  color: #3c4165;
 }
 .project-body {
   padding: 30px 32px 34px;
@@ -1085,7 +1125,7 @@ html:lang(ko) .brand small {
   .project-grid {
     grid-template-columns: 1fr;
   }
-  .smile-card {
+  .atlanta-card {
     grid-template-columns: 1fr;
   }
   .project-body > p:not(.project-kicker) {
@@ -1207,6 +1247,12 @@ html:lang(ko) .brand small {
   }
   .project-visual {
     height: 270px;
+  }
+  .work-section .project-visual {
+    height: 310px;
+  }
+  .visual-label {
+    letter-spacing: 0.04em;
   }
   .footer div {
     gap: 14px;
