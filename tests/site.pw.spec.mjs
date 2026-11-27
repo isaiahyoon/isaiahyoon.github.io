@@ -194,7 +194,7 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
           await expect(page).toHaveURL(`${base}/work`);
         }
       }
-      await expect(page.locator('#work .project-card')).toHaveCount(5);
+      await expect(page.locator('#work .project-card')).toHaveCount(7);
       await expect(page.locator('#concepts .project-card')).toHaveCount(2);
       await expect(page.locator('nav a[aria-current="page"]')).toHaveText('Work');
     });
@@ -353,6 +353,142 @@ for (const viewport of [{ name: 'desktop', width: 1440, height: 900 }, { name: '
   });
 }
 
+test('last three work previews have distinct tilted offsets without clipping', async ({ page, base }) => {
+  for (const width of [1440, 980, 768, 391, 375, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`${base}/work`);
+    const previews = await page.locator('.smile-frame, .basketball-frame, .atlanta-frame').evaluateAll(frames => frames.map(frame => {
+      const transform = new DOMMatrix(getComputedStyle(frame).transform);
+      const bounds = frame.getBoundingClientRect();
+      const container = frame.parentElement.getBoundingClientRect();
+      return {
+        angle: Math.atan2(transform.b, transform.a) * 180 / Math.PI,
+        offset: transform.f,
+        contained: bounds.left >= container.left && bounds.right <= container.right &&
+          bounds.top >= container.top && bounds.bottom <= container.bottom
+      };
+    }));
+    expect(previews.map(preview => Math.round(preview.angle))).toEqual([-3, 3, -2]);
+    for (const preview of previews) {
+      expect(preview.offset).toBeLessThan(0);
+      expect(preview.contained, `${width}px: ${JSON.stringify(previews)}`).toBe(true);
+    }
+  }
+});
+
+test('work preview labels remain unboxed and legible against their backgrounds', async ({ page, base }) => {
+  for (const width of [1440, 980, 768, 391, 375, 320]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`${base}/work`);
+    const visuals = page.locator('#work .project-visual');
+    for (const visual of await visuals.all()) {
+      const label = visual.locator('.visual-label');
+      const details = await label.evaluate(element => {
+        const labelBounds = element.getBoundingClientRect();
+        const visualBounds = element.parentElement.getBoundingClientRect();
+        const frameBounds = element.previousElementSibling.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return {
+          x: labelBounds.left - visualBounds.left,
+          y: labelBounds.top - visualBounds.top,
+          width: labelBounds.width,
+          height: labelBounds.height,
+          color: style.color,
+          background: style.backgroundColor,
+          border: style.borderTopWidth,
+          separate: labelBounds.top >= frameBounds.bottom
+        };
+      });
+      expect(details.background).toBe('rgba(0, 0, 0, 0)');
+      expect(details.border).toBe('0px');
+      expect(details.separate, `${width}px ${await label.textContent()}`).toBe(true);
+      await label.evaluate(element => { element.style.visibility = 'hidden'; });
+      const screenshot = await visual.screenshot();
+      const contrast = await page.evaluate(async ({ image, details }) => {
+        const bitmap = await createImageBitmap(await (await fetch(`data:image/png;base64,${image}`)).blob());
+        const canvas = document.createElement('canvas');
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+        const context = canvas.getContext('2d');
+        context.drawImage(bitmap, 0, 0);
+        const colors = details.color.match(/\d+/g).map(Number);
+        const luminance = rgb => {
+          const channels = rgb.map(value => {
+            const s = value / 255;
+            return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+          });
+          return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+        };
+        const foreground = luminance(colors);
+        const pixels = context.getImageData(Math.floor(details.x), Math.floor(details.y), Math.ceil(details.width), Math.ceil(details.height)).data;
+        let minimum = Infinity;
+        for (let i = 0; i < pixels.length; i += 4) {
+          const background = luminance([pixels[i], pixels[i + 1], pixels[i + 2]]);
+          minimum = Math.min(minimum, (Math.max(foreground, background) + 0.05) / (Math.min(foreground, background) + 0.05));
+        }
+        return minimum;
+      }, { image: screenshot.toString('base64'), details });
+      expect(contrast, `${width}px ${await label.textContent()}`).toBeGreaterThanOrEqual(4.5);
+    }
+  }
+});
+
+test('new projects appear in the work grid and carousel in both languages', async ({ page, base }) => {
+  const projects = [
+    { selector: 'basketball', title: 'Yoon Basketball Training', site: 'https://yoonbasketballtraining.com/', instagram: 'https://instagram.com/yoonbasketballtraining' },
+    { selector: 'atlanta', title: 'Atlanta Coding Academy', site: 'https://atlantacodingacademy.org/', instagram: 'https://instagram.com/atlantacodingacademy' },
+    { selector: 'stones', title: 'David’s Stones Golf Club', site: 'https://davidsstonesgolfclub.com/', instagram: 'https://instagram.com/davidsstonesgolfclub' }
+  ];
+  for (const language of ['', '?lang=ko']) {
+    for (const route of ['/work', '/services']) {
+      await page.goto(`${base}${route}${language}`);
+      for (const project of projects) {
+        const card = page.locator(route === '/work' ? `.${project.selector}-card` : `.featured-project.${project.selector}-visual`);
+        await expect(card.getByRole('heading', { name: project.title })).toHaveCount(1);
+        const site = card.locator('.project-link:not(.instagram-link)');
+        const instagram = card.locator('.instagram-link');
+        await expect(site).toHaveAttribute('href', project.site);
+        await expect(instagram).toHaveAttribute('href', project.instagram);
+        for (const link of [site, instagram]) {
+          await expect(link).toHaveAttribute('target', '_blank');
+          await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+        }
+        if (language) await expect(site).toContainText('방문하기');
+      }
+      if (route === '/work') {
+        await expect(page.locator('.atlanta-card .project-body > p:not(.project-kicker)')).toContainText(language ? '준비 단계' : 'pre-launch');
+        const boxes = await page.locator('.smile-card, .basketball-card, .atlanta-card').evaluateAll(cards => cards.map(card => {
+          const box = card.getBoundingClientRect();
+          return { x: box.x, y: box.y, width: box.width };
+        }));
+        expect(boxes[0].y).toBe(boxes[1].y);
+        expect(boxes[0].width).toBeCloseTo(boxes[1].width, 0);
+        expect(boxes[2].y).toBeGreaterThan(boxes[0].y);
+        expect(boxes[2].width).toBeGreaterThan(boxes[0].width * 1.9);
+      } else {
+        await page.emulateMedia({ reducedMotion: 'reduce' });
+        const next = page.locator('.carousel-next');
+        for (let i = 0; i < 5; i++) await next.click();
+        await expect(page.locator('.carousel-position')).toHaveText('06 / 09');
+        await expect(page.locator('.carousel-position')).toHaveAttribute('aria-label', /Yoon Basketball Training/);
+        await next.click();
+        await expect(page.locator('.carousel-position')).toHaveText('07 / 09');
+        await expect(page.locator('.carousel-position')).toHaveAttribute('aria-label', /Atlanta Coding Academy/);
+      }
+    }
+  }
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto(`${base}/work`);
+  const mobileBoxes = await page.locator('.smile-card, .basketball-card, .atlanta-card').evaluateAll(cards => cards.map(card => {
+    const box = card.getBoundingClientRect();
+    return { y: box.y, width: box.width };
+  }));
+  expect(mobileBoxes[1].y).toBeGreaterThan(mobileBoxes[0].y);
+  expect(mobileBoxes[2].y).toBeGreaterThan(mobileBoxes[1].y);
+  expect(mobileBoxes[2].width).toBeCloseTo(mobileBoxes[0].width, 0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
+
 test('work carousel stays still until manually navigated', async ({ page, base }) => {
   await page.clock.install();
   await page.goto(`${base}/services`);
@@ -360,16 +496,16 @@ test('work carousel stays still until manually navigated', async ({ page, base }
   const position = carousel.locator('.carousel-position');
   await carousel.scrollIntoViewIfNeeded();
   await page.mouse.move(0, 0);
-  await expect(position).toHaveText('01 / 07');
+  await expect(position).toHaveText('01 / 09');
   await expect(carousel.locator('.carousel-controls button')).toHaveCount(2);
   await page.clock.fastForward(21000);
-  await expect(position).toHaveText('01 / 07');
+  await expect(position).toHaveText('01 / 09');
   await carousel.getByRole('button', { name: 'Next project' }).click();
-  await expect(position).toHaveText('02 / 07');
+  await expect(position).toHaveText('02 / 09');
   await page.mouse.move(0, 0);
   await page.locator('h1').click();
   await page.clock.fastForward(21000);
-  await expect(position).toHaveText('02 / 07');
+  await expect(position).toHaveText('02 / 09');
 });
 
 test('work carousel supports reduced motion and wraparound', async ({ page, base }) => {
@@ -380,17 +516,17 @@ test('work carousel supports reduced motion and wraparound', async ({ page, base
   const position = carousel.locator('.carousel-position');
   await carousel.scrollIntoViewIfNeeded();
   await page.clock.fastForward(15000);
-  await expect(position).toHaveText('01 / 07');
+  await expect(position).toHaveText('01 / 09');
   await carousel.getByRole('button', { name: '이전 작업' }).click();
-  await expect(position).toHaveText('07 / 07');
-  await expect(position).toHaveAttribute('aria-label', '7개 중 7번째 작업: The Café');
+  await expect(position).toHaveText('09 / 09');
+  await expect(position).toHaveAttribute('aria-label', '9개 중 9번째 작업: The Café');
   await expect.poll(async () => carousel.locator('.featured-grid').evaluate(track => {
     const trackBounds = track.getBoundingClientRect();
     const cardBounds = track.lastElementChild.getBoundingClientRect();
     return Math.abs((trackBounds.left + trackBounds.width / 2) - (cardBounds.left + cardBounds.width / 2));
   })).toBeLessThan(2);
   await carousel.getByRole('button', { name: '다음 작업' }).click();
-  await expect(position).toHaveText('01 / 07');
+  await expect(position).toHaveText('01 / 09');
 });
 
 test('work cards remain available without JavaScript', async ({ browser, base }) => {
@@ -398,7 +534,7 @@ test('work cards remain available without JavaScript', async ({ browser, base })
   try {
     const page = await context.newPage();
     await page.goto(`${base}/services`);
-    await expect(page.locator('.featured-project')).toHaveCount(7);
+    await expect(page.locator('.featured-project')).toHaveCount(9);
     await expect(page.locator('.carousel-controls')).toBeHidden();
     await expect(page.getByRole('link', { name: 'View The Café concept' })).toBeVisible();
   } finally {
